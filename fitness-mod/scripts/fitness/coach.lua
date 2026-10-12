@@ -160,7 +160,47 @@ local function updateEnemy()
     enemyEl:update()
 end
 
+-- Full-view colour flash for dodge results / calls, fading out.
+local flashEl, flashUntil, flashLen = nil, 0, 0.5
+local centreBox = nil
+local function flash(color, secs)
+    if not flashEl then
+        local ok, el = pcall(ui.create, { layer = LAYER, type = ui.TYPE.Image, props = {
+            relativePosition = util.vector2(0, 0), relativeSize = util.vector2(1, 1),
+            resource = WHITE_TEX, color = color, alpha = 0 } })
+        if not ok then return end
+        flashEl = el
+    end
+    flashLen = secs or 0.5
+    flashUntil = now + flashLen
+    flashEl.layout.props.color = color
+    flashEl.layout.props.alpha = 0.35
+    flashEl:update()
+end
+local function updateFlash()
+    if not flashEl or flashEl.layout.props.alpha == 0 then return end
+    local left = flashUntil - now
+    flashEl.layout.props.alpha = left > 0 and 0.35 * (left / flashLen) or 0
+    flashEl:update()
+end
+local function setCentreBox(visible)
+    if not centreBox then
+        local ok, el = pcall(ui.create, { layer = LAYER, type = ui.TYPE.Image, props = {
+            relativePosition = util.vector2(0.5, CFG.coachCentreY), anchor = util.vector2(0.5, 0.5),
+            size = util.vector2(760, 96), resource = WHITE_TEX, color = util.color.rgb(0, 0, 0), alpha = 0.55,
+            visible = false } })
+        if not ok then return end
+        centreBox = el
+    end
+    if centreBox.layout.props.visible ~= visible then
+        centreBox.layout.props.visible = visible
+        centreBox:update()
+    end
+end
+
 local function show(data)
+    if data.flash then flash(data.flash, data.flashSecs) end
+    if data.slot == 'centre' then setCentreBox((data.text or '') ~= '') end
     local slot = slots[data.slot or 'status']
     if not slot then return end
     local el = element(slot)
@@ -180,6 +220,7 @@ local function onFrame(dt)
         show({ slot = 'status', text = 'punch info shows here', secs = 3, color = util.color.rgb(0.8, 0.8, 0.8) })
     end
     updateStats(dt)
+    updateFlash()
     enemyTimer = (enemyTimer or 0) - dt
     if enemyTimer <= 0 then enemyTimer = 0.25; updateEnemy() end
     for _, slot in pairs(slots) do
@@ -187,6 +228,7 @@ local function onFrame(dt)
             slot.until_ = nil
             slot.el.layout.props.text = ''
             slot.el:update()
+            if slot == slots.centre then setCentreBox(false) end
         end
     end
 end

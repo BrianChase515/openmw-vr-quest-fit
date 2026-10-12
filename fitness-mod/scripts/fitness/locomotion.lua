@@ -38,6 +38,7 @@ local CFG = {
 
 local now = 0
 local backHeld, sideHeld, sideDir = 0, 0, 0
+local standZ = nil
 local speedNow = 0.75
 local boutHome, stillTime, driftWarnAt = nil, 0, -10
 local logTimer = 0
@@ -159,7 +160,13 @@ local function onFrame(dt)
     end
 
     -- physical jump: a sharp upward burst well beyond jogging bob
-    local wantJump = vz > CFG.jumpSpeed and dz > CFG.jumpRise and (now - lastJump) > CFG.jumpCooldown
+    -- standing height: learned only while upright, so it stays put while you squat
+    if not standZ then standZ = z end
+    if z > standZ - 0.08 and math.abs(vz) < 0.3 then
+        standZ = standZ + (z - standZ) * math.min(dt / 2.0, 1)
+    end
+    -- a jump has to take your head clearly ABOVE standing height; rising out of a squat doesn't count
+    local wantJump = vz > CFG.jumpSpeed and z > standZ + CFG.jumpRise and (now - lastJump) > CFG.jumpCooldown
     if wantJump then lastJump = now end
 
     -- the stick always wins

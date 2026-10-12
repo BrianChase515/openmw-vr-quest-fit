@@ -347,7 +347,11 @@ namespace MWVR
 
         void StateMachine::transition_launchToSwing()
         {
-            playSwish();
+            // Bare-handed: the whoosh waits until the fist is actually out in a punch (see swing state),
+            // so arm pumps while jogging stay silent.
+            mReachedPunch = false;
+            if (!mHandToHand)
+                playSwish();
             transition(SwingState_Swing, true);
 
             // As a special case, update the new state immediately to allow
@@ -366,6 +370,11 @@ namespace MWVR
 
             if (mHandToHand && !mPunchPose)
                 return; // fist isn't out in front yet - keep tracking the swing, no contact
+            if (mHandToHand && !mReachedPunch)
+            {
+                mReachedPunch = true;
+                playSwish();
+            }
 
             std::optional<std::pair<MWWorld::Ptr, osg::Vec3f>> victim;
             if (mOffHand)
@@ -387,7 +396,10 @@ namespace MWVR
 
         void StateMachine::transition_swingingToImpact(MWWorld::Ptr victim, osg::Vec3f hitPosition, bool success) 
         {
-            mPtr.getClass().hit(mPtr, mStrength, mSwingType, victim, hitPosition, success, true);
+            // A bare-handed swing that never reached punch position (arm pump) isn't an attack at all:
+            // no miss, no fatigue cost.
+            if (!(mHandToHand && victim.isEmpty() && !mReachedPunch))
+                mPtr.getClass().hit(mPtr, mStrength, mSwingType, victim, hitPosition, success, true);
             transition(SwingState_Impact, false);
         }
 

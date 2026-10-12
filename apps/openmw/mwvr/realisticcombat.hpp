@@ -112,6 +112,7 @@ namespace MWVR
             bool mHandToHand = false;
             bool mLaunchPose = true;   // hand high enough to start a punch
             bool mPunchPose = true;    // hand far enough in front of your face to connect
+            bool mReachedPunch = false; // this swing got into punch position at least once
             void updatePunchPose(const osg::Vec3& handMeters);
         };
 

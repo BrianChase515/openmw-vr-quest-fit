@@ -188,13 +188,15 @@ end
 local function onPunchLanded(data)
     local h, name = pickHand()
     local kind = h and classify(h, name) or 'punch'
+    -- Left and right count as different moves (a 1-2 is L JAB > R JAB).
+    local move = ((name == 'left') and 'L ' or (name == 'right') and 'R ' or '') .. kind:upper()
 
     -- combo bookkeeping
     if now - combo.lastTime > CFG.comboWindow then
         combo.level, combo.last, combo.sameCount, combo.chain = 0, nil, 0, {}
     end
     local mult
-    if kind ~= 'punch' and kind == combo.last then
+    if kind ~= 'punch' and move == combo.last then
         combo.sameCount = combo.sameCount + 1
     else
         combo.sameCount = 1
@@ -208,8 +210,8 @@ local function onPunchLanded(data)
     else
         mult = 1 + CFG.comboStep * combo.level
     end
-    combo.last, combo.lastTime = kind, now
-    table.insert(combo.chain, kind)
+    combo.last, combo.lastTime = move, now
+    table.insert(combo.chain, move)
     while #combo.chain > 4 do table.remove(combo.chain, 1) end
 
     -- optional enemy weakness
@@ -234,11 +236,11 @@ local function onPunchLanded(data)
     if combo.level >= 2 and mult > 1.05 then pcall(ambient.playSound, 'critical damage') end
     local label
     if mult < 1 then
-        label = string.format('%s (stale) x%.1f  - mix it up', kind:upper(), mult)
+        label = string.format('%s (stale) x%.1f  - mix it up', move, mult)
     elseif combo.level > 0 then
-        label = string.format('COMBO %d  %s  x%.1f%s', combo.level + 1, table.concat(combo.chain, ' > '):upper(), mult, tag)
+        label = string.format('COMBO %d   %s   x%.1f%s', combo.level + 1, table.concat(combo.chain, ' > '), mult, tag)
     else
-        label = string.format('%s%s', kind:upper(), tag)
+        label = string.format('%s%s', move, tag)
     end
     showHud(label, 1.2)
 end

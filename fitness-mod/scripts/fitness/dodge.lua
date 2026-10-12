@@ -29,8 +29,9 @@ local recentDodges = {}
 local warnings = {}            -- attacker id -> {lane, dir, t, pos, right}
 local lastWarnText = -10
 
-local function coach(slot, text, color, secs, size)
-    self.object:sendEvent('FitCoach', { slot = slot, text = text, color = color, secs = secs, size = size })
+local function coach(slot, text, color, secs, size, flash)
+    self.object:sendEvent('FitCoach', { slot = slot, text = text, color = color, secs = secs, size = size,
+        flash = flash, flashSecs = 0.6 })
 end
 
 -- Controller buzz on both hands so the result is felt, not just read.
@@ -39,7 +40,7 @@ local function buzz(strength, secs)
     buzzUntil, buzzStrength = now + secs, strength
 end
 
-local LABEL = { squat = 'v  SQUAT  v', left = '<<  SLIP LEFT', right = 'SLIP RIGHT  >>' }
+local LABEL = { squat = 'v  SQUAT!  v', left = '<<<  SLIP LEFT', right = 'SLIP RIGHT  >>>' }
 
 local function laneFor(data)
     if data.lane == 'squat' then return 'squat' end
@@ -99,7 +100,7 @@ I.Combat.addOnHitHandler(function(attack)
     local right = w and w.right or headRight
     local grade = judge(called, from, right)
     if not grade then
-        coach('centre', 'HIT!', RED, 1.0, 60)
+        coach('centre', 'HIT!', RED, 1.2, 72, RED)
         buzz(0.6, 0.15)
         return
     end
@@ -116,14 +117,14 @@ I.Combat.addOnHitHandler(function(attack)
     if math.random() < chance then
         attack.successful = false
         pcall(ambient.playSound, 'miss')
-        coach('centre', 'DODGED!', GREEN, 1.4, 64)
+        coach('centre', 'DODGED!', GREEN, 1.6, 80, GREEN)
         buzz(1.0, 0.08)
         return
     end
     if attack.damage then
         for k, v in pairs(attack.damage) do attack.damage[k] = v * reduce end
     end
-    coach('centre', grade == 'clean' and 'GRAZED - half damage' or 'PARTIAL - 25% less', YELLOW, 1.2, 52)
+    coach('centre', grade == 'clean' and 'GRAZED - half damage' or 'PARTIAL - 25% less', YELLOW, 1.4, 60, YELLOW)
     buzz(0.4, 0.1)
 end)
 
@@ -131,7 +132,8 @@ local function onIncoming(data)
     if not data.attacker then return end
     local called = laneFor(data)
     warnings[data.attacker.id] = { called = called, t = now, pos = headPos, right = headRight }
-    coach('centre', LABEL[called], WHITE, math.max(data.eta or 0.6, 0.4) + 0.2)
+    coach('centre', LABEL[called], WHITE, math.max(data.eta or 0.6, 0.4) + 0.3, 72)
+    buzz(0.35, 0.1)   -- a tap on both hands: something's coming
 end
 
 local function onVRFrame()
