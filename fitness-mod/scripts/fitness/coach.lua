@@ -166,6 +166,7 @@ local function show(data)
     local el = element(slot)
     el.layout.props.text = data.text or ''
     el.layout.props.textColor = data.color or util.color.rgb(1, 1, 1)
+    el.layout.props.textSize = data.size or slot.size
     el:update()
     slot.until_ = now + (data.secs or 1.5)
 end

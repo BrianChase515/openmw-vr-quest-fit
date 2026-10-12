@@ -635,6 +635,8 @@ namespace MWBase
         virtual void enableVRPointer(bool left, bool right) = 0;
 
         virtual std::optional<std::pair<MWWorld::Ptr, osg::Vec3f>> getVRMeleeHitContact(MWWorld::Ptr actor) = 0;
+        virtual std::optional<std::pair<MWWorld::Ptr, osg::Vec3f>> getVRMeleeHitContact(
+            MWWorld::Ptr actor, const osg::Vec3f& origin, const osg::Quat& orient) = 0;
 
         virtual MWWorld::Ptr placeObject(const MWWorld::ConstPtr& object, const MWRender::RayResult& ray, int amount)
             = 0;

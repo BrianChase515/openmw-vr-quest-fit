@@ -100,7 +100,7 @@ end
 
 local function maybeLowerFists()
     local idle = now - lastPunchSwing
-    if raisedByUs and (idle > FISTS_DOWN_AFTER or (moving and idle > 3)) then
+    if raisedByUs and (idle > FISTS_DOWN_AFTER or (moving and idle > 1.5)) then
         if Actor.getStance(self) == Actor.STANCE.Weapon and emptyHanded() then
             Actor.setStance(self, Actor.STANCE.Nothing)
         end

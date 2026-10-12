@@ -3952,6 +3952,20 @@ namespace MWWorld
         return result;
     }
 
+    std::optional<std::pair<MWWorld::Ptr, osg::Vec3f>> MWWorld::World::getVRMeleeHitContact(
+        MWWorld::Ptr ptr, const osg::Vec3f& origin, const osg::Quat& orient)
+    {
+        if (ptr.getClass().getCreatureStats(ptr).getDrawState() != MWMechanics::DrawState::Weapon)
+            return std::nullopt;
+        const MWWorld::Store<ESM::GameSetting>& store = getStore().get<ESM::GameSetting>();
+        const float distance
+            = store.find("fCombatDistance")->mValue.getFloat() * store.find("fHandToHandReach")->mValue.getFloat();
+        auto result = mPhysics->getHitContact(ptr, origin, orient, distance);
+        if (result.first.isEmpty())
+            return std::nullopt;
+        return result;
+    }
+
 //## VR_PATCH END
     MWRender::PostProcessor* World::getPostProcessor()
     {

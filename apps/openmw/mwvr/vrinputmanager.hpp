@@ -90,6 +90,8 @@ namespace MWVR
         std::unique_ptr<UserPointer> mVRPointer;
         std::unique_ptr<OpenXRInput> mXRInput;
         std::unique_ptr<RealisticCombat::StateMachine> mRealisticCombat;
+        std::unique_ptr<RealisticCombat::StateMachine> mRealisticCombatOffHand; // second fist (hand-to-hand)
+        std::string mOffHandPath;
         //bool mPointerActivation = false;
         bool mPointerLeft = true;
         bool mPointerRight = true;

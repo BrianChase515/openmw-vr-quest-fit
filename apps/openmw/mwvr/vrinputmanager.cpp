@@ -98,11 +98,24 @@ namespace MWVR
             {
                 mRealisticCombat.reset(new RealisticCombat::StateMachine(playerPtr, VR::getPreferredAimPath()));
             }
+            std::string mainPath = VR::getPreferredAimPath();
+            std::string offPath = mainPath == VR::Paths::LEFT_HAND_AIM ? VR::Paths::RIGHT_HAND_AIM : VR::Paths::LEFT_HAND_AIM;
+            if (!mRealisticCombatOffHand || mRealisticCombatOffHand->ptr() != playerPtr || mOffHandPath != offPath)
+            {
+                mOffHandPath = offPath;
+                mRealisticCombatOffHand.reset(new RealisticCombat::StateMachine(playerPtr, offPath, true));
+            }
             bool enabled = !guiMode && player.getDrawState() == MWMechanics::DrawState::Weapon && !player.isDisabled();
             mRealisticCombat->update(dt, enabled);
+            mRealisticCombatOffHand->update(dt, enabled);
         }
-        else if (mRealisticCombat)
-            mRealisticCombat->update(dt, false);
+        else
+        {
+            if (mRealisticCombat)
+                mRealisticCombat->update(dt, false);
+            if (mRealisticCombatOffHand)
+                mRealisticCombatOffHand->update(dt, false);
+        }
 
         auto ptr = MWBase::Environment::get().getWorld()->getPlayerPtr();
         auto* anim = MWBase::Environment::get().getWorld()->getAnimation(ptr);

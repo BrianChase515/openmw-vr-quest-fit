@@ -57,18 +57,47 @@ namespace MWVR
         //     }
         // }
 
-        StateMachine::StateMachine(MWWorld::Ptr ptr, std::string_view space)
+        StateMachine::StateMachine(MWWorld::Ptr ptr, std::string_view space, bool offHand)
             : mPtr(ptr)
             , mMinVelocity(Settings::Manager::getFloat("realistic combat minimum swing velocity", "VR"))
             , mMaxVelocity(Settings::Manager::getFloat("realistic combat maximum swing velocity", "VR"))
             , mSpace(space)
+            , mOffHand(offHand)
         {
             Log(Debug::Verbose) << "realistic combat minimum swing velocity: " << mMinVelocity;
             Log(Debug::Verbose) << "realistic combat maximum swing velocity: " << mMaxVelocity;
         }
 
+        // Bare-handed punches only count when the fist is where punches happen: starting no lower
+        // than ~chest height and connecting at least 25 cm in front of your face. Running arm pumps
+        // swing down by the hips, so they never start a swing or land a hit.
+        void StateMachine::updatePunchPose(const osg::Vec3& hand)
+        {
+            mLaunchPose = mPunchPose = true;
+            if (!mHandToHand)
+                return;
+            auto* headSpace = OpenXRInput::instance().getSpace("/default/reference/view");
+            if (!headSpace)
+                return;
+            auto head = headSpace->locate(VR::ReferenceSpace::Local);
+            if (!head.status)
+                return;
+            osg::Vec3 headPos = head.pose.position.asMeters();
+            osg::Vec3 fwd = head.pose.orientation * osg::Vec3{ 0, 1, 0 };
+            fwd.z() = 0;
+            if (fwd.normalize() < 1e-3f)
+                return;
+            osg::Vec3 d = hand - headPos;
+            float reach = d.x() * fwd.x() + d.y() * fwd.y();
+            float drop = -d.z();
+            mLaunchPose = drop <= 0.55f;
+            mPunchPose = reach >= 0.25f && drop <= 0.45f;
+        }
+
         bool StateMachine::canSwing()
         {
+            if (mHandToHand && !mLaunchPose && mState == SwingState_Ready)
+                return false;
             if (mSwingType >= 0)
                 if (mVelocity >= mMinVelocity)
                     if (mSwingType != ESM::Weapon::AT_Thrust || mThrustVelocity >= 0.f)
@@ -135,6 +164,9 @@ namespace MWVR
             auto weaponType = MWBase::Environment::get().getWorld()->getActiveWeaponType();
 
             enabled = enabled && isMeleeWeapon(weaponType);
+            mHandToHand = weaponType == ESM::Weapon::HandToHand;
+            // The off-hand fist only fights bare-handed (a weapon belongs in the main hand).
+            enabled = enabled && (!mOffHand || mHandToHand);
             enabled = enabled && !!tp.status && !!tp.status;
 
             if (mEnabled != enabled)
@@ -176,6 +208,7 @@ namespace MWVR
             if (mPreviousPosition == osg::Vec3(0.f, 0.f, 0.f))
                 mPreviousPosition = tp.pose.position.asMeters();
 
+            updatePunchPose(tp.pose.position.asMeters());
             osg::Vec3 movement = tp.pose.position.asMeters() - mPreviousPosition;
             mMovementSinceEnteredState += movement.length();
             mPreviousPosition = tp.pose.position.asMeters();
@@ -331,7 +364,19 @@ namespace MWVR
             if (!canSwing())
                 return transition_swingingToImpact(MWWorld::Ptr(), osg::Vec3f(), false);
 
-            auto victim = MWBase::Environment::get().getWorld()->getVRMeleeHitContact(mPtr);
+            if (mHandToHand && !mPunchPose)
+                return; // fist isn't out in front yet - keep tracking the swing, no contact
+
+            std::optional<std::pair<MWWorld::Ptr, osg::Vec3f>> victim;
+            if (mOffHand)
+            {
+                // The off hand has no weapon node: aim from the controller itself.
+                auto wp = OpenXRInput::instance().getSpace(mSpace)->locateInWorld();
+                victim = MWBase::Environment::get().getWorld()->getVRMeleeHitContact(
+                    mPtr, wp.pose.position.asMWUnits(), wp.pose.orientation);
+            }
+            else
+                victim = MWBase::Environment::get().getWorld()->getVRMeleeHitContact(mPtr);
 
             if (victim && victim->first.getClass().isActor())
             {

@@ -698,6 +698,8 @@ namespace MWWorld
         void enableVRPointer(bool left, bool right) override;
 
         std::optional<std::pair<MWWorld::Ptr, osg::Vec3f>> getVRMeleeHitContact(MWWorld::Ptr ptr) override;
+        std::optional<std::pair<MWWorld::Ptr, osg::Vec3f>> getVRMeleeHitContact(
+            MWWorld::Ptr ptr, const osg::Vec3f& origin, const osg::Quat& orient) override;
 //## VR_PATCH END
     };
 }

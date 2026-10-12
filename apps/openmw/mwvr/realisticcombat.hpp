@@ -50,7 +50,8 @@ namespace MWVR
         class StateMachine
         {
         public:
-            StateMachine(MWWorld::Ptr ptr, std::string_view space);
+            //! offHand: the second fist for hand-to-hand; finds its own hit contact from the controller pose
+            StateMachine(MWWorld::Ptr ptr, std::string_view space, bool offHand = false);
             void update(float dt, bool enabled);
             MWWorld::Ptr ptr() { return mPtr; }
 
@@ -105,6 +106,13 @@ namespace MWVR
 
             osg::Vec3 mPreviousPosition{ 0.f, 0.f, 0.f };
             std::string mSpace;
+
+            // Fitness mod: punches must happen out in front of you (not arm pumps by your hips).
+            bool mOffHand = false;
+            bool mHandToHand = false;
+            bool mLaunchPose = true;   // hand high enough to start a punch
+            bool mPunchPose = true;    // hand far enough in front of your face to connect
+            void updatePunchPose(const osg::Vec3& handMeters);
         };
 
     }

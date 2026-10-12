@@ -29,8 +29,14 @@ local recentDodges = {}
 local warnings = {}            -- attacker id -> {lane, dir, t, pos, right}
 local lastWarnText = -10
 
-local function coach(slot, text, color, secs)
-    self.object:sendEvent('FitCoach', { slot = slot, text = text, color = color, secs = secs })
+local function coach(slot, text, color, secs, size)
+    self.object:sendEvent('FitCoach', { slot = slot, text = text, color = color, secs = secs, size = size })
+end
+
+-- Controller buzz on both hands so the result is felt, not just read.
+local buzzUntil, buzzStrength = 0, 0
+local function buzz(strength, secs)
+    buzzUntil, buzzStrength = now + secs, strength
 end
 
 local LABEL = { squat = 'v  SQUAT  v', left = '<<  SLIP LEFT', right = 'SLIP RIGHT  >>' }
@@ -93,7 +99,8 @@ I.Combat.addOnHitHandler(function(attack)
     local right = w and w.right or headRight
     local grade = judge(called, from, right)
     if not grade then
-        coach('centre', 'HIT', RED, 0.8)
+        coach('centre', 'HIT!', RED, 1.0, 60)
+        buzz(0.6, 0.15)
         return
     end
 
@@ -109,13 +116,15 @@ I.Combat.addOnHitHandler(function(attack)
     if math.random() < chance then
         attack.successful = false
         pcall(ambient.playSound, 'miss')
-        coach('centre', 'DODGED!', GREEN, 1.0)
+        coach('centre', 'DODGED!', GREEN, 1.4, 64)
+        buzz(1.0, 0.08)
         return
     end
     if attack.damage then
         for k, v in pairs(attack.damage) do attack.damage[k] = v * reduce end
     end
-    coach('centre', grade == 'clean' and 'GRAZED  (half damage)' or 'PARTIAL  (-25%)', YELLOW, 1.0)
+    coach('centre', grade == 'clean' and 'GRAZED - half damage' or 'PARTIAL - 25% less', YELLOW, 1.2, 52)
+    buzz(0.4, 0.1)
 end)
 
 local function onIncoming(data)
@@ -140,6 +149,10 @@ local function onFrame(dt)
     if fl:length() > 1e-3 then
         fl = fl:normalize()
         headRight = util.vector3(fl.y, -fl.x, 0)
+    end
+    if now < buzzUntil then
+        pcall(I.vrinputs.setOutputValue, '/user/hand/left/output/haptic', buzzStrength)
+        pcall(I.vrinputs.setOutputValue, '/user/hand/right/output/haptic', buzzStrength)
     end
     table.insert(history, { t = now, pos = headPos })
     while #history > 0 and now - history[1].t > 0.8 do table.remove(history, 1) end
