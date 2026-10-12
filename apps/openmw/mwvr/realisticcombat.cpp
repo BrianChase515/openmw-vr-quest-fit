@@ -76,7 +76,7 @@ namespace MWVR
             mLaunchPose = mPunchPose = true;
             if (!mHandToHand)
                 return;
-            auto* headSpace = OpenXRInput::instance().getSpace("/default/reference/view");
+            auto headSpace = OpenXRInput::instance().getSpace("/default/reference/view");
             if (!headSpace)
                 return;
             auto head = headSpace->locate(VR::ReferenceSpace::Local);

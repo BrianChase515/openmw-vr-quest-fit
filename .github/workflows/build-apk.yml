@@ -119,10 +119,6 @@ jobs:
             grep -n -iE -B3 -A25 "error[: ]|\*\*\*|failed|undefined reference|No such file" "$RUNNER_TEMP/$f" | head -n 3000 > "errors-$f" || true
             gzip -c "$RUNNER_TEMP/$f" > "full-$f.gz"
           done
-          # Re-run the dependency build one job at a time so the real error is not buried.
-          if [ -d "$GITHUB_WORKSPACE/android/buildscripts/build/arm64" ]; then
-            (cd "$GITHUB_WORKSPACE/android/buildscripts/build/arm64" && make -j1 2>&1 | tail -n 400) > rerun-j1.log || true
-          fi
           cd "$GITHUB_WORKSPACE/android/buildscripts/build" 2>/dev/null && \
             find . -name '*.log' -size -2M -newer "$GITHUB_WORKSPACE/README.md" \
               -exec cp --parents {} "$RUNNER_TEMP/logs/" \; || true
