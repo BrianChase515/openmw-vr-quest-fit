@@ -192,7 +192,7 @@ public class OpenMWActivity extends SDLActivity {
         for (String bsa : detect(present, new String[] { ".bsa" },
                 new String[] { "Morrowind.bsa", "Tribunal.bsa", "Bloodmoon.bsa" }))
             sb.append("fallback-archive=").append(bsa).append('\n');
-        for (String esm : detect(present, new String[] { ".esm", ".omwgame", ".esp", ".omwaddon" },
+        for (String esm : detect(present, new String[] { ".esm", ".omwgame", ".esp", ".omwaddon", ".omwscripts" },
                 new String[] { "Morrowind.esm", "Tribunal.esm", "Bloodmoon.esm" }))
             sb.append("content=").append(esm).append('\n');
         writeFile(new File(userCfgDir, "openmw.cfg"), sb.toString());
