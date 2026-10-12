@@ -42,13 +42,16 @@ jobs:
           yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null
           "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-34" "build-tools;34.0.0"
 
-      - name: Cache downloads and compiler cache
-        uses: actions/cache@v4
+      - name: Restore downloads, compiler cache and finished libraries
+        uses: actions/cache/restore@v4
         with:
           path: |
             android/buildscripts/downloads
+            android/buildscripts/build
+            android/buildscripts/prefix
+            android/buildscripts/toolchain
             ~/.cache/ccache
-          key: omw-${{ runner.os }}-${{ github.sha }}
+          key: omw-${{ runner.os }}-${{ github.run_id }}
           restore-keys: omw-${{ runner.os }}-
 
       - name: Build engine and libraries
@@ -62,6 +65,19 @@ jobs:
           set -o pipefail
           ./build.sh --ccache 2>&1 | tee "$RUNNER_TEMP/build.log"
           ccache -s || true
+
+      - name: Save caches (also after a failure, so retries skip finished work)
+        if: always()
+        continue-on-error: true
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            android/buildscripts/downloads
+            android/buildscripts/build
+            android/buildscripts/prefix
+            android/buildscripts/toolchain
+            ~/.cache/ccache
+          key: omw-${{ runner.os }}-${{ github.run_id }}
 
       - name: Package APK
         working-directory: android
@@ -92,8 +108,15 @@ jobs:
         run: |
           mkdir -p "$RUNNER_TEMP/logs" && cd "$RUNNER_TEMP/logs"
           for f in build.log gradle.log; do
-            [ -f "$RUNNER_TEMP/$f" ] && tail -n 600 "$RUNNER_TEMP/$f" > "tail-$f"
+            [ -f "$RUNNER_TEMP/$f" ] || continue
+            tail -n 600 "$RUNNER_TEMP/$f" > "tail-$f"
+            grep -n -iE -B3 -A25 "error[: ]|\*\*\*|failed|undefined reference|No such file" "$RUNNER_TEMP/$f" | head -n 3000 > "errors-$f" || true
+            gzip -c "$RUNNER_TEMP/$f" > "full-$f.gz"
           done
+          # Re-run the dependency build one job at a time so the real error is not buried.
+          if [ -d "$GITHUB_WORKSPACE/android/buildscripts/build/arm64" ]; then
+            (cd "$GITHUB_WORKSPACE/android/buildscripts/build/arm64" && make -j1 2>&1 | tail -n 400) > rerun-j1.log || true
+          fi
           cd "$GITHUB_WORKSPACE/android/buildscripts/build" 2>/dev/null && \
             find . -name '*.log' -size -2M -newer "$GITHUB_WORKSPACE/README.md" \
               -exec cp --parents {} "$RUNNER_TEMP/logs/" \; || true
