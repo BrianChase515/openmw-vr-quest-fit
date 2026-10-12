@@ -114,6 +114,7 @@ end
 local LANE = { slash = 'squat', attack1 = 'squat', chop = 'slip', thrust = 'slip', attack2 = 'slip', attack3 = 'slip' }
 
 local combatCheck, cachedPlayer = 0, nil
+local statusTimer = 0
 local loggedSpeed = false
 local function onUpdate(dt)
     -- cheap: only ask the AI who we're fighting twice a second
@@ -123,6 +124,19 @@ local function onUpdate(dt)
         cachedPlayer = fightingPlayer()
     end
     local player = cachedPlayer
+    if player and CFG.showEnemy then
+        statusTimer = statusTimer - dt
+        if statusTimer <= 0 then
+            statusTimer = 0.25
+            local d = types.Actor.stats.dynamic
+            local h, f = d.health(self), d.fatigue(self)
+            local rec = (types.NPC.objectIsInstance(self) and types.NPC.record(self)) or types.Creature.record(self)
+            player:sendEvent('FitEnemyStatus', { id = self.object.id, name = rec and rec.name or '?',
+                pos = self.position,
+                health = h.current, healthMax = h.base + h.modifier,
+                fatigue = f.current, fatigueMax = f.base + f.modifier })
+        end
+    end
     if not player then
         if slowed then animation.setSpeed(self, slowed, 1); slowed = nil end
         warned = nil

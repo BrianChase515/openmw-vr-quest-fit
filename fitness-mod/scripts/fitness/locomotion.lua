@@ -15,7 +15,7 @@ local U = I.vrspaces.unitsPerMeter -- game units per real metre (~70)
 
 -- Tuning (metres, seconds). Adjust from playtest feedback.
 local CFG = {
-    bobThreshold   = 0.020, -- head must rise/fall this far from its average to count as a bob
+    bobThreshold   = 0.012, -- head must rise/fall this far from its average to count as a step (light walking ok)
     averageTime    = 0.8,   -- how quickly the "average standing height" follows you
     minSteps       = 2,     -- bobs in a row before you start moving (rejects single nods)
     stopAfter      = 0.95,  -- stop if no step for this long (a normal walking step is ~0.6 s apart)

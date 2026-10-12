@@ -15,6 +15,7 @@ local LAYER = 'Notification'
 local self = require('openmw.self')
 local types = require('openmw.types')
 local now = 0
+local enemyTimer = 0
 local slots = {
     centre = { y = CFG.coachCentreY, size = 44 },
     status = { y = CFG.coachStatusY, size = 28 },
@@ -95,6 +96,70 @@ local function updateStats(dt)
     statsEl:update()
 end
 
+-- Enemy panel (top): name + health + fatigue of whoever is fighting you (nearest if several).
+local enemies = {}         -- id -> latest status
+local enemyEl, enemyParts = nil, nil
+local ENEMY_W = 420
+
+local function buildEnemy()
+    local name = { type = ui.TYPE.Text, props = { position = util.vector2(0, 0), text = '',
+        textSize = 22, textColor = util.color.rgb(1, 0.85, 0.6), textShadow = true, textShadowColor = util.color.rgb(0, 0, 0) } }
+    local rows, content = {}, { name }
+    for i, key in ipairs({ 'health', 'fatigue' }) do
+        local y = 28 + (i - 1) * 24
+        local back = { type = ui.TYPE.Image, props = { position = util.vector2(0, y), size = util.vector2(ENEMY_W, 16),
+            resource = WHITE_TEX, color = util.color.rgb(0.1, 0.1, 0.1), alpha = 0.7 } }
+        local fill = { type = ui.TYPE.Image, props = { position = util.vector2(0, y), size = util.vector2(ENEMY_W, 16),
+            resource = WHITE_TEX, color = util.color.rgb(0.9, 0.3, 0.25) } }
+        local label = { type = ui.TYPE.Text, props = { position = util.vector2(ENEMY_W + 10, y - 3), text = '',
+            textSize = 18, textColor = util.color.rgb(1, 1, 1), textShadow = true, textShadowColor = util.color.rgb(0, 0, 0) } }
+        rows[key] = { fill = fill, label = label }
+        content[#content + 1] = back
+        content[#content + 1] = fill
+        content[#content + 1] = label
+    end
+    local ok, el = pcall(ui.create, {
+        layer = LAYER, type = ui.TYPE.Widget,
+        props = { relativePosition = util.vector2(0.5, CFG.coachEnemyY), anchor = util.vector2(0.5, 0),
+                  size = util.vector2(ENEMY_W + 140, 80), visible = false },
+        content = ui.content(content),
+    })
+    if ok then enemyEl, enemyParts = el, { name = name, rows = rows } else print('[fitness] coach: enemy bar failed: ' .. tostring(el)) end
+end
+
+local function updateEnemy()
+    if not CFG.showEnemy then return end
+    -- pick the nearest enemy that reported in the last 1.5 s
+    local best, bestDist
+    for id, e in pairs(enemies) do
+        if now - e.t > 1.5 then
+            enemies[id] = nil
+        else
+            local dist = e.pos and (e.pos - self.position):length() or 0
+            if not best or dist < bestDist then best, bestDist = e, dist end
+        end
+    end
+    if not enemyEl then
+        if not best then return end
+        buildEnemy()
+        if not enemyEl then return end
+    end
+    if not best then
+        if enemyEl.layout.props.visible then enemyEl.layout.props.visible = false; enemyEl:update() end
+        return
+    end
+    enemyEl.layout.props.visible = true
+    enemyParts.name.props.text = best.name
+    for key, row in pairs(enemyParts.rows) do
+        local cur, max = math.max(best[key] or 0, 0), math.max(best[key .. 'Max'] or 1, 1)
+        local p = math.min(cur / max, 1)
+        row.fill.props.size = util.vector2(math.max(ENEMY_W * p, 1), 16)
+        row.fill.props.color = key == 'health' and util.color.rgb(0.9, 0.3, 0.25) or util.color.rgb(0.35, 0.8, 0.4)
+        row.label.props.text = string.format('%s %d/%d', key == 'health' and 'HP' or 'FAT', cur, max)
+    end
+    enemyEl:update()
+end
+
 local function show(data)
     local slot = slots[data.slot or 'status']
     if not slot then return end
@@ -114,6 +179,8 @@ local function onFrame(dt)
         show({ slot = 'status', text = 'punch info shows here', secs = 3, color = util.color.rgb(0.8, 0.8, 0.8) })
     end
     updateStats(dt)
+    enemyTimer = (enemyTimer or 0) - dt
+    if enemyTimer <= 0 then enemyTimer = 0.25; updateEnemy() end
     for _, slot in pairs(slots) do
         if slot.el and slot.until_ and now > slot.until_ then
             slot.until_ = nil
@@ -125,5 +192,8 @@ end
 
 return {
     engineHandlers = { onFrame = safe('coach', onFrame) },
-    eventHandlers = { FitCoach = safe('coach show', show) },
+    eventHandlers = {
+        FitCoach = safe('coach show', show),
+        FitEnemyStatus = safe('coach enemy', function(e) e.t = now; enemies[e.id] = e end),
+    },
 }

@@ -6,14 +6,20 @@ return {
     coachCentreY = 0.22,
     coachStatusY = 0.62,
     coachStatsY  = 0.74,
-    showStats    = true,   -- health / magicka / fatigue numbers on the bottom line
+    showStats    = true,   -- health / magicka / fatigue bars on the bottom line
+    showEnemy    = true,   -- enemy name + health / fatigue bars at the top while fighting
+    coachEnemyY  = 0.06,
+    -- Keep your body lined up with your character: if your head ends up this far (m) from the
+    -- character (walking around the room), the view re-centres. false = never.
+    recenterDist = 0.35,
     -- Warn when jogging in place has carried you this far (m) from where the jog started.
     -- Off (false) for roomscale play; set to e.g. 0.5 if you play in a small space.
     driftWarn    = false,
 
     -- Effort gate: the engine reports punch strength 0..1 from hand speed,
     -- strength = (speed - 1.0) / 4.0 with default VR settings, so 0.5 = 3.0 m/s.
-    minPunchStrength = 0.5,
+    -- The engine now ignores swings under 2.8 m/s (set in the build), so any strength counts here.
+    minPunchStrength = 0.05,
     -- Morrowind rolls your skill to decide if a hit lands. With this on, any punch that
     -- connects with real effort lands (damage still scales with skill and strength).
     committedPunchesAlwaysHit = true,
