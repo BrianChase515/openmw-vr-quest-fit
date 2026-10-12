@@ -23,6 +23,8 @@ local CFG = {
     jumpSpeed      = 1.2,   -- upward head speed (m/s) that counts as a real jump
     jumpRise       = 0.06,  -- and the head must be at least this far above average
     jumpCooldown   = 1.0,
+    leanThreshold  = 0.08,  -- lean this far from your centre to steer back / sideways
+    centreTime     = 3.0,   -- how quickly your standing centre re-settles while you're still
     debug          = true,  -- on-screen readout for tuning
 }
 
@@ -35,9 +37,28 @@ local moving, running, cadence = false, false, 0
 local hud, hudTimer = nil, 0
 local lastDz, lastVz = 0, 0
 
-local function headZ()
-    local pose = I.vrspaces.locateSpace(I.vrspaces.referenceSpaces.View, I.vrspaces.referenceSpaces.Local)
-    return pose and pose.position.z / U or nil -- metres
+local centre = nil          -- standing centre (metres, horizontal)
+local leanFwd, leanSide = 0, 0
+local util_v3 = util.vector3
+
+local function headPose()
+    return I.vrspaces.locateSpace(I.vrspaces.referenceSpaces.View, I.vrspaces.referenceSpaces.Local)
+end
+
+local function updateLean(pose, dt)
+    local p = util.vector2(pose.position.x, pose.position.y) / U
+    if not centre then centre = p end
+    if not moving then
+        -- re-centre slowly while standing still, so drifting around the room doesn't count as leaning
+        centre = centre + (p - centre) * math.min(dt / CFG.centreTime, 1)
+    end
+    local f3 = pose.orientation * util_v3(0, 1, 0)
+    local f = util.vector2(f3.x, f3.y)
+    if f:length() < 1e-3 then return end
+    f = f:normalize()
+    local r = util.vector2(f.y, -f.x)
+    local d = p - centre
+    leanFwd, leanSide = d:dot(f), d:dot(r)
 end
 
 local function recordStep(t)
@@ -64,8 +85,9 @@ local function updateHud(dt)
     hudTimer = hudTimer + dt
     if hudTimer < 0.2 then return end
     hudTimer = 0
-    local text = string.format('FIT  bob %+.1fcm  vz %+.2fm/s  cad %.1f/s  %s',
-        lastDz * 100, lastVz, cadence, running and 'RUN' or (moving and 'WALK' or 'idle'))
+    local text = string.format('FIT  bob %+.1fcm  vz %+.2fm/s  cad %.1f/s  lean %+.0f/%+.0fcm  %s',
+        lastDz * 100, lastVz, cadence, leanFwd * 100, leanSide * 100,
+        running and 'RUN' or (moving and 'WALK' or 'idle'))
     if not hud then
         hud = ui.create({
             layer = 'HUD',
@@ -85,8 +107,9 @@ local function onFrame(dt)
     if dt <= 0 or core.isWorldPaused() or I.UI.getMode() then return end
     now = now + dt
 
-    local z = headZ()
-    if not z then return end
+    local pose = headPose()
+    if not pose then return end
+    local z = pose.position.z / U
     if not avgZ then avgZ, lastZ = z, z end
 
     -- slow-moving average of head height; the bob is the difference from it
@@ -105,6 +128,7 @@ local function onFrame(dt)
         phase = -1
     end
     updateCadence(now)
+    updateLean(pose, dt)
 
     -- physical jump: a sharp upward burst well beyond jogging bob
     local wantJump = vz > CFG.jumpSpeed and dz > CFG.jumpRise and (now - lastJump) > CFG.jumpCooldown
@@ -113,7 +137,15 @@ local function onFrame(dt)
     -- the stick always wins
     local stickUsed = math.abs(self.controls.movement) > 0.1 or math.abs(self.controls.sideMovement) > 0.1
     if not stickUsed and moving then
-        self.controls.movement = 1
+        -- rhythm sets speed, lean sets direction (default: forward)
+        local fwd, side = 1, 0
+        if leanFwd < -CFG.leanThreshold then fwd = -1 end
+        if math.abs(leanSide) > CFG.leanThreshold then
+            side = leanSide > 0 and 1 or -1
+            if leanFwd > -CFG.leanThreshold then fwd = 0 end
+        end
+        self.controls.movement = fwd
+        self.controls.sideMovement = side
         self.controls.run = running
     end
     if wantJump then self.controls.jump = true end

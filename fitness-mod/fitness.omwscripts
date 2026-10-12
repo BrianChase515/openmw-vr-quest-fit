@@ -1,1 +1,4 @@
 PLAYER: scripts/fitness/locomotion.lua
+PLAYER: scripts/fitness/punch.lua
+PLAYER: scripts/fitness/dodge.lua
+NPC, CREATURE: scripts/fitness/target.lua
