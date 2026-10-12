@@ -171,7 +171,7 @@ public class OpenMWActivity extends SDLActivity {
         global.append("data=\"").append(new File(resourcesDir(), "vfs-mw").getAbsolutePath()).append("\"\n");
         // Desktop sets user-data explicitly; without it the engine logs an error and falls back
         // to the same external files dir — pin it so saves/screenshots stay put by contract.
-        global.append("user-data=\"").append(userStorage).append("\"\n");
+        global.append("user-data=\"").append(userDataDir()).append("\"\n");
         writeFile(new File(globalConfigDir(), "openmw.cfg"), global.toString());
 
         // User config: every existing data dir + the game files found across them.
@@ -255,6 +255,51 @@ public class OpenMWActivity extends SDLActivity {
     private void copyAssetFile(String assetPath, File dst) throws Exception {
         dst.getParentFile().mkdirs();
         try (InputStream in = getAssets().open(assetPath); OutputStream out = new FileOutputStream(dst)) {
+            byte[] buf = new byte[65536];
+            int n;
+            while ((n = in.read(buf)) > 0) out.write(buf, 0, n);
+        }
+    }
+
+    /**
+     * Saves live in /sdcard/Morrowind/userdata when we can write there (legacy storage + the
+     * storage permission): that folder survives uninstalls and adb can back it up / restore it.
+     * Falls back to the app-private folder otherwise. Existing private saves are copied over once.
+     */
+    private String userDataDir() {
+        File shared = new File(Environment.getExternalStorageDirectory(), "Morrowind/userdata");
+        try {
+            if (!shared.isDirectory() && !shared.mkdirs())
+                return userStorage;
+            File probe = new File(shared, ".write-test");
+            new FileOutputStream(probe).close();
+            probe.delete();
+        } catch (Exception e) {
+            Log.w(TAG, "shared user-data not writable, keeping saves in app storage: " + e);
+            return userStorage;
+        }
+        File oldSaves = new File(userStorage, "saves");
+        File newSaves = new File(shared, "saves");
+        if (oldSaves.isDirectory() && !newSaves.exists()) {
+            try {
+                copyTree(oldSaves, newSaves);
+                Log.i(TAG, "copied saves to " + newSaves);
+            } catch (Exception e) {
+                Log.w(TAG, "could not copy old saves: " + e);
+            }
+        }
+        return shared.getAbsolutePath();
+    }
+
+    private static void copyTree(File src, File dst) throws Exception {
+        if (src.isDirectory()) {
+            dst.mkdirs();
+            File[] kids = src.listFiles();
+            if (kids != null)
+                for (File k : kids) copyTree(k, new File(dst, k.getName()));
+            return;
+        }
+        try (InputStream in = new java.io.FileInputStream(src); OutputStream out = new FileOutputStream(dst)) {
             byte[] buf = new byte[65536];
             int n;
             while ((n = in.read(buf)) > 0) out.write(buf, 0, n);
