@@ -37,9 +37,13 @@ local combo = { level = 0, last = nil, sameCount = 0, lastTime = -10, chain = {}
 local hud, hudText, hudUntil = nil, '', 0
 local hapticUntil = { right = 0, left = 0 }
 
-local function locate(space)
-    return I.vrspaces.locateSpace(space, SP.Local)
+-- Poses may only be read inside onVRFrame; cache them there for onFrame.
+local poseCache = {}
+local function onVRFrame()
+    poseCache[SP.View] = I.vrspaces.locateSpace(SP.View, SP.Local)
+    for _, h in pairs(HANDS) do poseCache[h.space] = I.vrspaces.locateSpace(h.space, SP.Local) end
 end
+local function locate(space) return poseCache[space] end
 
 local function toMeters(v) return v / U end
 
@@ -194,10 +198,11 @@ local function onFrame(dt)
     end
 end
 
+local safe = require('scripts.fitness.safe')
 return {
-    engineHandlers = { onFrame = onFrame },
+    engineHandlers = { onFrame = safe('punch', onFrame), onVRFrame = safe('punch vr', onVRFrame) },
     eventHandlers = {
-        FitPunchLanded = onPunchLanded,
+        FitPunchLanded = safe('punch landed', onPunchLanded),
         FitPunchWeak = function(d)
             showHud(string.format('too soft (%.0f%%) - commit to it', (d.strength or 0) * 100), 0.8)
         end,

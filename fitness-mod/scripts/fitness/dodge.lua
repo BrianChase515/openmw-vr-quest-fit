@@ -91,10 +91,15 @@ I.Combat.addOnHitHandler(function(attack)
     show(string.format('%s - grazed, %.0f%% damage', label, reduce * 100), util.color.rgb(1, 0.9, 0.4))
 end)
 
+local cachedHead = nil
+local function onVRFrame()
+    cachedHead = I.vrspaces.locateSpace(SP.View, SP.Local)
+end
+
 local function onFrame(dt)
     if dt <= 0 then return end
     now = now + dt
-    local pose = I.vrspaces.locateSpace(SP.View, SP.Local)
+    local pose = cachedHead
     if pose then
         table.insert(history, { t = now, pos = pose.position / U })
         while #history > 0 and now - history[1].t > WINDOW + 0.1 do table.remove(history, 1) end
@@ -106,4 +111,5 @@ local function onFrame(dt)
     end
 end
 
-return { engineHandlers = { onFrame = onFrame } }
+local safe = require('scripts.fitness.safe')
+return { engineHandlers = { onFrame = safe('dodge', onFrame), onVRFrame = safe('dodge vr', onVRFrame) } }

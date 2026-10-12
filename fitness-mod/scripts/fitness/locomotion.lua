@@ -41,9 +41,12 @@ local centre = nil          -- standing centre (metres, horizontal)
 local leanFwd, leanSide = 0, 0
 local util_v3 = util.vector3
 
-local function headPose()
-    return I.vrspaces.locateSpace(I.vrspaces.referenceSpaces.View, I.vrspaces.referenceSpaces.Local)
+-- Poses may only be read inside onVRFrame; cache them there for onFrame.
+local cachedHead = nil
+local function onVRFrame()
+    cachedHead = I.vrspaces.locateSpace(I.vrspaces.referenceSpaces.View, I.vrspaces.referenceSpaces.Local)
 end
+local function headPose() return cachedHead end
 
 local function updateLean(pose, dt)
     local p = util.vector2(pose.position.x, pose.position.y) / U
@@ -153,6 +156,7 @@ local function onFrame(dt)
     updateHud(dt)
 end
 
+local safe = require('scripts.fitness.safe')
 return {
-    engineHandlers = { onFrame = onFrame },
+    engineHandlers = { onFrame = safe('locomotion', onFrame), onVRFrame = safe('locomotion vr', onVRFrame) },
 }
