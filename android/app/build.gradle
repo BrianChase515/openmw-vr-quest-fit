@@ -30,8 +30,21 @@ android {
         }
     }
 
+    // One fixed key for every build (CI runners otherwise make a new random debug key each
+    // time, and Android refuses to update an app whose signature changed).
+    // Only used for this personal sideloaded build.
+    signingConfigs {
+        fit {
+            storeFile file('fit.keystore')
+            storePassword 'N0cdeexS8AAmR2ZV-0LtGahi'
+            keyAlias 'fit'
+            keyPassword 'N0cdeexS8AAmR2ZV-0LtGahi'
+        }
+    }
+
     buildTypes {
-        release { minifyEnabled false; signingConfig signingConfigs.debug }
+        debug { signingConfig signingConfigs.fit }
+        release { minifyEnabled false; signingConfig signingConfigs.fit }
     }
     lint { abortOnError false }
     compileOptions {
