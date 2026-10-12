@@ -1,8 +1,7 @@
 name: Build and test
 
 on:
-- push
-- pull_request
+  workflow_dispatch:  # upstream desktop builds; run manually only in this fork
 
 env:
   BUILD_TYPE: RelWithDebInfo
