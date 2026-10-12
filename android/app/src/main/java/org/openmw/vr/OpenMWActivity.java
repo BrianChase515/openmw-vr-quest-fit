@@ -280,7 +280,7 @@ public class OpenMWActivity extends SDLActivity {
         }
         File oldSaves = new File(userStorage, "saves");
         File newSaves = new File(shared, "saves");
-        if (oldSaves.isDirectory() && !newSaves.exists()) {
+        if (oldSaves.isDirectory()) { // merge: copies only saves not already in the shared folder
             try {
                 copyTree(oldSaves, newSaves);
                 Log.i(TAG, "copied saves to " + newSaves);
@@ -299,6 +299,7 @@ public class OpenMWActivity extends SDLActivity {
                 for (File k : kids) copyTree(k, new File(dst, k.getName()));
             return;
         }
+        if (dst.exists()) return;
         try (InputStream in = new java.io.FileInputStream(src); OutputStream out = new FileOutputStream(dst)) {
             byte[] buf = new byte[65536];
             int n;
