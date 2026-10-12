@@ -19,16 +19,24 @@ local CFG = {
     averageTime    = 0.8,   -- how quickly the "average standing height" follows you
     minSteps       = 2,     -- bobs in a row before you start moving (rejects single nods)
     stopAfter      = 0.6,   -- stop if no bob for this long
-    runCadence     = 2.4,   -- steps per second at or above this = run
+    runCadence     = 2.0,   -- steps per second at or above this = run...
+    runBob         = 0.08,  -- ...or a big bounce (peak-to-peak metres) at a decent pace
+    runBobCadence  = 1.6,
     jumpSpeed      = 1.2,   -- upward head speed (m/s) that counts as a real jump
     jumpRise       = 0.06,  -- and the head must be at least this far above average
     jumpCooldown   = 1.0,
-    leanThreshold  = 0.08,  -- lean this far from your centre to steer back / sideways
-    centreTime     = 3.0,   -- how quickly your standing centre re-settles while you're still
+    leanBack       = 0.12,  -- lean back this far (m) to backpedal
+    leanSide       = 0.16,  -- lean sideways this far (m) to sidestep
+    leanHold       = 0.35,  -- and hold it this long, so a stray wobble doesn't steer you
+    leanAfterJump  = 1.0,   -- ignore lean for this long after a jump
+    centreTime     = 3.0,   -- standing centre re-settles this fast while you're still...
+    centreTimeMoving = 8.0, -- ...and slowly while moving, so drifting around the room doesn't steer
     debug          = true,  -- on-screen readout for tuning
 }
 
 local now = 0
+local backHeld, sideHeld, sideDir = 0, 0, 0
+local logTimer = 0
 local avgZ, lastZ = nil, nil
 local phase = 0           -- -1 below average, +1 above
 local stepTimes = {}      -- times of recent upward bobs
@@ -51,9 +59,13 @@ local function headPose() return cachedHead end
 local function updateLean(pose, dt)
     local p = util.vector2(pose.position.x, pose.position.y) / U
     if not centre then centre = p end
-    if not moving then
-        -- re-centre slowly while standing still, so drifting around the room doesn't count as leaning
-        centre = centre + (p - centre) * math.min(dt / CFG.centreTime, 1)
+    -- Re-centre fast while still, slowly while moving, and not at all while you're
+    -- deliberately leaning (otherwise a held lean would fade away).
+    local off = p - centre
+    local leaning = moving and off:length() > CFG.leanBack * 0.6
+    if not leaning then
+        local tau = moving and CFG.centreTimeMoving or CFG.centreTime
+        centre = centre + off * math.min(dt / tau, 1)
     end
     local f3 = pose.orientation * util_v3(0, 1, 0)
     local f = util.vector2(f3.x, f3.y)
@@ -69,6 +81,7 @@ local function recordStep(t)
     while #stepTimes > 6 do table.remove(stepTimes, 1) end
 end
 
+local bobMax, bobMin, bobAmp = -1, 1, 0
 local function updateCadence(t)
     -- drop steps that are too old to matter
     while #stepTimes > 0 and t - stepTimes[1] > 2.5 do table.remove(stepTimes, 1) end
@@ -80,7 +93,7 @@ local function updateCadence(t)
     end
     local recent = n > 0 and (t - stepTimes[n]) < CFG.stopAfter
     moving = recent and n >= CFG.minSteps
-    running = moving and cadence >= CFG.runCadence
+    running = moving and (cadence >= CFG.runCadence or (bobAmp >= CFG.runBob and cadence >= CFG.runBobCadence))
 end
 
 local function updateHud(dt)
@@ -88,8 +101,8 @@ local function updateHud(dt)
     hudTimer = hudTimer + dt
     if hudTimer < 0.2 then return end
     hudTimer = 0
-    local text = string.format('FIT  bob %+.1fcm  vz %+.2fm/s  cad %.1f/s  lean %+.0f/%+.0fcm  %s',
-        lastDz * 100, lastVz, cadence, leanFwd * 100, leanSide * 100,
+    local text = string.format('FIT  bounce %.1fcm  cad %.1f/s  lean %+.0f/%+.0fcm  %s',
+        bobAmp * 100, cadence, leanFwd * 100, leanSide * 100,
         running and 'RUN' or (moving and 'WALK' or 'idle'))
     if not hud then
         hud = ui.create({
@@ -124,9 +137,12 @@ local function onFrame(dt)
 
     -- step detection with hysteresis: one step per rise above the band
     local h = CFG.bobThreshold / 2
+    bobMax, bobMin = math.max(bobMax, dz), math.min(bobMin, dz)
     if phase <= 0 and dz > h then
         phase = 1
         recordStep(now)
+        bobAmp = bobAmp * 0.5 + (bobMax - bobMin) * 0.5   -- smoothed peak-to-peak per step
+        bobMax, bobMin = dz, dz
     elseif phase >= 0 and dz < -h then
         phase = -1
     end
@@ -139,13 +155,20 @@ local function onFrame(dt)
 
     -- the stick always wins
     local stickUsed = math.abs(self.controls.movement) > 0.1 or math.abs(self.controls.sideMovement) > 0.1
+    -- lean only counts once held for leanHold seconds, and never right after a jump
+    local leanOk = (now - lastJump) > CFG.leanAfterJump and math.abs(vz) < 0.6
+    local wantBack = leanOk and leanFwd < -CFG.leanBack
+    local wantSide = leanOk and math.abs(leanSide) > CFG.leanSide and (leanSide > 0 and 1 or -1) or 0
+    backHeld = wantBack and backHeld + dt or 0
+    if wantSide ~= 0 and wantSide == sideDir then sideHeld = sideHeld + dt else sideHeld = 0 end
+    sideDir = wantSide
     if not stickUsed and moving then
         -- rhythm sets speed, lean sets direction (default: forward)
         local fwd, side = 1, 0
-        if leanFwd < -CFG.leanThreshold then fwd = -1 end
-        if math.abs(leanSide) > CFG.leanThreshold then
-            side = leanSide > 0 and 1 or -1
-            if leanFwd > -CFG.leanThreshold then fwd = 0 end
+        if backHeld >= CFG.leanHold then fwd = -1 end
+        if sideHeld >= CFG.leanHold then
+            side = sideDir
+            if fwd == 1 then fwd = 0 end
         end
         self.controls.movement = fwd
         self.controls.sideMovement = side
@@ -154,6 +177,13 @@ local function onFrame(dt)
     if wantJump then self.controls.jump = true end
 
     updateHud(dt)
+    logTimer = logTimer + dt
+    if logTimer >= 2 and (moving or cadence > 0) then
+        logTimer = 0
+        print(string.format('[fitness] loco cad %.2f/s amp %.1fcm lean fwd %+.0f side %+.0fcm -> %s',
+            cadence, bobAmp * 100, leanFwd * 100, leanSide * 100,
+            running and 'RUN' or (moving and 'WALK' or 'idle')))
+    end
 end
 
 local safe = require('scripts.fitness.safe')

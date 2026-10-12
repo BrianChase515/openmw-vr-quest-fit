@@ -9,7 +9,9 @@ local ui = require('openmw.ui')
 local util = require('openmw.util')
 local ambient = require('openmw.ambient')
 local I = require('openmw.interfaces')
+local types = require('openmw.types')
 local CFG = require('scripts.fitness.config')
+local Actor = types.Actor
 
 local U = I.vrspaces.unitsPerMeter
 local SP = I.vrspaces.referenceSpaces
@@ -32,6 +34,7 @@ local WEAK = {   -- used only when CFG.weaknessesEnabled
 }
 
 local now = 0
+local raiseFists, onSwingEnd, showSwing, classify
 local headFwd = util.vector3(0, 1, 0)
 local combo = { level = 0, last = nil, sameCount = 0, lastTime = -10, chain = {} }
 local hud, hudText, hudUntil = nil, '', 0
@@ -58,6 +61,43 @@ for _, h in pairs(HANDS) do
     h.prev, h.active, h.start, h.peak, h.peakTime, h.last = nil, false, nil, 0, -10, nil
 end
 
+local AUTO_FISTS_SPEED = 2.5   -- a swing this fast brings your fists up automatically
+local FISTS_DOWN_AFTER = 20    -- seconds without a punching-speed swing before fists go down
+local lastPunchSwing = -100
+local raisedByUs = false
+
+local function emptyHanded()
+    local w = Actor.getEquipment(self, Actor.EQUIPMENT_SLOT.CarriedRight)
+    return w == nil or not types.Weapon.objectIsInstance(w)
+end
+
+raiseFists = function()
+    lastPunchSwing = now
+    if Actor.getStance(self) == Actor.STANCE.Nothing and emptyHanded()
+        and types.Player.getControlSwitch(self, types.Player.CONTROL_SWITCH.Fighting) then
+        Actor.setStance(self, Actor.STANCE.Weapon)
+        raisedByUs = true
+    end
+end
+
+local function maybeLowerFists()
+    if raisedByUs and now - lastPunchSwing > FISTS_DOWN_AFTER then
+        if Actor.getStance(self) == Actor.STANCE.Weapon and emptyHanded() then
+            Actor.setStance(self, Actor.STANCE.Nothing)
+        end
+        raisedByUs = false
+    end
+end
+
+onSwingEnd = function(name, h)
+    if h.peak < AUTO_FISTS_SPEED then return end
+    local kind = classify(h, name)
+    print(string.format('[fitness] swing %s %s peak %.1f m/s', name, kind, h.peak))
+    if CFG.showSwings and now > hudUntil then
+        showSwing(string.format('%s %.1f m/s', kind, h.peak))
+    end
+end
+
 local function updateHand(name, h, dt)
     local pose = locate(h.space)
     if not pose then h.prev = nil; return end
@@ -73,13 +113,15 @@ local function updateHand(name, h, dt)
             if speed < END_SPEED or now - h.peakTime > 0.5 then
                 h.active = false
                 h.endPos, h.endTime = p, now
+                onSwingEnd(name, h)
             end
+            if h.peak >= AUTO_FISTS_SPEED then raiseFists() end
         end
     end
     h.prev = p
 end
 
-local function classify(h, name)
+classify = function(h, name)
     local finish = h.active and h.last or h.endPos
     if not h.start or not finish then return 'punch' end
     local d = finish - h.start
@@ -113,6 +155,18 @@ local function showHud(text, secs)
     else
         hud.layout.props.text = text
         hud:update()
+    end
+end
+
+local swingHud
+showSwing = function(text)
+    if not swingHud then
+        swingHud = ui.create({ layer = 'HUD', type = ui.TYPE.Text, props = {
+            text = text, textSize = 20, textColor = util.color.rgb(0.8, 0.8, 0.8),
+            relativePosition = util.vector2(0.5, 0.56), anchor = util.vector2(0.5, 0.5) } })
+    else
+        swingHud.layout.props.text = text
+        swingHud:update()
     end
 end
 
@@ -191,6 +245,7 @@ local function onFrame(dt)
         updateHand(name, h, dt)
         if now < hapticUntil[name] then pcall(I.vrinputs.setOutputValue, h.haptic, h.buzz or 0.5) end
     end
+    maybeLowerFists()
     if hud and now > hudUntil and hudText ~= '' then
         hudText = ''
         hud.layout.props.text = ''

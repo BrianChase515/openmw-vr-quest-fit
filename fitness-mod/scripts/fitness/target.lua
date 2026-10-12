@@ -3,6 +3,7 @@
 local self = require('openmw.self')
 local types = require('openmw.types')
 local I = require('openmw.interfaces')
+local core = require('openmw.core')
 local CFG = require('scripts.fitness.config')
 
 local function isPlayerPunch(attack)
@@ -31,21 +32,42 @@ local function describeSelf()
     return 'light'
 end
 
+-- Vanilla hand-to-hand damage for a punch of the given strength (used when we
+-- overturn a skill-roll miss: a committed punch that connects should land).
+local function handToHandDamage(attacker, strength)
+    local skill = types.NPC.stats.skills.handtohand(attacker).modified
+    local minM, maxM = core.getGMST('fMinHandToHandMult'), core.getGMST('fMaxHandToHandMult')
+    local dmg = skill * (minM + (maxM - minM) * strength)
+    local fat = types.Actor.stats.dynamic.fatigue(self).current
+    if fat <= 0 then
+        return { health = dmg * core.getGMST('fHandtoHandHealthPer') }
+    end
+    return { fatigue = dmg }
+end
+
 I.Combat.addOnHitHandler(function(attack)
-    if not isPlayerPunch(attack) or not attack.successful then return end
-    if (attack.strength or 1) < CFG.minPunchStrength then
+    if not isPlayerPunch(attack) then return end
+    local strength = attack.strength or 0
+    print(string.format('[fitness] punch contact: success=%s strength=%.2f', tostring(attack.successful), strength))
+    if strength < CFG.minPunchStrength then
         -- not a real punch: no damage, plays the miss sound
         attack.successful = false
-        attack.attacker:sendEvent('FitPunchWeak', { strength = attack.strength })
+        attack.attacker:sendEvent('FitPunchWeak', { strength = strength })
         return
     end
+    if not attack.successful and CFG.committedPunchesAlwaysHit then
+        -- Morrowind's skill roll said "miss"; in a fitness game effort beats dice.
+        attack.successful = true
+        attack.damage = handToHandDamage(attack.attacker, strength)
+    end
+    if not attack.successful then return end
     local dmg = attack.damage or {}
     attack.attacker:sendEvent('FitPunchLanded', {
         victim = self.object,
         kind = describeSelf(),
         fatigue = dmg.fatigue or 0,
         health = dmg.health or 0,
-        strength = attack.strength,
+        strength = strength,
     })
 end)
 

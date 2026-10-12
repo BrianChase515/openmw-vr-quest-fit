@@ -5,6 +5,11 @@ return {
     -- Effort gate: the engine reports punch strength 0..1 from hand speed,
     -- strength = (speed - 1.0) / 4.0 with default VR settings, so 0.5 = 3.0 m/s.
     minPunchStrength = 0.5,
+    -- Morrowind rolls your skill to decide if a hit lands. With this on, any punch that
+    -- connects with real effort lands (damage still scales with skill and strength).
+    committedPunchesAlwaysHit = true,
+    -- Show every swing on screen (even in the air), handy for shadowboxing and tuning.
+    showSwings = true,
 
     -- Combos: alternate punch types to build a multiplier, repeat one type and it goes stale.
     comboWindow   = 1.5,      -- max gap between landed punches to keep a combo alive
