@@ -182,7 +182,9 @@ public class OpenMWActivity extends SDLActivity {
         StringBuilder sb = new StringBuilder();
         java.util.List<File> present = new java.util.ArrayList<>();
         for (File d : dataDirs()) {
-            if (d.isDirectory()) {
+            // Skip folders the app can't list (e.g. created over adb inside Android/data):
+            // the engine throws on them and the game aborts at startup.
+            if (d.isDirectory() && d.canRead() && d.listFiles() != null) {
                 sb.append("data=\"").append(d.getAbsolutePath()).append("\"\n");
                 present.add(d);
             }
