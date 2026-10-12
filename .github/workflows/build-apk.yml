@@ -8,6 +8,12 @@ on:
 permissions:
   contents: write
 
+# Only the newest build matters: cancel an older one still running, so it can't
+# finish last and overwrite the posted APK with stale code.
+concurrency:
+  group: quest-apk
+  cancel-in-progress: true
+
 env:
   # Newer CMake refuses the old minimum versions some bundled libraries declare.
   CMAKE_POLICY_VERSION_MINIMUM: '3.5'
