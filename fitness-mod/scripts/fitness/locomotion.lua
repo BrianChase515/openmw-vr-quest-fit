@@ -18,8 +18,9 @@ local CFG = {
     bobThreshold   = 0.020, -- head must rise/fall this far from its average to count as a bob
     averageTime    = 0.8,   -- how quickly the "average standing height" follows you
     minSteps       = 2,     -- bobs in a row before you start moving (rejects single nods)
-    stopAfter      = 0.6,   -- stop if no bob for this long
-    runCadence     = 2.0,   -- steps per second at or above this = run...
+    stopAfter      = 0.95,  -- stop if no step for this long (a normal walking step is ~0.6 s apart)
+    walkCadence    = 1.2,   -- steps per second where a walk starts picking up speed
+    runCadence     = 2.05,  -- steps per second at or above this = run...
     runBob         = 0.08,  -- ...or a big bounce (peak-to-peak metres) at a decent pace
     runBobCadence  = 1.6,
     jumpSpeed      = 1.2,   -- upward head speed (m/s) that counts as a real jump
@@ -37,6 +38,7 @@ local CFG = {
 
 local now = 0
 local backHeld, sideHeld, sideDir = 0, 0, 0
+local speedNow = 0.75
 local boutHome, stillTime, driftWarnAt = nil, 0, -10
 local logTimer = 0
 local avgZ, lastZ = nil, nil
@@ -177,9 +179,17 @@ local function onFrame(dt)
             side = sideDir
             if fwd == 1 then fwd = 0 end
         end
-        self.controls.movement = fwd
-        self.controls.sideMovement = side
+        -- Pace sets speed smoothly: an easy march = steady walk, picking it up = brisk walk,
+        -- a real jog = run. (Movement values below 1 make the character go slower.)
+        local walkFrom, runAt = CFG.walkCadence, CFG.runCadence
+        local pace = math.max(0, math.min(1, (cadence - walkFrom) / (runAt - walkFrom)))
+        local target = running and 1 or (0.75 + 0.25 * pace)
+        speedNow = speedNow + (target - speedNow) * math.min(dt / 0.25, 1)
+        self.controls.movement = fwd * speedNow
+        self.controls.sideMovement = side * speedNow
         self.controls.run = running
+    else
+        speedNow = 0.75
     end
     if wantJump then self.controls.jump = true end
 

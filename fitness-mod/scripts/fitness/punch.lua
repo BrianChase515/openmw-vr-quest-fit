@@ -21,7 +21,8 @@ local HANDS = {
     left  = { space = I.vrspaces.actionSpaces.LeftHandGrip,
               haptic = '/user/hand/left/output/haptic', inward = 1 },
 }
-local LAUNCH_SPEED, END_SPEED = 1.5, 0.8   -- m/s: swing tracking only, not the effort gate
+local LAUNCH_SPEED, END_SPEED = 1.5, 0.8
+local MAX_REAL_SPEED = 12   -- m/s; faster than any human punch = tracking glitch   -- m/s: swing tracking only, not the effort gate
 
 local WEAK = {   -- used only when CFG.weaknessesEnabled
     heavy = { weak = 'uppercut', resist = 'jab' },
@@ -112,7 +113,7 @@ onSwingEnd = function(name, h)
     raiseFists()
     local kind = classify(h, name)
     print(string.format('[fitness] swing %s %s peak %.1f m/s', name, kind, h.peak))
-    if CFG.showSwings and now > hudUntil then
+    if CFG.showSwings and now > hudUntil and not moving then
         showSwing(string.format('%s %.1f m/s', kind, h.peak))
     end
 end
@@ -123,7 +124,13 @@ local function updateHand(name, h, dt)
     local p = toMeters(pose.position)
     if h.prev then
         local speed = (p - h.prev):length() / dt
-        if not h.active and speed > LAUNCH_SPEED then
+        if speed > MAX_REAL_SPEED then
+            -- tracking glitch (controller lost / jumped): throw the swing away
+            h.active, h.fast, h.prev = false, 0, p
+            return
+        end
+        h.fast = speed > LAUNCH_SPEED and (h.fast or 0) + 1 or 0
+        if not h.active and h.fast >= 2 then       -- needs 2+ frames of real speed
             h.active, h.start, h.peak, h.peakTime = true, h.prev, speed, now
         end
         if h.active then
@@ -258,6 +265,7 @@ return {
         FitPunchLanded = safe('punch landed', onPunchLanded),
         FitMoving = function(d) moving = d.moving end,
         FitPunchWeak = function(d)
+            if moving then return end   -- arm pumps brushing past someone while jogging: stay quiet
             showHud(string.format('too soft (%.0f%%) - commit to it', (d.strength or 0) * 100), 0.8, GREY)
         end,
     },

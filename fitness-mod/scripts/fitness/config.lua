@@ -48,13 +48,13 @@ return {
     brawlerHealthShare = 0.5,
 
     -- Dodging. Enemies telegraph each attack: the screen tells you SQUAT, SLIP LEFT or SLIP RIGHT.
-    windupSlow  = 0.7,   -- enemy wind-ups play at this speed, giving you more time to react
+    windupSlow  = 0.5,   -- enemy wind-ups play at this speed, giving you more time to react
     squatDrop   = 0.18,  -- squat: head this far below your standing height (m)
     slipDist    = 0.14,  -- slip: head this far sideways in the called direction (m)
     partialMove = 0.07,  -- any dodge movement this big (wrong direction / too small) = partial
     cleanAvoid = 0.45, partialAvoid = 0.15,
     cleanReduce = 0.5, partialReduce = 0.75,
     dodgeFatigueCost = 5,
-    dodgeFalloff = 0.6,       -- each recent dodge multiplies the next chance by this
-    dodgeMemory = 4.0,
+    dodgeFalloff = 0.8,       -- each recent clean dodge multiplies the next chance by this
+    dodgeMemory = 3.0,
 }

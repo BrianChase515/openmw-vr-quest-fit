@@ -73,7 +73,11 @@ local function judge(called, from, right)
     else -- no warning seen: any decent slip or squat counts
         if drop >= CFG.squatDrop or math.abs(side) >= CFG.slipDist then return 'clean' end
     end
-    if travel >= CFG.partialMove or drop >= CFG.partialMove then return 'partial' end
+    -- partial: at least half of the called move (or any decent move if nothing was called)
+    if called == 'squat' and drop >= CFG.squatDrop / 2 then return 'partial' end
+    if called == 'left' and side <= -CFG.slipDist / 2 then return 'partial' end
+    if called == 'right' and side >= CFG.slipDist / 2 then return 'partial' end
+    if not called and (travel >= CFG.partialMove or drop >= CFG.partialMove) then return 'partial' end
     return nil
 end
 
@@ -93,13 +97,14 @@ I.Combat.addOnHitHandler(function(attack)
         return
     end
 
-    table.insert(recentDodges, now)
+    local chanceFactor = dodgeFactor()
+    if grade == 'clean' then table.insert(recentDodges, now) end
     local fat = types.Actor.stats.dynamic.fatigue(self)
     fat.current = fat.current - CFG.dodgeFatigueCost
 
     local avoid = grade == 'clean' and CFG.cleanAvoid or CFG.partialAvoid
     local reduce = grade == 'clean' and CFG.cleanReduce or CFG.partialReduce
-    local chance = avoid * dodgeFactor()
+    local chance = avoid * chanceFactor
     print(string.format('[fitness] dodge %s (called %s) chance %.0f%%', grade, tostring(called), chance * 100))
     if math.random() < chance then
         attack.successful = false

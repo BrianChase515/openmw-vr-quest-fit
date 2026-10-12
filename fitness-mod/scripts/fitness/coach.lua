@@ -14,10 +14,10 @@ local safe = require('scripts.fitness.safe')
 local LAYER = 'Notification'
 local self = require('openmw.self')
 local types = require('openmw.types')
+local now = 0
 local slots = {
     centre = { y = CFG.coachCentreY, size = 44 },
     status = { y = CFG.coachStatusY, size = 28 },
-    stats  = { y = CFG.coachStatsY,  size = 24 },
 }
 local function element(slot)
     if slot.el then return slot.el end
@@ -36,23 +36,64 @@ local function element(slot)
     return el
 end
 
+-- Health / magicka / fatigue: a label + a bar each, coloured by how much is left.
+local WHITE_TEX = ui.texture { path = 'white' }
+local STATS = { { key = 'health', label = 'HEALTH' }, { key = 'magicka', label = 'MAGICKA' }, { key = 'fatigue', label = 'FATIGUE' } }
+local BAR_W, BAR_H, GAP = 200, 16, 30
+local statsEl, statsParts = nil, {}
 local statsTimer = 0
+
+local function pctColor(p)
+    if p > 0.6 then return util.color.rgb(0.35, 0.9, 0.4) end
+    if p > 0.3 then return util.color.rgb(1.0, 0.8, 0.25) end
+    return util.color.rgb(1.0, 0.3, 0.25)
+end
+
+local function buildStats()
+    local content = {}
+    for i, st in ipairs(STATS) do
+        local x = (i - 1) * (BAR_W + GAP)
+        local label = { type = ui.TYPE.Text, props = { position = util.vector2(x, 0), text = st.label,
+            textSize = 20, textColor = util.color.rgb(1, 1, 1), textShadow = true, textShadowColor = util.color.rgb(0, 0, 0) } }
+        local back = { type = ui.TYPE.Image, props = { position = util.vector2(x, 26), size = util.vector2(BAR_W, BAR_H),
+            resource = WHITE_TEX, color = util.color.rgb(0.1, 0.1, 0.1), alpha = 0.7 } }
+        local fill = { type = ui.TYPE.Image, props = { position = util.vector2(x, 26), size = util.vector2(BAR_W, BAR_H),
+            resource = WHITE_TEX, color = util.color.rgb(0.35, 0.9, 0.4) } }
+        statsParts[st.key] = { label = label, fill = fill, text = st.label }
+        content[#content + 1] = back
+        content[#content + 1] = fill
+        content[#content + 1] = label
+    end
+    local ok, el = pcall(ui.create, {
+        layer = LAYER, type = ui.TYPE.Widget,
+        props = { relativePosition = util.vector2(0.5, CFG.coachStatsY), anchor = util.vector2(0.5, 0.5),
+                  size = util.vector2(3 * BAR_W + 2 * GAP, 26 + BAR_H) },
+        content = ui.content(content),
+    })
+    if ok then statsEl = el else print('[fitness] coach: stats bars failed: ' .. tostring(el)) end
+end
+
 local function updateStats(dt)
     if not CFG.showStats then return end
     statsTimer = statsTimer - dt
     if statsTimer > 0 then return end
     statsTimer = 0.25
+    if not statsEl then buildStats() end
+    if not statsEl then return end
     local d = types.Actor.stats.dynamic
-    local h, m, f = d.health(self), d.magicka(self), d.fatigue(self)
-    local slot = slots.stats
-    local el = element(slot)
-    el.layout.props.text = string.format('HEALTH %d/%d     MAGICKA %d/%d     FATIGUE %d/%d',
-        h.current, h.base + h.modifier, m.current, m.base + m.modifier, f.current, f.base + f.modifier)
-    local low = f.current < 0.25 * (f.base + f.modifier) or h.current < 0.25 * (h.base + h.modifier)
-    el.layout.props.textColor = low and util.color.rgb(1, 0.5, 0.4) or util.color.rgb(0.85, 0.85, 0.85)
-    el:update()
+    for _, st in ipairs(STATS) do
+        local stat = d[st.key](self)
+        local max = math.max((stat.base or 0) + (stat.modifier or 0), 1)
+        local cur = math.max(stat.current or 0, 0)
+        local p = math.min(cur / max, 1)
+        local part = statsParts[st.key]
+        part.fill.props.size = util.vector2(math.max(BAR_W * p, 1), BAR_H)
+        part.fill.props.color = pctColor(p)
+        part.label.props.text = string.format('%s  %d/%d', part.text, cur, max)
+        part.label.props.textColor = pctColor(p)
+    end
+    statsEl:update()
 end
-local now = 0
 
 local function show(data)
     local slot = slots[data.slot or 'status']

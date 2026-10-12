@@ -114,6 +114,7 @@ end
 local LANE = { slash = 'squat', attack1 = 'squat', chop = 'slip', thrust = 'slip', attack2 = 'slip', attack3 = 'slip' }
 
 local combatCheck, cachedPlayer = 0, nil
+local loggedSpeed = false
 local function onUpdate(dt)
     -- cheap: only ask the AI who we're fighting twice a second
     combatCheck = combatCheck - dt
@@ -135,7 +136,17 @@ local function onUpdate(dt)
         return
     end
     local key = group .. atk
+    if warned == key and slowed == group and CFG.windupSlow < 1 then
+        -- the engine may reset animation speed: keep it slowed for the whole wind-up
+        local sp = animation.getSpeed(self, group)
+        if not loggedSpeed then
+            loggedSpeed = true
+            print(string.format('[fitness] %s wind-up %s: speed %.2f (wanted %.2f)', self.recordId or '?', atk, sp or -1, CFG.windupSlow))
+        end
+        if sp and math.abs(sp - CFG.windupSlow) > 0.01 then animation.setSpeed(self, group, CFG.windupSlow) end
+    end
     if warned ~= key then
+        loggedSpeed = false
         warned = key
         if CFG.windupSlow and CFG.windupSlow < 1 then
             animation.setSpeed(self, group, CFG.windupSlow)
