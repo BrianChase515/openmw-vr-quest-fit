@@ -75,6 +75,11 @@ local function isPunchShape(h)
     local hp = toMeters(head.position)
     local d = finish - hp
     local reach = util.vector3(d.x, d.y, 0):dot(headFwd)
+    if moving then
+        -- while jogging, arm pumps can rise high: only a clearly extended jab/hook counts
+        local kind = classify(h)
+        return kind ~= 'uppercut' and kind ~= 'punch' and reach >= CFG.punchMinReachMoving and d.z >= -0.3
+    end
     return reach >= CFG.punchMinReach and d.z >= -CFG.punchMaxDrop
 end
 

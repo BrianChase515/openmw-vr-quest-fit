@@ -12,12 +12,13 @@ local safe = require('scripts.fitness.safe')
 
 -- 'Notification' is a VR layer that is locked to your view (the game's own message popups use it).
 local LAYER = 'Notification'
+local self = require('openmw.self')
+local types = require('openmw.types')
 local slots = {
     centre = { y = CFG.coachCentreY, size = 44 },
     status = { y = CFG.coachStatusY, size = 28 },
+    stats  = { y = CFG.coachStatsY,  size = 24 },
 }
-local now = 0
-
 local function element(slot)
     if slot.el then return slot.el end
     local ok, el = pcall(ui.create, {
@@ -34,6 +35,24 @@ local function element(slot)
     slot.el = el
     return el
 end
+
+local statsTimer = 0
+local function updateStats(dt)
+    if not CFG.showStats then return end
+    statsTimer = statsTimer - dt
+    if statsTimer > 0 then return end
+    statsTimer = 0.25
+    local d = types.Actor.stats.dynamic
+    local h, m, f = d.health(self), d.magicka(self), d.fatigue(self)
+    local slot = slots.stats
+    local el = element(slot)
+    el.layout.props.text = string.format('HEALTH %d/%d     MAGICKA %d/%d     FATIGUE %d/%d',
+        h.current, h.base + h.modifier, m.current, m.base + m.modifier, f.current, f.base + f.modifier)
+    local low = f.current < 0.25 * (f.base + f.modifier) or h.current < 0.25 * (h.base + h.modifier)
+    el.layout.props.textColor = low and util.color.rgb(1, 0.5, 0.4) or util.color.rgb(0.85, 0.85, 0.85)
+    el:update()
+end
+local now = 0
 
 local function show(data)
     local slot = slots[data.slot or 'status']
@@ -53,6 +72,7 @@ local function onFrame(dt)
         show({ slot = 'centre', text = 'FITNESS MOD READY', secs = 3, color = util.color.rgb(0.6, 1, 0.6) })
         show({ slot = 'status', text = 'punch info shows here', secs = 3, color = util.color.rgb(0.8, 0.8, 0.8) })
     end
+    updateStats(dt)
     for _, slot in pairs(slots) do
         if slot.el and slot.until_ and now > slot.until_ then
             slot.until_ = nil

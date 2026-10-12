@@ -5,6 +5,10 @@ return {
     -- Fitness HUD layout (fractions of the view panel, 0 = top, 1 = bottom)
     coachCentreY = 0.22,
     coachStatusY = 0.62,
+    coachStatsY  = 0.74,
+    showStats    = true,   -- health / magicka / fatigue numbers on the bottom line
+    -- Warn when jogging in place has carried you this far (m) from where the jog started.
+    driftWarn    = 0.5,
 
     -- Effort gate: the engine reports punch strength 0..1 from hand speed,
     -- strength = (speed - 1.0) / 4.0 with default VR settings, so 0.5 = 3.0 m/s.
@@ -18,11 +22,13 @@ return {
     -- this far in front of your face, and no more than this far below it.
     punchMinReach = 0.30,
     punchMaxDrop  = 0.45,
+    punchMinReachMoving = 0.42,   -- stricter while you're jogging
 
-    -- Where the health/magic/fatigue HUD sits. 'HUDBottomLeft' locks it in the lower-left of
+    -- Where the game's own health/magic/fatigue panel sits. 'LeftWristTop' is the engine default
+    -- (on your left wrist). 'HUDBottomLeft' would lock it in the lower-left of
     -- your view. Other options: 'HUDBottomRight', 'HUDTopLeft', 'HUDTopRight', 'LeftWristTop'
     -- (engine default). Set to false to leave whatever you picked in the VR settings menu.
-    hudPosition = 'HUDBottomLeft',
+    hudPosition = 'LeftWristTop',
 
     -- Combos: alternate punch types to build a multiplier, repeat one type and it goes stale.
     comboWindow   = 1.5,      -- max gap between landed punches to keep a combo alive

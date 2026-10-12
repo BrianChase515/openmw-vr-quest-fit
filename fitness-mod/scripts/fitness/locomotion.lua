@@ -32,10 +32,12 @@ local CFG = {
     centreTime     = 3.0,   -- standing centre re-settles this fast while you're still...
     centreTimeMoving = 8.0, -- ...and slowly while moving, so drifting around the room doesn't steer
     debug          = true,  -- on-screen readout for tuning
+    driftWarn      = require('scripts.fitness.config').driftWarn or 0.5,
 }
 
 local now = 0
 local backHeld, sideHeld, sideDir = 0, 0, 0
+local boutHome, stillTime, driftWarnAt = nil, 0, -10
 local logTimer = 0
 local avgZ, lastZ = nil, nil
 local phase = 0           -- -1 below average, +1 above
@@ -97,7 +99,7 @@ local function updateCadence(t)
 end
 
 local function updateHud(dt)
-    if not CFG.debugHud then return end
+    if not require('scripts.fitness.config').debugHud then return end
     hudTimer = hudTimer + dt
     if hudTimer < 0.25 then return end
     hudTimer = 0
@@ -137,6 +139,22 @@ local function onFrame(dt)
     updateCadence(now)
     if moving ~= wasMoving then self.object:sendEvent('FitMoving', { moving = moving }) end
     updateLean(pose, dt)
+
+    -- Jogging in place tends to creep forward. Warn before you reach the Guardian boundary.
+    local here = util.vector2(pose.position.x, pose.position.y) / U
+    if moving then
+        stillTime = 0
+        if not boutHome then boutHome = here end
+        local drift = (here - boutHome):length()
+        if drift > CFG.driftWarn and now - driftWarnAt > 2 then
+            driftWarnAt = now
+            self.object:sendEvent('FitCoach', { slot = 'centre', secs = 1.8, color = util.color.rgb(1, 0.4, 0.3),
+                text = string.format('DRIFTING %.1fm - STEP BACK', drift) })
+        end
+    else
+        stillTime = stillTime + dt
+        if stillTime > 3 then boutHome = nil end
+    end
 
     -- physical jump: a sharp upward burst well beyond jogging bob
     local wantJump = vz > CFG.jumpSpeed and dz > CFG.jumpRise and (now - lastJump) > CFG.jumpCooldown
