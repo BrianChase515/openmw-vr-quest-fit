@@ -97,26 +97,13 @@ local function updateCadence(t)
 end
 
 local function updateHud(dt)
-    if not CFG.debug then return end
+    if not CFG.debugHud then return end
     hudTimer = hudTimer + dt
-    if hudTimer < 0.2 then return end
+    if hudTimer < 0.25 then return end
     hudTimer = 0
-    local text = string.format('FIT  bounce %.1fcm  cad %.1f/s  lean %+.0f/%+.0fcm  %s',
-        bobAmp * 100, cadence, leanFwd * 100, leanSide * 100,
-        running and 'RUN' or (moving and 'WALK' or 'idle'))
-    if not hud then
-        hud = ui.create({
-            layer = 'HUD',
-            type = ui.TYPE.Text,
-            props = {
-                text = text, textSize = 22, textColor = util.color.rgb(1, 0.9, 0.3),
-                relativePosition = util.vector2(0.5, 0.15), anchor = util.vector2(0.5, 0),
-            },
-        })
-    else
-        hud.layout.props.text = text
-        hud:update()
-    end
+    self.object:sendEvent('FitCoach', { slot = 'status', secs = 0.5, text = string.format(
+        'bounce %.1fcm  cad %.1f/s  lean %+.0f/%+.0fcm  %s', bobAmp * 100, cadence, leanFwd * 100, leanSide * 100,
+        running and 'RUN' or (moving and 'WALK' or 'idle')) })
 end
 
 local function onFrame(dt)

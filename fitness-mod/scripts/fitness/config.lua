@@ -1,6 +1,10 @@
 -- Shared tuning for the fitness mod. Distances in metres, times in seconds.
 return {
-    debugHud = true,          -- on-screen readouts for tuning
+    debugHud = false,         -- extra movement readout on the status line (for tuning)
+
+    -- Fitness HUD layout (fractions of the view panel, 0 = top, 1 = bottom)
+    coachCentreY = 0.22,
+    coachStatusY = 0.62,
 
     -- Effort gate: the engine reports punch strength 0..1 from hand speed,
     -- strength = (speed - 1.0) / 4.0 with default VR settings, so 0.5 = 3.0 m/s.
@@ -37,8 +41,11 @@ return {
     brawler = false,
     brawlerHealthShare = 0.5,
 
-    -- Dodging (slip the incoming hit with your head)
-    cleanSlip = 0.15, partialSlip = 0.07,  -- head travel in the last 0.4 s
+    -- Dodging. Enemies telegraph each attack: the screen tells you SQUAT, SLIP LEFT or SLIP RIGHT.
+    windupSlow  = 0.7,   -- enemy wind-ups play at this speed, giving you more time to react
+    squatDrop   = 0.18,  -- squat: head this far below your standing height (m)
+    slipDist    = 0.14,  -- slip: head this far sideways in the called direction (m)
+    partialMove = 0.07,  -- any dodge movement this big (wrong direction / too small) = partial
     cleanAvoid = 0.45, partialAvoid = 0.15,
     cleanReduce = 0.5, partialReduce = 0.75,
     dodgeFatigueCost = 5,

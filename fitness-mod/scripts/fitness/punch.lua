@@ -37,7 +37,7 @@ local now = 0
 local raiseFists, onSwingEnd, showSwing, classify
 local headFwd = util.vector3(0, 1, 0)
 local combo = { level = 0, last = nil, sameCount = 0, lastTime = -10, chain = {} }
-local hud, hudText, hudUntil = nil, '', 0
+local hudUntil = 0
 local hapticUntil = { right = 0, left = 0 }
 
 -- Poses may only be read inside onVRFrame; cache them there for onFrame.
@@ -158,29 +158,14 @@ local function pickHand()
     return best, bestName
 end
 
-local function showHud(text, secs)
-    if not CFG.debugHud and secs < 1 then return end
-    hudText, hudUntil = text, now + (secs or 1.2)
-    if not hud then
-        hud = ui.create({ layer = 'HUD', type = ui.TYPE.Text, props = {
-            text = text, textSize = 26, textColor = util.color.rgb(1, 0.6, 0.2),
-            relativePosition = util.vector2(0.5, 0.62), anchor = util.vector2(0.5, 0.5) } })
-    else
-        hud.layout.props.text = text
-        hud:update()
-    end
+local ORANGE, GREY = util.color.rgb(1, 0.65, 0.25), util.color.rgb(0.85, 0.85, 0.85)
+local function showHud(text, secs, color)
+    hudUntil = now + (secs or 1.2)
+    self.object:sendEvent('FitCoach', { slot = 'status', text = text, secs = secs or 1.2, color = color or ORANGE })
 end
 
-local swingHud
 showSwing = function(text)
-    if not swingHud then
-        swingHud = ui.create({ layer = 'HUD', type = ui.TYPE.Text, props = {
-            text = text, textSize = 20, textColor = util.color.rgb(0.8, 0.8, 0.8),
-            relativePosition = util.vector2(0.5, 0.56), anchor = util.vector2(0.5, 0.5) } })
-    else
-        swingHud.layout.props.text = text
-        swingHud:update()
-    end
+    self.object:sendEvent('FitCoach', { slot = 'status', text = text, secs = 0.8, color = GREY })
 end
 
 local function buzz(name, strength, secs)
@@ -259,11 +244,6 @@ local function onFrame(dt)
         if now < hapticUntil[name] then pcall(I.vrinputs.setOutputValue, h.haptic, h.buzz or 0.5) end
     end
     maybeLowerFists()
-    if hud and now > hudUntil and hudText ~= '' then
-        hudText = ''
-        hud.layout.props.text = ''
-        hud:update()
-    end
 end
 
 local safe = require('scripts.fitness.safe')
@@ -273,7 +253,7 @@ return {
         FitPunchLanded = safe('punch landed', onPunchLanded),
         FitMoving = function(d) moving = d.moving end,
         FitPunchWeak = function(d)
-            showHud(string.format('too soft (%.0f%%) - commit to it', (d.strength or 0) * 100), 0.8)
+            showHud(string.format('too soft (%.0f%%) - commit to it', (d.strength or 0) * 100), 0.8, GREY)
         end,
     },
 }
