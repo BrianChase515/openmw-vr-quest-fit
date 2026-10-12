@@ -5,6 +5,13 @@ on:
     branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
+env:
+  # Newer CMake refuses the old minimum versions some bundled libraries declare.
+  CMAKE_POLICY_VERSION_MINIMUM: '3.5'
+
 jobs:
   build:
     runs-on: ubuntu-24.04
@@ -46,16 +53,22 @@ jobs:
 
       - name: Build engine and libraries
         working-directory: android/buildscripts
+        shell: bash
         env:
           NCPU_OVERRIDE: 4
         run: |
           export CCACHE_DIR=$HOME/.cache/ccache CCACHE_MAXSIZE=5G
-          ./build.sh --ccache
+          cmake --version | head -1
+          set -o pipefail
+          ./build.sh --ccache 2>&1 | tee "$RUNNER_TEMP/build.log"
           ccache -s || true
 
       - name: Package APK
         working-directory: android
-        run: ./gradlew --no-daemon :app:assembleDebug
+        shell: bash
+        run: |
+          set -o pipefail
+          ./gradlew --no-daemon :app:assembleDebug 2>&1 | tee "$RUNNER_TEMP/gradle.log"
 
       - uses: actions/upload-artifact@v4
         with:
@@ -63,12 +76,29 @@ jobs:
           path: android/app/build/outputs/apk/debug/app-debug.apk
           retention-days: 30
 
-      - name: Upload build logs on failure
+      - name: Publish APK to the 'apk' branch
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/apk" && cd "$RUNNER_TEMP/apk"
+          cp "$GITHUB_WORKSPACE/android/app/build/outputs/apk/debug/app-debug.apk" openmw-vr-quest.apk
+          echo "Built from ${GITHUB_SHA} on $(date -u)" > BUILD.txt
+          git init -q -b apk && git add . 
+          git -c user.name=ci -c user.email=ci@localhost commit -q -m "APK from ${GITHUB_SHA}"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${GITHUB_REPOSITORY}.git" apk
+
+      - name: Publish logs to the 'ci-logs' branch on failure
         if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-logs
-          path: |
-            android/buildscripts/build/**/*.log
-            android/buildscripts/build/**/CMakeError.log
-          if-no-files-found: ignore
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/logs" && cd "$RUNNER_TEMP/logs"
+          for f in build.log gradle.log; do
+            [ -f "$RUNNER_TEMP/$f" ] && tail -n 600 "$RUNNER_TEMP/$f" > "tail-$f"
+          done
+          cd "$GITHUB_WORKSPACE/android/buildscripts/build" 2>/dev/null && \
+            find . -name '*.log' -size -2M -newer "$GITHUB_WORKSPACE/README.md" \
+              -exec cp --parents {} "$RUNNER_TEMP/logs/" \; || true
+          cd "$RUNNER_TEMP/logs"
+          echo "Failed run ${GITHUB_RUN_ID} at ${GITHUB_SHA}" > RUN.txt
+          git init -q -b ci-logs && git add .
+          git -c user.name=ci -c user.email=ci@localhost commit -q -m "Logs from run ${GITHUB_RUN_ID}"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${GITHUB_REPOSITORY}.git" ci-logs
