@@ -50,7 +50,8 @@ set(LZ4_VERSION 1.9.3)
 set(LZ4_HASH SHA256=030644df4611007ff7dc962d981f390361e6c97a34e5cbc393ddfbe019ffe2c1)
 
 # https://luajit.org/download.html - no tarballs anymore, clone from git
-set(LUAJIT_VERSION v2.1.0-beta3)
+# The v2.1.0-beta3 tag was deleted upstream (LuaJIT is now a rolling release); pin a v2.1 commit.
+set(LUAJIT_VERSION c6ffc141a8762b41703f9287d63d93622a13dd8f)
 
 # https://github.com/OpenMW/openmw/commits/master
 set(OPENMW_VERSION 1644430bc08aa537621b21bf7bfb1f5c0f3a9d92)
@@ -430,7 +431,7 @@ set(LUAJIT_MAKE_FLAGS
 )
 
 ExternalProject_Add(luajit
-	GIT_REPOSITORY https://luajit.org/git/luajit.git
+	GIT_REPOSITORY https://github.com/LuaJIT/LuaJIT.git
 	GIT_TAG ${LUAJIT_VERSION}
 	DOWNLOAD_DIR ${download_dir}
 
