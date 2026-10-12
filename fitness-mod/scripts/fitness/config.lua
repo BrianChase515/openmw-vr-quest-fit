@@ -8,7 +8,8 @@ return {
     coachStatsY  = 0.74,
     showStats    = true,   -- health / magicka / fatigue numbers on the bottom line
     -- Warn when jogging in place has carried you this far (m) from where the jog started.
-    driftWarn    = 0.5,
+    -- Off (false) for roomscale play; set to e.g. 0.5 if you play in a small space.
+    driftWarn    = false,
 
     -- Effort gate: the engine reports punch strength 0..1 from hand speed,
     -- strength = (speed - 1.0) / 4.0 with default VR settings, so 0.5 = 3.0 m/s.

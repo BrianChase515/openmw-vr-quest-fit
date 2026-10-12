@@ -33,7 +33,7 @@ local CFG = {
     centreTime     = 3.0,   -- standing centre re-settles this fast while you're still...
     centreTimeMoving = 8.0, -- ...and slowly while moving, so drifting around the room doesn't steer
     debug          = true,  -- on-screen readout for tuning
-    driftWarn      = require('scripts.fitness.config').driftWarn or 0.5,
+    driftWarn      = require('scripts.fitness.config').driftWarn,   -- false = off
 }
 
 local now = 0
@@ -148,7 +148,7 @@ local function onFrame(dt)
         stillTime = 0
         if not boutHome then boutHome = here end
         local drift = (here - boutHome):length()
-        if drift > CFG.driftWarn and now - driftWarnAt > 2 then
+        if CFG.driftWarn and drift > CFG.driftWarn and now - driftWarnAt > 2 then
             driftWarnAt = now
             self.object:sendEvent('FitCoach', { slot = 'centre', secs = 1.8, color = util.color.rgb(1, 0.4, 0.3),
                 text = string.format('DRIFTING %.1fm - STEP BACK', drift) })
