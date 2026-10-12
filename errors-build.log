@@ -1,0 +1,100 @@
+123078-34 warnings generated.
+123079-[ 84%] Building CXX object apps/openmw/CMakeFiles/openmw-lib.dir/mwworld/player.cpp.o
+123080-37 warnings generated.
+123081:[ 84%] Building CXX object apps/openmw/CMakeFiles/openmw-lib.dir/mwworld/failedaction.cpp.o
+123082-In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwworld/player.cpp:31:
+123083-In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwworld/../mwrender/camera.hpp:7:
+123084-In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Matrix:18:
+123085-In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Matrixd:17:
+123086-In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Object:17:
+123087-In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Referenced:20:
+123088-/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/OpenThreads/Mutex:83:33: warning: extra ';' after member function definition [-Wextra-semi]
+123089-   83 |     Mutex(const Mutex &/*m*/) {};
+123090-      |                                 ^
+123091-/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/OpenThreads/Mutex:88:59: warning: extra ';' after member function definition [-Wextra-semi]
+123092-   88 |     Mutex &operator=(const Mutex &/*m*/) {return *(this);};
+123093-      |                                                           ^
+123094-In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwworld/player.cpp:31:
+123095-In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwworld/../mwrender/camera.hpp:14:
+123096-In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/vr/session.hpp:14:
+123097-In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/stereo/stereomanager.hpp:4:
+123098-In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Camera:17:
+123099-In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Transform:17:
+123100-In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Group:17:
+123101-In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Node:19:
+123102-In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/StateSet:18:
+123103-In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/StateAttribute:19:
+123104-/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Callback:44:35: warning: extra ';' after member function definition [-Wextra-semi]
+123105-   44 |         META_Object(osg, Callback);
+123106-      |                                   ^
+--
+146160-  475 |         META_Shape(osg, ConvexHull);
+146161-      |                                    ^
+146162-/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Shape:490:37: warning: extra ';' after member function definition [-Wextra-semi]
+146163:  490 |         ME/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/realisticcombat.cpp:79:19: error: variable 'headSpace' with type 'auto *' has incompatible initializer of type 'std::shared_ptr<VR::Space>'
+146164-   TA_Shape(osg, HeightField);
+146165-      |                                     ^
+146166-79 |             auto* headSpace = OpenXRInput::instance().getSpace("/default/reference/view");
+146167-      |                   ^           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+146168-/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Shape:604:40: warning: extra ';' after member function definition [-Wextra-semi]
+146169-  604 |         META_Shape(osg, CompositeShape);
+146170-      |                                        ^
+146171-/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Shader:324:42: warning: extra ';' after member function definition [-Wextra-semi]
+146172-  324 |         META_Object(osg, ShaderComponent);
+146173-      |                                          ^
+146174-In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vranimation.cpp:1:
+146175-In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/openxrinput.hpp:7:
+146176-In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/vr/session.hpp:14:
+146177-In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/stereo/stereomanager.hpp:4:
+146178-In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Camera:21:
+146179-In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Texture:20:
+146180-In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/GraphicsContext:17:
+146181-In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/State:27:
+146182-/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/ShaderComposer:35:41: warning: extra ';' after member function definition [-Wextra-semi]
+146183-   35 |         META_Object(osg, ShaderComposer);
+146184-      |                                         ^
+146185-/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Shape:687:43: warning: extra ';' after member function definition [-Wextra-semi]
+146186-  687 |         META_Object(osg,TessellationHints);
+146187-      |                                           ^
+146188-In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vranimation.cpp:1:
+--
+146668-/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/View:37:30: warning: extra ';' after member function definition [-Wextra-semi]
+146669-   37 |         META_Object(osg,View);
+146670-      |                              ^
+146671:90 warnings and 1 error generated.
+146672:make[5]: *** [apps/openmw/CMakeFiles/openmw-lib.dir/build.make:5273: apps/openmw/CMakeFiles/openmw-lib.dir/mwvr/realisticcombat.cpp.o] Error 1
+146673:make[5]: *** Waiting for unfinished jobs....
+146674-In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vranimation.cpp:1:
+146675-In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/openxrinput.hpp:7:
+146676-In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/vr/session.hpp:14:
+146677-In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/stereo/stereomanager.hpp:8:
+146678-In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgUtil/CullVisitor:24:
+146679-/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Drawable:97:33: warning: extra ';' after member function definition [-Wextra-semi]
+146680-   97 |         META_Node(osg, Drawable);
+146681-      |                                 ^
+146682-/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Drawable:168:56: warning: extra ';' after member function definition [-Wextra-semi]
+146683-  168 |             META_Object(osg,ComputeBoundingBoxCallback);
+146684-      |                                                        ^
+146685-/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Drawable:294:61: warning: extra ';' after member function definition [-Wextra-semi]
+146686-  294 |             META_Object(osg, CreateVertexArrayStateCallback);
+146687-      |                                                             ^
+146688-/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Drawable:360:42: warning: extra ';' after member function definition [-Wextra-semi]
+146689-  360 |             META_Object(osg,DrawCallback);
+146690-      |                                          ^
+146691-In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrgui.cpp:1:
+146692-In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrgui.hpp:10:
+146693-In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Camera:17:
+146694-In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Transform:17:
+146695-In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Group:17:
+146696-In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Node:19:
+146697-In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/StateSet:18:
+146698-In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/StateAttribute:20:
+--
+149820-138 warnings generated.
+149821-142 warnings generated.
+149822-145 warnings generated.
+149823:make[4]: *** [CMakeFiles/Makefile2:2306: apps/openmw/CMakeFiles/openmw-lib.dir/all] Error 2
+149824:make[3]: *** [Makefile:136: all] Error 2
+149825:make[2]: *** [CMakeFiles/openmw.dir/build.make:86: openmw-prefix/src/openmw-stamp/openmw-build] Error 2
+149826:make[1]: *** [CMakeFiles/Makefile2:592: CMakeFiles/openmw.dir/all] Error 2
+149827:make: *** [Makefile:91: all] Error 2

@@ -1,0 +1,400 @@
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/vr/session.hpp:14:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/stereo/stereomanager.hpp:4:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Camera:21:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Texture:20:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/GraphicsContext:17:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/State:27:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/ShaderComposer:35:41: warning: extra ';' after member function definition [-Wextra-semi]
+   35 |         META_Object(osg, ShaderComposer);
+      |                                         ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/realisticcombat.cpp:2:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/openxrinput.hpp:7:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/vr/session.hpp:14:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/stereo/stereomanager.hpp:4:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Camera:21:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Texture:20:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/GraphicsContext:17:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/State:30:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Polytope:17:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Plane:244:17: warning: variable 'noOn' set but not used [-Wunused-but-set-variable]
+  244 |             int noOn = 0;
+      |                 ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Plane:273:17: warning: variable 'noOn' set but not used [-Wunused-but-set-variable]
+  273 |             int noOn = 0;
+      |                 ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/realisticcombat.cpp:2:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/openxrinput.hpp:7:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/vr/session.hpp:14:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/stereo/stereomanager.hpp:4:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Camera:17:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Transform:17:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Group:17:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Node:19:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/StateSet:18:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/StateAttribute:20:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Shader:25:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/GLExtensions:140:9: warning: definition of implicit copy assignment operator for 'VertexAttribAlias' is deprecated because it has a user-provided copy constructor [-Wdeprecated-copy-with-user-provided-copy]
+  140 |         VertexAttribAlias(const VertexAttribAlias& rhs):
+      |         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/State:264:76: note: in implicit copy assignment operator for 'osg::VertexAttribAlias' first required here
+  264 |         void setVertexAlias(const VertexAttribAlias& alias) { _vertexAlias = alias; }
+      |                                                                            ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/realisticcombat.cpp:2:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/openxrinput.hpp:7:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/vr/session.hpp:14:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/stereo/stereomanager.hpp:4:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Camera:21:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Texture:20:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/GraphicsContext:18:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/GraphicsThread:17:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/OperationThread:20:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/OpenThreads/Thread:147:79: warning: extra ';' after member function definition [-Wextra-semi]
+  147 |     static ThreadPriority GetMasterPriority() {return s_masterThreadPriority;};
+      |                                                                               ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/OpenThreads/Thread:335:36: warning: extra ';' after member function definition [-Wextra-semi]
+  335 |     virtual void cancelCleanup() {};
+      |                                    ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/OpenThreads/Thread:337:50: warning: extra ';' after member function definition [-Wextra-semi]
+  337 |     void* getImplementation(){ return _prvData; };
+      |                                                  ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/OpenThreads/Thread:367:35: warning: extra ';' after member function definition [-Wextra-semi]
+  367 |     Thread(const Thread &/*t*/) {};
+      |                                   ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/OpenThreads/Thread:372:61: warning: extra ';' after member function definition [-Wextra-semi]
+  372 |     Thread &operator=(const Thread &/*t*/) {return *(this);};
+      |                                                             ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/realisticcombat.cpp:2:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/openxrinput.hpp:7:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/vr/session.hpp:14:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/stereo/stereomanager.hpp:4:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Camera:21:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Texture:20:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/GraphicsContext:18:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/GraphicsThread:17:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/OperationThread:21:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/OpenThreads/Barrier:80:37: warning: extra ';' after member function definition [-Wextra-semi]
+   80 |     Barrier(const Barrier &/*b*/) {};
+      |                                     ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/OpenThreads/Barrier:85:63: warning: extra ';' after member function definition [-Wextra-semi]
+   85 |     Barrier &operator=(const Barrier &/*b*/) {return *(this);};
+      |                                                               ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/realisticcombat.cpp:2:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/openxrinput.hpp:7:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/vr/session.hpp:14:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/stereo/stereomanager.hpp:4:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Camera:21:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Texture:20:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/GraphicsContext:18:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/GraphicsThread:17:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/OperationThread:22:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/OpenThreads/Condition:77:41: warning: extra ';' after member function definition [-Wextra-semi]
+   77 |     Condition(const Condition &/*c*/) {};
+      |                                         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/OpenThreads/Condition:82:67: warning: extra ';' after member function definition [-Wextra-semi]
+   82 |     Condition &operator=(const Condition &/*c*/) {return *(this);};
+      |                                                                   ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/realisticcombat.cpp:2:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/openxrinput.hpp:7:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/vr/session.hpp:14:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/stereo/stereomanager.hpp:4:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Camera:21:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Texture:543:103: warning: extra ';' after member function definition [-Wextra-semi]
+  543 |         inline void setSwizzle(const Vec4i& swizzle) { _swizzle = swizzle; dirtyTextureParameters(); };
+      |                                                                                                       ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Texture:717:13: warning: declaration shadows a variable in namespace 'osg' [-Wshadow]
+  717 |             ALWAYS = GL_ALWAYS
+      |             ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Notify:31:5: note: previous declaration is here
+   31 |     ALWAYS=0,
+      |     ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/realisticcombat.cpp:2:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/openxrinput.hpp:7:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/vr/session.hpp:14:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/stereo/stereomanager.hpp:4:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Camera:54:31: warning: extra ';' after member function definition [-Wextra-semi]
+   54 |         META_Node(osg, Camera);
+      |                               ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Camera:385:14: warning: extra ';' after member function definition [-Wextra-semi]
+  385 |             };
+      |              ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Camera:392:14: warning: extra ';' after member function definition [-Wextra-semi]
+  392 |             };
+      |              ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Camera:399:14: warning: extra ';' after member function definition [-Wextra-semi]
+  399 |             };
+      |              ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Camera:601:43: warning: extra ';' after member function definition [-Wextra-semi]
+  601 |             META_Object(osg, DrawCallback);
+      |                                           ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Camera:604:25: warning: 'osg::Camera::DrawCallback::run' hides overloaded virtual function [-Woverloaded-virtual]
+  604 |             inline void run(osg::RenderInfo& renderInfo) const
+      |                         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Callback:80:22: note: hidden overloaded virtual function 'osg::Callback::run' declared here: different number of parameters (2 vs 1)
+   80 |         virtual bool run(osg::Object* object, osg::Object* data)
+      |                      ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/realisticcombat.cpp:2:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/openxrinput.hpp:7:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/vr/session.hpp:14:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/stereo/stereomanager.hpp:8:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgUtil/CullVisitor:24:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Drawable:18:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Shape:163:32: warning: extra ';' after member function definition [-Wextra-semi]
+  163 |         META_Shape(osg, Sphere);
+      |                                ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Shape:210:29: warning: extra ';' after member function definition [-Wextra-semi]
+  210 |         META_Shape(osg, Box);
+      |                             ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/realisticcombat.cpp:1:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/realisticcombat.hpp:6:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/vr/vr.hpp:4:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/stereo/types.hpp:4:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Matrix:18:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Matrixd:20:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Quat:95:22: warning: definition of implicit copy constructor for 'Quat' is deprecated because it has a user-provided copy assignment operator [-Wdeprecated-copy-with-user-provided-copy]
+   95 |         inline Quat& operator = (const Quat& v) { _v[0]=v._v[0];  _v[1]=v._v[1]; _v[2]=v._v[2]; _v[3]=v._v[3]; return *this; }
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Shape:208:13: note: in implicit copy constructor for 'osg::Quat' first required here
+  208 |             _rotation(box._rotation) {}
+      |             ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Shape:264:30: warning: extra ';' after member function definition [-Wextra-semi]
+  264 |         META_Shape(osg, Cone);
+      |                              ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Shape:324:34: warning: extra ';' after member function definition [-Wextra-semi]
+  324 |         META_Shape(osg, Cylinder);
+      |                                  ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Shape:380:33: warning: extra ';' after member function definition [-Wextra-semi]
+  380 |         META_Shape(osg, Capsule);
+      |                                 ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Shape:425:39: warning: extra ';' after member function definition [-Wextra-semi]
+  425 |         META_Shape(osg, InfinitePlane);
+      |                                       ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Shape:444:38: warning: extra ';' after member function definition [-Wextra-semi]
+  444 |         META_Shape(osg, TriangleMesh);
+      |                                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Shape:475:36: warning: extra ';' after member function definition [-Wextra-semi]
+  475 |         META_Shape(osg, ConvexHull);
+      |                                    ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Shape:490:37: warning: extra ';' after member function definition [-Wextra-semi]
+  490 |         META_Shape(osg, HeightField);
+      |                                     ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Shape:604:40: warning: extra ';' after member function definition [-Wextra-semi]
+  604 |         META_Shape(osg, CompositeShape);
+      |                                        ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Shape:687:43: warning: extra ';' after member function definition [-Wextra-semi]
+  687 |         META_Object(osg,TessellationHints);
+      |                                           ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/realisticcombat.cpp:2:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/openxrinput.hpp:7:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/vr/session.hpp:14:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/stereo/stereomanager.hpp:8:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgUtil/CullVisitor:24:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Drawable:21:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/RenderInfo:18:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/View:37:30: warning: extra ';' after member function definition [-Wextra-semi]
+   37 |         META_Object(osg,View);
+      |                              ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/realisticcombat.cpp:2:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/openxrinput.hpp:7:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/vr/session.hpp:14:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/stereo/stereomanager.hpp:8:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgUtil/CullVisitor:24:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Drawable:97:33: warning: extra ';' after member function definition [-Wextra-semi]
+   97 |         META_Node(osg, Drawable);
+      |                                 ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Drawable:168:56: warning: extra ';' after member function definition [-Wextra-semi]
+  168 |             META_Object(osg,ComputeBoundingBoxCallback);
+      |                                                        ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Drawable:294:61: warning: extra ';' after member function definition [-Wextra-semi]
+  294 |             META_Object(osg, CreateVertexArrayStateCallback);
+      |                                                             ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Drawable:360:42: warning: extra ';' after member function definition [-Wextra-semi]
+  360 |             META_Object(osg,DrawCallback);
+      |                                          ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/realisticcombat.cpp:2:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/openxrinput.hpp:7:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/vr/session.hpp:14:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/stereo/stereomanager.hpp:8:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgUtil/CullVisitor:31:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/CullStack:17:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/CullingSet:18:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/ShadowVolumeOccluder:18:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/ConvexPlanarOccluder:36:46: warning: extra ';' after member function definition [-Wextra-semi]
+   36 |         META_Object(osg,ConvexPlanarOccluder);
+      |                                              ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/realisticcombat.cpp:2:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/openxrinput.hpp:7:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/vr/session.hpp:14:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/stereo/stereomanager.hpp:8:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgUtil/CullVisitor:31:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/CullStack:17:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/CullingSet:18:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/ShadowVolumeOccluder:34:9: warning: definition of implicit copy assignment operator for 'ShadowVolumeOccluder' is deprecated because it has a user-provided copy constructor [-Wdeprecated-copy-with-user-provided-copy]
+   34 |         ShadowVolumeOccluder(const ShadowVolumeOccluder& svo):
+      |         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/toolchain/ndk/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__algorithm/copy.h:40:17: note: in implicit copy assignment operator for 'osg::ShadowVolumeOccluder' first required here
+   40 |       *__result = *__first;
+      |                 ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/toolchain/ndk/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__algorithm/copy_move_common.h:106:19: note: in instantiation of function template specialization 'std::__copy_loop<std::_ClassicAlgPolicy>::operator()<osg::ShadowVolumeOccluder *, osg::ShadowVolumeOccluder *, osg::ShadowVolumeOccluder *>' requested here
+  106 |   auto __result = _Algorithm()(std::move(__range.first), std::move(__range.second), std::__unwrap_iter(__out_first));
+      |                   ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/toolchain/ndk/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__algorithm/copy_move_common.h:130:15: note: in instantiation of function template specialization 'std::__unwrap_and_dispatch<std::__overload<std::__copy_loop<std::_ClassicAlgPolicy>, std::__copy_trivial>, osg::ShadowVolumeOccluder *, osg::ShadowVolumeOccluder *, osg::ShadowVolumeOccluder *, 0>' requested here
+  130 |   return std::__unwrap_and_dispatch<_Algorithm>(std::move(__first), std::move(__last), std::move(__out_first));
+      |               ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/toolchain/ndk/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__algorithm/copy.h:111:15: note: in instantiation of function template specialization 'std::__dispatch_copy_or_move<std::_ClassicAlgPolicy, std::__copy_loop<std::_ClassicAlgPolicy>, std::__copy_trivial, osg::ShadowVolumeOccluder *, osg::ShadowVolumeOccluder *, osg::ShadowVolumeOccluder *>' requested here
+  111 |   return std::__dispatch_copy_or_move<_AlgPolicy, __copy_loop<_AlgPolicy>, __copy_trivial>(
+      |               ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/toolchain/ndk/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__algorithm/copy.h:118:15: note: in instantiation of function template specialization 'std::__copy<std::_ClassicAlgPolicy, osg::ShadowVolumeOccluder *, osg::ShadowVolumeOccluder *, osg::ShadowVolumeOccluder *>' requested here
+  118 |   return std::__copy<_ClassicAlgPolicy>(__first, __last, __result).second;
+      |               ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/toolchain/ndk/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/vector:1337:12: note: in instantiation of function template specialization 'std::copy<osg::ShadowVolumeOccluder *, osg::ShadowVolumeOccluder *>' requested here
+ 1337 |       std::copy(__first, __mid, this->__begin_);
+      |            ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/toolchain/ndk/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/vector:1326:3: note: in instantiation of function template specialization 'std::vector<osg::ShadowVolumeOccluder>::__assign_with_size<osg::ShadowVolumeOccluder *, osg::ShadowVolumeOccluder *>' requested here
+ 1326 |   __assign_with_size(__first, __last, std::distance(__first, __last));
+      |   ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/toolchain/ndk/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/vector:1297:5: note: in instantiation of function template specialization 'std::vector<osg::ShadowVolumeOccluder>::assign<osg::ShadowVolumeOccluder *, 0>' requested here
+ 1297 |     assign(__x.__begin_, __x.__end_);
+      |     ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/CullingSet:74:27: note: in instantiation of member function 'std::vector<osg::ShadowVolumeOccluder>::operator=' requested here
+   74 |             _occluderList = cs._occluderList;
+      |                           ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/realisticcombat.cpp:2:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/openxrinput.hpp:7:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/vr/session.hpp:14:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/stereo/stereomanager.hpp:8:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgUtil/CullVisitor:34:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgUtil/RenderStage:20:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/FrameBufferObject:133:39: warning: extra ';' after member function definition [-Wextra-semi]
+  133 |         META_Object(osg, RenderBuffer);
+      |                                       ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/FrameBufferObject:331:73: warning: extra ';' after member function definition [-Wextra-semi]
+  331 |         META_StateAttribute(osg, FrameBufferObject, FRAME_BUFFER_OBJECT);
+      |                                                                         ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/realisticcombat.cpp:2:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/openxrinput.hpp:7:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/vr/session.hpp:16:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/sdlutil/sdlgraphicswindow.hpp:6:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgViewer/GraphicsWindow:20:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgGA/EventQueue:17:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgGA/GUIEventAdapter:21:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgGA/Event:33:30: warning: extra ';' after member function definition [-Wextra-semi]
+   33 |     META_Object(osgGA, Event);
+      |                              ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/realisticcombat.cpp:2:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/openxrinput.hpp:7:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/vr/session.hpp:16:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/sdlutil/sdlgraphicswindow.hpp:6:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgViewer/GraphicsWindow:20:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgGA/EventQueue:17:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgGA/GUIEventAdapter:418:42: warning: extra ';' after member function definition [-Wextra-semi]
+  418 |             META_Object(osgGA, TouchData);
+      |                                          ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgGA/GUIEventAdapter:450:44: warning: extra ';' after member function definition [-Wextra-semi]
+  450 |         META_Object(osgGA, GUIEventAdapter);
+      |                                            ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/realisticcombat.cpp:2:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/openxrinput.hpp:8:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/xr/action.hpp:7:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/xr/space.hpp:3:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/vr/space.hpp:50:9: warning: 'cloneType' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+   50 |         META_Node(VR, SpaceTransform)
+      |         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Node:60:30: note: expanded from macro 'META_Node'
+   60 |         virtual osg::Object* cloneType() const { return new name (); } \
+      |                              ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Transform:83:9: note: overridden virtual function is here
+   83 |         META_Node(osg, Transform);
+      |         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Node:60:30: note: expanded from macro 'META_Node'
+   60 |         virtual osg::Object* cloneType() const { return new name (); } \
+      |                              ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/realisticcombat.cpp:2:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/openxrinput.hpp:8:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/xr/action.hpp:7:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/xr/space.hpp:3:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/vr/space.hpp:50:9: warning: 'clone' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+   50 |         META_Node(VR, SpaceTransform)
+      |         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Node:61:30: note: expanded from macro 'META_Node'
+   61 |         virtual osg::Object* clone(const osg::CopyOp& copyop) const { return new name (*this,copyop); } \
+      |                              ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Transform:83:9: note: overridden virtual function is here
+   83 |         META_Node(osg, Transform);
+      |         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Node:61:30: note: expanded from macro 'META_Node'
+   61 |         virtual osg::Object* clone(const osg::CopyOp& copyop) const { return new name (*this,copyop); } \
+      |                              ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/realisticcombat.cpp:2:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/openxrinput.hpp:8:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/xr/action.hpp:7:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/xr/space.hpp:3:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/vr/space.hpp:50:9: warning: 'isSameKindAs' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+   50 |         META_Node(VR, SpaceTransform)
+      |         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Node:62:22: note: expanded from macro 'META_Node'
+   62 |         virtual bool isSameKindAs(const osg::Object* obj) const { return dynamic_cast<const name *>(obj)!=NULL; } \
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Transform:83:9: note: overridden virtual function is here
+   83 |         META_Node(osg, Transform);
+      |         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Node:62:22: note: expanded from macro 'META_Node'
+   62 |         virtual bool isSameKindAs(const osg::Object* obj) const { return dynamic_cast<const name *>(obj)!=NULL; } \
+      |                      ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/realisticcombat.cpp:2:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/openxrinput.hpp:8:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/xr/action.hpp:7:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/xr/space.hpp:3:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/vr/space.hpp:50:9: warning: 'className' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+   50 |         META_Node(VR, SpaceTransform)
+      |         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Node:63:29: note: expanded from macro 'META_Node'
+   63 |         virtual const char* className() const { return #name; } \
+      |                             ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Transform:83:9: note: overridden virtual function is here
+   83 |         META_Node(osg, Transform);
+      |         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Node:63:29: note: expanded from macro 'META_Node'
+   63 |         virtual const char* className() const { return #name; } \
+      |                             ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/realisticcombat.cpp:2:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/openxrinput.hpp:8:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/xr/action.hpp:7:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/xr/space.hpp:3:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/vr/space.hpp:50:9: warning: 'libraryName' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+   50 |         META_Node(VR, SpaceTransform)
+      |         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Node:64:29: note: expanded from macro 'META_Node'
+   64 |         virtual const char* libraryName() const { return #library; } \
+      |                             ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Transform:83:9: note: overridden virtual function is here
+   83 |         META_Node(osg, Transform);
+      |         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Node:64:29: note: expanded from macro 'META_Node'
+   64 |         virtual const char* libraryName() const { return #library; } \
+      |                             ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/realisticcombat.cpp:2:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/openxrinput.hpp:8:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/xr/action.hpp:7:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/xr/space.hpp:3:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/vr/space.hpp:50:9: warning: 'accept' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+   50 |         META_Node(VR, SpaceTransform)
+      |         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Node:65:22: note: expanded from macro 'META_Node'
+   65 |         virtual void accept(osg::NodeVisitor& nv) { if (nv.validNodeMask(*this)) { nv.pushOntoNodePath(this); nv.apply(*this); nv.popFromNodePath(); } } \
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Transform:83:9: note: overridden virtual function is here
+   83 |         META_Node(osg, Transform);
+      |         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Node:65:22: note: expanded from macro 'META_Node'
+   65 |         virtual void accept(osg::NodeVisitor& nv) { if (nv.validNodeMask(*this)) { nv.pushOntoNodePath(this); nv.apply(*this); nv.popFromNodePath(); } } \
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/realisticcombat.cpp:79:19: error: variable 'headSpace' with type 'auto *' has incompatible initializer of type 'std::shared_ptr<VR::Space>'
+   79 |             auto* headSpace = OpenXRInput::instance().getSpace("/default/reference/view");
+      |                   ^           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+90 warnings and 1 error generated.
+make[5]: *** [apps/openmw/CMakeFiles/openmw-lib.dir/build.make:5273: apps/openmw/CMakeFiles/openmw-lib.dir/mwvr/realisticcombat.cpp.o] Error 1
+make[4]: *** [CMakeFiles/Makefile2:2306: apps/openmw/CMakeFiles/openmw-lib.dir/all] Error 2
+make[3]: *** [Makefile:136: all] Error 2
+make[2]: *** [CMakeFiles/openmw.dir/build.make:86: openmw-prefix/src/openmw-stamp/openmw-build] Error 2
+make[1]: *** [CMakeFiles/Makefile2:592: CMakeFiles/openmw.dir/all] Error 2
+make: *** [Makefile:91: all] Error 2

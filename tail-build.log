@@ -1,0 +1,600 @@
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgViewer/Viewer:18:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgGA/EventVisitor:23:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/LightSource:38:36: warning: extra ';' after member function definition [-Wextra-semi]
+   38 |         META_Node(osg, LightSource);
+      |                                    ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrgui.cpp:2:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrinputmanager.hpp:4:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/../mwinput/inputmanagerimp.hpp:7:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgViewer/ViewerEventHandlers:23:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgViewer/Viewer:18:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgGA/EventVisitor:25:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Projection:36:35: warning: extra ';' after member function definition [-Wextra-semi]
+   36 |         META_Node(osg, Projection);
+      |                                   ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrgui.cpp:2:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrinputmanager.hpp:4:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/../mwinput/inputmanagerimp.hpp:7:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgViewer/ViewerEventHandlers:23:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgViewer/Viewer:18:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgGA/EventVisitor:26:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/OccluderNode:35:37: warning: extra ';' after member function definition [-Wextra-semi]
+   35 |         META_Node(osg, OccluderNode);
+      |                                     ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrgui.cpp:2:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrinputmanager.hpp:4:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/../mwinput/inputmanagerimp.hpp:7:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgViewer/ViewerEventHandlers:23:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgViewer/Viewer:21:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgViewer/View:27:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgGA/Device:37:34: warning: extra ';' after member function definition [-Wextra-semi]
+   37 |         META_Object(osgGA,Device);
+      |                                  ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrgui.cpp:2:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrinputmanager.hpp:4:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/../mwinput/inputmanagerimp.hpp:7:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgViewer/ViewerEventHandlers:23:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgViewer/Viewer:21:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgViewer/View:29:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgViewer/Scene:19:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgDB/DatabasePager:19:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/PagedLOD:44:33: warning: extra ';' after member function definition [-Wextra-semi]
+   44 |         META_Node(osg, PagedLOD);
+      |                                 ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrgui.cpp:2:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrinputmanager.hpp:4:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/../mwinput/inputmanagerimp.hpp:7:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgViewer/ViewerEventHandlers:23:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgViewer/Viewer:21:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgViewer/View:29:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgViewer/Scene:19:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgDB/DatabasePager:31:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgUtil/IncrementalCompileOperation:19:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgUtil/GLObjectsVisitor:104:14: warning: 'osgUtil::GLObjectsVisitor::apply' hides overloaded virtual functions [-Woverloaded-virtual]
+  104 |         void apply(osg::StateSet& stateset);
+      |              ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:327:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('Geometry &' vs 'osg::StateSet &')
+  327 |         virtual void apply(Geometry& geometry);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:331:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('Geode &' vs 'osg::StateSet &')
+  331 |         virtual void apply(Geode& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:332:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('Billboard &' vs 'osg::StateSet &')
+  332 |         virtual void apply(Billboard& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:334:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('Group &' vs 'osg::StateSet &')
+  334 |         virtual void apply(Group& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:336:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('ProxyNode &' vs 'osg::StateSet &')
+  336 |         virtual void apply(ProxyNode& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:338:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('Projection &' vs 'osg::StateSet &')
+  338 |         virtual void apply(Projection& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:340:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('CoordinateSystemNode &' vs 'osg::StateSet &')
+  340 |         virtual void apply(CoordinateSystemNode& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:342:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('ClipNode &' vs 'osg::StateSet &')
+  342 |         virtual void apply(ClipNode& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:343:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('TexGenNode &' vs 'osg::StateSet &')
+  343 |         virtual void apply(TexGenNode& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:344:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('LightSource &' vs 'osg::StateSet &')
+  344 |         virtual void apply(LightSource& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:346:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('Transform &' vs 'osg::StateSet &')
+  346 |         virtual void apply(Transform& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:347:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('Camera &' vs 'osg::StateSet &')
+  347 |         virtual void apply(Camera& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:348:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('CameraView &' vs 'osg::StateSet &')
+  348 |         virtual void apply(CameraView& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:349:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('MatrixTransform &' vs 'osg::StateSet &')
+  349 |         virtual void apply(MatrixTransform& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:350:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('PositionAttitudeTransform &' vs 'osg::StateSet &')
+  350 |         virtual void apply(PositionAttitudeTransform& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:351:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('AutoTransform &' vs 'osg::StateSet &')
+  351 |         virtual void apply(AutoTransform& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:353:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('Switch &' vs 'osg::StateSet &')
+  353 |         virtual void apply(Switch& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:354:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('Sequence &' vs 'osg::StateSet &')
+  354 |         virtual void apply(Sequence& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:355:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('LOD &' vs 'osg::StateSet &')
+  355 |         virtual void apply(LOD& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:356:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('PagedLOD &' vs 'osg::StateSet &')
+  356 |         virtual void apply(PagedLOD& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:357:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('ClearNode &' vs 'osg::StateSet &')
+  357 |         virtual void apply(ClearNode& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:358:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('OccluderNode &' vs 'osg::StateSet &')
+  358 |         virtual void apply(OccluderNode& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:359:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('OcclusionQueryNode &' vs 'osg::StateSet &')
+  359 |         virtual void apply(OcclusionQueryNode& node);
+      |                      ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrgui.cpp:2:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrinputmanager.hpp:4:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/../mwinput/inputmanagerimp.hpp:7:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgViewer/ViewerEventHandlers:23:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgViewer/Viewer:21:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgViewer/View:29:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgViewer/Scene:19:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgDB/DatabasePager:31:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgUtil/IncrementalCompileOperation:52:22: warning: 'osgUtil::StateToCompile::apply' hides overloaded virtual functions [-Woverloaded-virtual]
+   52 |         virtual void apply(osg::StateSet& stateset);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:327:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('Geometry &' vs 'osg::StateSet &')
+  327 |         virtual void apply(Geometry& geometry);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:331:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('Geode &' vs 'osg::StateSet &')
+  331 |         virtual void apply(Geode& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:332:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('Billboard &' vs 'osg::StateSet &')
+  332 |         virtual void apply(Billboard& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:334:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('Group &' vs 'osg::StateSet &')
+  334 |         virtual void apply(Group& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:336:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('ProxyNode &' vs 'osg::StateSet &')
+  336 |         virtual void apply(ProxyNode& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:338:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('Projection &' vs 'osg::StateSet &')
+  338 |         virtual void apply(Projection& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:340:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('CoordinateSystemNode &' vs 'osg::StateSet &')
+  340 |         virtual void apply(CoordinateSystemNode& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:342:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('ClipNode &' vs 'osg::StateSet &')
+  342 |         virtual void apply(ClipNode& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:343:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('TexGenNode &' vs 'osg::StateSet &')
+  343 |         virtual void apply(TexGenNode& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:344:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('LightSource &' vs 'osg::StateSet &')
+  344 |         virtual void apply(LightSource& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:346:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('Transform &' vs 'osg::StateSet &')
+  346 |         virtual void apply(Transform& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:347:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('Camera &' vs 'osg::StateSet &')
+  347 |         virtual void apply(Camera& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:348:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('CameraView &' vs 'osg::StateSet &')
+  348 |         virtual void apply(CameraView& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:349:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('MatrixTransform &' vs 'osg::StateSet &')
+  349 |         virtual void apply(MatrixTransform& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:350:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('PositionAttitudeTransform &' vs 'osg::StateSet &')
+  350 |         virtual void apply(PositionAttitudeTransform& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:351:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('AutoTransform &' vs 'osg::StateSet &')
+  351 |         virtual void apply(AutoTransform& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:353:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('Switch &' vs 'osg::StateSet &')
+  353 |         virtual void apply(Switch& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:354:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('Sequence &' vs 'osg::StateSet &')
+  354 |         virtual void apply(Sequence& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:355:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('LOD &' vs 'osg::StateSet &')
+  355 |         virtual void apply(LOD& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:356:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('PagedLOD &' vs 'osg::StateSet &')
+  356 |         virtual void apply(PagedLOD& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:357:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('ClearNode &' vs 'osg::StateSet &')
+  357 |         virtual void apply(ClearNode& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:358:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('OccluderNode &' vs 'osg::StateSet &')
+  358 |         virtual void apply(OccluderNode& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:359:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('OcclusionQueryNode &' vs 'osg::StateSet &')
+  359 |         virtual void apply(OcclusionQueryNode& node);
+      |                      ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrgui.cpp:2:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrinputmanager.hpp:4:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/../mwinput/inputmanagerimp.hpp:7:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgViewer/ViewerEventHandlers:23:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgViewer/Viewer:21:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgViewer/View:29:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgViewer/Scene:19:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgDB/DatabasePager:31:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgUtil/IncrementalCompileOperation:53:22: warning: 'osgUtil::StateToCompile::apply' hides overloaded virtual functions [-Woverloaded-virtual]
+   53 |         virtual void apply(osg::Texture& texture);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:327:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('Geometry &' vs 'osg::Texture &')
+  327 |         virtual void apply(Geometry& geometry);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:331:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('Geode &' vs 'osg::Texture &')
+  331 |         virtual void apply(Geode& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:332:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('Billboard &' vs 'osg::Texture &')
+  332 |         virtual void apply(Billboard& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:334:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('Group &' vs 'osg::Texture &')
+  334 |         virtual void apply(Group& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:336:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('ProxyNode &' vs 'osg::Texture &')
+  336 |         virtual void apply(ProxyNode& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:338:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('Projection &' vs 'osg::Texture &')
+  338 |         virtual void apply(Projection& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:340:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('CoordinateSystemNode &' vs 'osg::Texture &')
+  340 |         virtual void apply(CoordinateSystemNode& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:342:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('ClipNode &' vs 'osg::Texture &')
+  342 |         virtual void apply(ClipNode& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:343:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('TexGenNode &' vs 'osg::Texture &')
+  343 |         virtual void apply(TexGenNode& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:344:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('LightSource &' vs 'osg::Texture &')
+  344 |         virtual void apply(LightSource& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:346:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('Transform &' vs 'osg::Texture &')
+  346 |         virtual void apply(Transform& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:347:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('Camera &' vs 'osg::Texture &')
+  347 |         virtual void apply(Camera& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:348:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('CameraView &' vs 'osg::Texture &')
+  348 |         virtual void apply(CameraView& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:349:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('MatrixTransform &' vs 'osg::Texture &')
+  349 |         virtual void apply(MatrixTransform& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:350:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('PositionAttitudeTransform &' vs 'osg::Texture &')
+  350 |         virtual void apply(PositionAttitudeTransform& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:351:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('AutoTransform &' vs 'osg::Texture &')
+  351 |         virtual void apply(AutoTransform& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:353:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('Switch &' vs 'osg::Texture &')
+  353 |         virtual void apply(Switch& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:354:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('Sequence &' vs 'osg::Texture &')
+  354 |         virtual void apply(Sequence& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:355:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('LOD &' vs 'osg::Texture &')
+  355 |         virtual void apply(LOD& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:356:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('PagedLOD &' vs 'osg::Texture &')
+  356 |         virtual void apply(PagedLOD& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:357:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('ClearNode &' vs 'osg::Texture &')
+  357 |         virtual void apply(ClearNode& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:358:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('OccluderNode &' vs 'osg::Texture &')
+  358 |         virtual void apply(OccluderNode& node);
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/NodeVisitor:359:22: note: hidden overloaded virtual function 'osg::NodeVisitor::apply' declared here: type mismatch at 1st parameter ('OcclusionQueryNode &' vs 'osg::Texture &')
+  359 |         virtual void apply(OcclusionQueryNode& node);
+      |                      ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrinputmanager.cpp:6:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrgui.hpp:12:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/PositionAttitudeTransform:41:50: warning: extra ';' after member function definition [-Wextra-semi]
+   41 |         META_Node(osg, PositionAttitudeTransform);
+      |                                                  ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrinputmanager.cpp:6:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrgui.hpp:13:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/TexMat:38:49: warning: extra ';' after member function definition [-Wextra-semi]
+   38 |         META_StateAttribute(osg, TexMat, TEXMAT);
+      |                                                 ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrgui.cpp:2:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrinputmanager.hpp:4:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/../mwinput/inputmanagerimp.hpp:7:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgViewer/ViewerEventHandlers:23:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgViewer/Viewer:21:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgViewer/View:45:42: warning: extra ';' after member function definition [-Wextra-semi]
+   45 |         META_Object(osgViewer,ViewConfig);
+      |                                          ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgViewer/View:83:36: warning: extra ';' after member function definition [-Wextra-semi]
+   83 |         META_Object(osgViewer,View);
+      |                                    ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrgui.cpp:2:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrinputmanager.hpp:4:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/../mwinput/inputmanagerimp.hpp:7:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgViewer/ViewerEventHandlers:23:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgViewer/Viewer:39:38: warning: extra ';' after member function definition [-Wextra-semi]
+   39 |         META_Object(osgViewer,Viewer);
+      |                                      ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrgui.cpp:2:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrinputmanager.hpp:4:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/../mwinput/inputmanagerimp.hpp:7:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osgViewer/ViewerEventHandlers:513:52: warning: extra ';' after member function definition [-Wextra-semi]
+  513 |     META_Object(osgViewer, InteractiveImageHandler);
+      |                                                    ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrgui.cpp:10:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/BlendFunc:82:54: warning: extra ';' after member function definition [-Wextra-semi]
+   82 |         META_StateAttribute(osg, BlendFunc,BLENDFUNC);
+      |                                                      ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrgui.cpp:11:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/ClipNode:35:33: warning: extra ';' after member function definition [-Wextra-semi]
+   35 |         META_Node(osg, ClipNode);
+      |                                 ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrgui.cpp:12:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Depth:37:13: warning: declaration shadows a variable in namespace 'osg' [-Wshadow]
+   37 |             ALWAYS = GL_ALWAYS
+      |             ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Notify:31:5: note: previous declaration is here
+   31 |     ALWAYS=0,
+      |     ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrgui.cpp:12:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Depth:52:47: warning: extra ';' after member function definition [-Wextra-semi]
+   52 |         META_StateAttribute(osg, Depth, DEPTH);
+      |                                               ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrgui.cpp:13:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Fog:69:42: warning: extra ';' after member function definition [-Wextra-semi]
+   69 |         META_StateAttribute(osg, Fog,FOG);
+      |                                          ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrgui.cpp:14:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/FrontFace:40:55: warning: extra ';' after member function definition [-Wextra-semi]
+   40 |         META_StateAttribute(osg, FrontFace, FRONTFACE);
+      |                                                       ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrgui.cpp:15:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/LightModel:37:57: warning: extra ';' after member function definition [-Wextra-semi]
+   37 |         META_StateAttribute(osg, LightModel, LIGHTMODEL);
+      |                                                         ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrgui.cpp:16:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Material:57:53: warning: extra ';' after member function definition [-Wextra-semi]
+   57 |         META_StateAttribute(osg, Material, MATERIAL);
+      |                                                     ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrgui.cpp:31:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/resource/scenemanager.hpp:14:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/sceneutil/lightmanager.hpp:166:9: warning: 'cloneType' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  166 |         META_StateAttribute(SceneUtil, UBOManager, osg::StateAttribute::LIGHT)
+      |         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/StateAttribute:49:30: note: expanded from macro 'META_StateAttribute'
+   49 |         virtual osg::Object* cloneType() const { return new name(); } \
+      |                              ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/StateAttribute:232:25: note: overridden virtual function is here
+  232 |         virtual Object* cloneType() const = 0;
+      |                         ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrgui.cpp:31:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/resource/scenemanager.hpp:14:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/sceneutil/lightmanager.hpp:166:9: warning: 'clone' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  166 |         META_StateAttribute(SceneUtil, UBOManager, osg::StateAttribute::LIGHT)
+      |         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/StateAttribute:50:30: note: expanded from macro 'META_StateAttribute'
+   50 |         virtual osg::Object* clone(const osg::CopyOp& copyop) const { return new name (*this,copyop); } \
+      |                              ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/StateAttribute:236:25: note: overridden virtual function is here
+  236 |         virtual Object* clone(const CopyOp&) const = 0;
+      |                         ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrgui.cpp:31:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/resource/scenemanager.hpp:14:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/sceneutil/lightmanager.hpp:166:9: warning: 'isSameKindAs' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  166 |         META_StateAttribute(SceneUtil, UBOManager, osg::StateAttribute::LIGHT)
+      |         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/StateAttribute:51:22: note: expanded from macro 'META_StateAttribute'
+   51 |         virtual bool isSameKindAs(const osg::Object* obj) const { return dynamic_cast<const name *>(obj)!=NULL; } \
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/StateAttribute:239:22: note: overridden virtual function is here
+  239 |         virtual bool isSameKindAs(const Object* obj) const { return dynamic_cast<const StateAttribute*>(obj)!=NULL; }
+      |                      ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrgui.cpp:31:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/resource/scenemanager.hpp:14:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/sceneutil/lightmanager.hpp:166:9: warning: 'libraryName' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  166 |         META_StateAttribute(SceneUtil, UBOManager, osg::StateAttribute::LIGHT)
+      |         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/StateAttribute:52:29: note: expanded from macro 'META_StateAttribute'
+   52 |         virtual const char* libraryName() const { return #library; } \
+      |                             ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/StateAttribute:242:29: note: overridden virtual function is here
+  242 |         virtual const char* libraryName() const { return "osg"; }
+      |                             ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrgui.cpp:31:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/resource/scenemanager.hpp:14:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/sceneutil/lightmanager.hpp:166:9: warning: 'className' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  166 |         META_StateAttribute(SceneUtil, UBOManager, osg::StateAttribute::LIGHT)
+      |         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/StateAttribute:53:29: note: expanded from macro 'META_StateAttribute'
+   53 |         virtual const char* className() const { return #name; } \
+      |                             ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/StateAttribute:245:29: note: overridden virtual function is here
+  245 |         virtual const char* className() const { return "StateAttribute"; }
+      |                             ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrgui.cpp:31:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/resource/scenemanager.hpp:14:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/sceneutil/lightmanager.hpp:166:9: warning: 'getType' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  166 |         META_StateAttribute(SceneUtil, UBOManager, osg::StateAttribute::LIGHT)
+      |         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/StateAttribute:54:22: note: expanded from macro 'META_StateAttribute'
+   54 |         virtual Type getType() const { return type; }
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/StateAttribute:264:22: note: overridden virtual function is here
+  264 |         virtual Type getType() const = 0;
+      |                      ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrgui.cpp:34:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/sceneutil/visitor.hpp:4:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/MatrixTransform:37:40: warning: extra ';' after member function definition [-Wextra-semi]
+   37 |         META_Node(osg, MatrixTransform);
+      |                                        ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrgui.cpp:39:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/vr/viewer.hpp:15:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/sceneutil/positionattitudetransform.hpp:25:9: warning: 'cloneType' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+   25 |         META_Node(SceneUtil, PositionAttitudeTransform)
+      |         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Node:60:30: note: expanded from macro 'META_Node'
+   60 |         virtual osg::Object* cloneType() const { return new name (); } \
+      |                              ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Transform:83:9: note: overridden virtual function is here
+   83 |         META_Node(osg, Transform);
+      |         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Node:60:30: note: expanded from macro 'META_Node'
+   60 |         virtual osg::Object* cloneType() const { return new name (); } \
+      |                              ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrgui.cpp:39:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/vr/viewer.hpp:15:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/sceneutil/positionattitudetransform.hpp:25:9: warning: 'clone' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+   25 |         META_Node(SceneUtil, PositionAttitudeTransform)
+      |         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Node:61:30: note: expanded from macro 'META_Node'
+   61 |         virtual osg::Object* clone(const osg::CopyOp& copyop) const { return new name (*this,copyop); } \
+      |                              ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Transform:83:9: note: overridden virtual function is here
+   83 |         META_Node(osg, Transform);
+      |         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Node:61:30: note: expanded from macro 'META_Node'
+   61 |         virtual osg::Object* clone(const osg::CopyOp& copyop) const { return new name (*this,copyop); } \
+      |                              ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrgui.cpp:39:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/vr/viewer.hpp:15:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/sceneutil/positionattitudetransform.hpp:25:9: warning: 'isSameKindAs' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+   25 |         META_Node(SceneUtil, PositionAttitudeTransform)
+      |         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Node:62:22: note: expanded from macro 'META_Node'
+   62 |         virtual bool isSameKindAs(const osg::Object* obj) const { return dynamic_cast<const name *>(obj)!=NULL; } \
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Transform:83:9: note: overridden virtual function is here
+   83 |         META_Node(osg, Transform);
+      |         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Node:62:22: note: expanded from macro 'META_Node'
+   62 |         virtual bool isSameKindAs(const osg::Object* obj) const { return dynamic_cast<const name *>(obj)!=NULL; } \
+      |                      ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrgui.cpp:39:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/vr/viewer.hpp:15:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/sceneutil/positionattitudetransform.hpp:25:9: warning: 'className' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+   25 |         META_Node(SceneUtil, PositionAttitudeTransform)
+      |         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Node:63:29: note: expanded from macro 'META_Node'
+   63 |         virtual const char* className() const { return #name; } \
+      |                             ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Transform:83:9: note: overridden virtual function is here
+   83 |         META_Node(osg, Transform);
+      |         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Node:63:29: note: expanded from macro 'META_Node'
+   63 |         virtual const char* className() const { return #name; } \
+      |                             ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrgui.cpp:39:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/vr/viewer.hpp:15:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/sceneutil/positionattitudetransform.hpp:25:9: warning: 'libraryName' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+   25 |         META_Node(SceneUtil, PositionAttitudeTransform)
+      |         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Node:64:29: note: expanded from macro 'META_Node'
+   64 |         virtual const char* libraryName() const { return #library; } \
+      |                             ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Transform:83:9: note: overridden virtual function is here
+   83 |         META_Node(osg, Transform);
+      |         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Node:64:29: note: expanded from macro 'META_Node'
+   64 |         virtual const char* libraryName() const { return #library; } \
+      |                             ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrgui.cpp:39:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/vr/viewer.hpp:15:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/sceneutil/positionattitudetransform.hpp:25:9: warning: 'accept' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+   25 |         META_Node(SceneUtil, PositionAttitudeTransform)
+      |         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Node:65:22: note: expanded from macro 'META_Node'
+   65 |         virtual void accept(osg::NodeVisitor& nv) { if (nv.validNodeMask(*this)) { nv.pushOntoNodePath(this); nv.apply(*this); nv.popFromNodePath(); } } \
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Transform:83:9: note: overridden virtual function is here
+   83 |         META_Node(osg, Transform);
+      |         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Node:65:22: note: expanded from macro 'META_Node'
+   65 |         virtual void accept(osg::NodeVisitor& nv) { if (nv.validNodeMask(*this)) { nv.pushOntoNodePath(this); nv.apply(*this); nv.popFromNodePath(); } } \
+      |                      ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrinputmanager.cpp:15:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/vr/viewer.hpp:15:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/sceneutil/positionattitudetransform.hpp:25:9: warning: 'cloneType' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+   25 |         META_Node(SceneUtil, PositionAttitudeTransform)
+      |         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Node:60:30: note: expanded from macro 'META_Node'
+   60 |         virtual osg::Object* cloneType() const { return new name (); } \
+      |                              ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Transform:83:9: note: overridden virtual function is here
+   83 |         META_Node(osg, Transform);
+      |         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Node:60:30: note: expanded from macro 'META_Node'
+   60 |         virtual osg::Object* cloneType() const { return new name (); } \
+      |                              ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrinputmanager.cpp:15:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/vr/viewer.hpp:15:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/sceneutil/positionattitudetransform.hpp:25:9: warning: 'clone' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+   25 |         META_Node(SceneUtil, PositionAttitudeTransform)
+      |         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Node:61:30: note: expanded from macro 'META_Node'
+   61 |         virtual osg::Object* clone(const osg::CopyOp& copyop) const { return new name (*this,copyop); } \
+      |                              ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Transform:83:9: note: overridden virtual function is here
+   83 |         META_Node(osg, Transform);
+      |         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Node:61:30: note: expanded from macro 'META_Node'
+   61 |         virtual osg::Object* clone(const osg::CopyOp& copyop) const { return new name (*this,copyop); } \
+      |                              ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrinputmanager.cpp:15:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/vr/viewer.hpp:15:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/sceneutil/positionattitudetransform.hpp:25:9: warning: 'isSameKindAs' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+   25 |         META_Node(SceneUtil, PositionAttitudeTransform)
+      |         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Node:62:22: note: expanded from macro 'META_Node'
+   62 |         virtual bool isSameKindAs(const osg::Object* obj) const { return dynamic_cast<const name *>(obj)!=NULL; } \
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Transform:83:9: note: overridden virtual function is here
+   83 |         META_Node(osg, Transform);
+      |         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Node:62:22: note: expanded from macro 'META_Node'
+   62 |         virtual bool isSameKindAs(const osg::Object* obj) const { return dynamic_cast<const name *>(obj)!=NULL; } \
+      |                      ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrinputmanager.cpp:15:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/vr/viewer.hpp:15:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/sceneutil/positionattitudetransform.hpp:25:9: warning: 'className' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+   25 |         META_Node(SceneUtil, PositionAttitudeTransform)
+      |         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Node:63:29: note: expanded from macro 'META_Node'
+   63 |         virtual const char* className() const { return #name; } \
+      |                             ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Transform:83:9: note: overridden virtual function is here
+   83 |         META_Node(osg, Transform);
+      |         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Node:63:29: note: expanded from macro 'META_Node'
+   63 |         virtual const char* className() const { return #name; } \
+      |                             ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrinputmanager.cpp:15:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/vr/viewer.hpp:15:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/sceneutil/positionattitudetransform.hpp:25:9: warning: 'libraryName' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+   25 |         META_Node(SceneUtil, PositionAttitudeTransform)
+      |         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Node:64:29: note: expanded from macro 'META_Node'
+   64 |         virtual const char* libraryName() const { return #library; } \
+      |                             ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Transform:83:9: note: overridden virtual function is here
+   83 |         META_Node(osg, Transform);
+      |         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Node:64:29: note: expanded from macro 'META_Node'
+   64 |         virtual const char* libraryName() const { return #library; } \
+      |                             ^
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/apps/openmw/mwvr/vrinputmanager.cpp:15:
+In file included from /home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/vr/viewer.hpp:15:
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/./components/sceneutil/positionattitudetransform.hpp:25:9: warning: 'accept' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+   25 |         META_Node(SceneUtil, PositionAttitudeTransform)
+      |         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Node:65:22: note: expanded from macro 'META_Node'
+   65 |         virtual void accept(osg::NodeVisitor& nv) { if (nv.validNodeMask(*this)) { nv.pushOntoNodePath(this); nv.apply(*this); nv.popFromNodePath(); } } \
+      |                      ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Transform:83:9: note: overridden virtual function is here
+   83 |         META_Node(osg, Transform);
+      |         ^
+/home/runner/work/openmw-vr-quest-fit/openmw-vr-quest-fit/android/buildscripts/prefix/arm64/include/osg/Node:65:22: note: expanded from macro 'META_Node'
+   65 |         virtual void accept(osg::NodeVisitor& nv) { if (nv.validNodeMask(*this)) { nv.pushOntoNodePath(this); nv.apply(*this); nv.popFromNodePath(); } } \
+      |                      ^
+138 warnings generated.
+142 warnings generated.
+145 warnings generated.
+make[4]: *** [CMakeFiles/Makefile2:2306: apps/openmw/CMakeFiles/openmw-lib.dir/all] Error 2
+make[3]: *** [Makefile:136: all] Error 2
+make[2]: *** [CMakeFiles/openmw.dir/build.make:86: openmw-prefix/src/openmw-stamp/openmw-build] Error 2
+make[1]: *** [CMakeFiles/Makefile2:592: CMakeFiles/openmw.dir/all] Error 2
+make: *** [Makefile:91: all] Error 2
