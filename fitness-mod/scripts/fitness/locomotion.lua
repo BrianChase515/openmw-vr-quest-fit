@@ -146,7 +146,9 @@ local function onFrame(dt)
     elseif phase >= 0 and dz < -h then
         phase = -1
     end
+    local wasMoving = moving
     updateCadence(now)
+    if moving ~= wasMoving then self.object:sendEvent('FitMoving', { moving = moving }) end
     updateLean(pose, dt)
 
     -- physical jump: a sharp upward burst well beyond jogging bob

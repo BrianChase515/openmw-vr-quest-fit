@@ -65,6 +65,18 @@ local AUTO_FISTS_SPEED = 2.5   -- a swing this fast brings your fists up automat
 local FISTS_DOWN_AFTER = 20    -- seconds without a punching-speed swing before fists go down
 local lastPunchSwing = -100
 local raisedByUs = false
+local moving = false     -- from locomotion.lua (stepping in place)
+
+-- Running arms pump low by your hips; punches finish out in front at chest height or above.
+local function isPunchShape(h)
+    local head = poseCache[SP.View]
+    local finish = h.active and h.last or h.endPos
+    if not head or not finish then return false end
+    local hp = toMeters(head.position)
+    local d = finish - hp
+    local reach = util.vector3(d.x, d.y, 0):dot(headFwd)
+    return reach >= CFG.punchMinReach and d.z >= -CFG.punchMaxDrop
+end
 
 local function emptyHanded()
     local w = Actor.getEquipment(self, Actor.EQUIPMENT_SLOT.CarriedRight)
@@ -81,7 +93,8 @@ raiseFists = function()
 end
 
 local function maybeLowerFists()
-    if raisedByUs and now - lastPunchSwing > FISTS_DOWN_AFTER then
+    local idle = now - lastPunchSwing
+    if raisedByUs and (idle > FISTS_DOWN_AFTER or (moving and idle > 3)) then
         if Actor.getStance(self) == Actor.STANCE.Weapon and emptyHanded() then
             Actor.setStance(self, Actor.STANCE.Nothing)
         end
@@ -90,7 +103,8 @@ local function maybeLowerFists()
 end
 
 onSwingEnd = function(name, h)
-    if h.peak < AUTO_FISTS_SPEED then return end
+    if h.peak < AUTO_FISTS_SPEED or not isPunchShape(h) then return end
+    raiseFists()
     local kind = classify(h, name)
     print(string.format('[fitness] swing %s %s peak %.1f m/s', name, kind, h.peak))
     if CFG.showSwings and now > hudUntil then
@@ -115,7 +129,6 @@ local function updateHand(name, h, dt)
                 h.endPos, h.endTime = p, now
                 onSwingEnd(name, h)
             end
-            if h.peak >= AUTO_FISTS_SPEED then raiseFists() end
         end
     end
     h.prev = p
@@ -258,6 +271,7 @@ return {
     engineHandlers = { onFrame = safe('punch', onFrame), onVRFrame = safe('punch vr', onVRFrame) },
     eventHandlers = {
         FitPunchLanded = safe('punch landed', onPunchLanded),
+        FitMoving = function(d) moving = d.moving end,
         FitPunchWeak = function(d)
             showHud(string.format('too soft (%.0f%%) - commit to it', (d.strength or 0) * 100), 0.8)
         end,

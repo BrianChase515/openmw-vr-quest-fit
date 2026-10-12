@@ -10,6 +10,15 @@ return {
     committedPunchesAlwaysHit = true,
     -- Show every swing on screen (even in the air), handy for shadowboxing and tuning.
     showSwings = true,
+    -- What counts as a punch (vs. arms pumping while you jog): the fist must finish at least
+    -- this far in front of your face, and no more than this far below it.
+    punchMinReach = 0.30,
+    punchMaxDrop  = 0.45,
+
+    -- Where the health/magic/fatigue HUD sits. 'HUDBottomLeft' locks it in the lower-left of
+    -- your view. Other options: 'HUDBottomRight', 'HUDTopLeft', 'HUDTopRight', 'LeftWristTop'
+    -- (engine default). Set to false to leave whatever you picked in the VR settings menu.
+    hudPosition = 'HUDBottomLeft',
 
     -- Combos: alternate punch types to build a multiplier, repeat one type and it goes stale.
     comboWindow   = 1.5,      -- max gap between landed punches to keep a combo alive
