@@ -282,18 +282,52 @@ local function updateCompass()
     end
 end
 
+-- Workout summary: a small table (this session / all time) shown whenever a menu is open.
+local summaryEl = nil
+local COL = { 0, 230, 380 }   -- label, session (right edge), all time (right edge)
+local ROW_H, SUM_W = 30, 400
+local function showSummary(rows)
+    if summaryEl then summaryEl:destroy(); summaryEl = nil end
+    if not rows then return end
+    local function cell(text, x, y, right, color, size)
+        return { type = ui.TYPE.Text, props = { text = text, textSize = size or 22,
+            textColor = color or util.color.rgb(1, 1, 1), textShadow = true, textShadowColor = util.color.rgb(0, 0, 0),
+            position = util.vector2(x, y), anchor = util.vector2(right and 1 or 0, 0) } }
+    end
+    local head = util.color.rgb(0.75, 0.9, 1)
+    local content = {
+        { type = ui.TYPE.Image, props = { resource = WHITE_TEX, color = util.color.rgb(0, 0, 0), alpha = 0.6,
+            position = util.vector2(-16, -10), size = util.vector2(SUM_W + 32, ROW_H * (#rows + 1) + 20) } },
+        cell('WORKOUT', COL[1], 0, false, head),
+        cell('SESSION', COL[2], 0, true, head),
+        cell('ALL TIME', COL[3] + 20, 0, true, head),
+    }
+    for i, r in ipairs(rows) do
+        local y = i * ROW_H
+        local hi = i == 1 and util.color.rgb(1, 0.85, 0.4) or nil   -- calories first, highlighted
+        content[#content + 1] = cell(r[1], COL[1], y, false, hi)
+        content[#content + 1] = cell(r[2], COL[2], y, true, hi)
+        content[#content + 1] = cell(r[3], COL[3] + 20, y, true, hi)
+    end
+    local ok, el = pcall(ui.create, { layer = LAYER, type = ui.TYPE.Widget,
+        props = { relativePosition = util.vector2(0.5, CFG.summaryY or 0.70), anchor = util.vector2(0.5, 0),
+                  size = util.vector2(SUM_W, ROW_H * (#rows + 1)) },
+        content = ui.content(content) })
+    if ok then summaryEl = el else print('[fitness] summary failed: ' .. tostring(el)) end
+end
+
 local pausedShown = false
 local function onFrame(dt)
     now = now + math.max(dt, 0)
-    -- game paused / menu open: workout summary (this session + all time) at the bottom of your view
+    -- game paused / menu open: workout summary (this session + all time)
     if core.isWorldPaused() then
-        if not pausedShown and summary:get('text') then
+        if not pausedShown then
             pausedShown = true
-            show({ slot = 'tally', text = summary:get('text'), secs = 0.1, size = 24,
-                   color = util.color.rgb(0.75, 0.9, 1) })
+            showSummary(summary:get('rows'))
         end
-    else
+    elseif pausedShown then
         pausedShown = false
+        showSummary(nil)
     end
     if not greeted and now > 2 then
         greeted = true

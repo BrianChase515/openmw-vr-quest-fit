@@ -81,14 +81,19 @@ local function commas(n)
 end
 
 local KEYS = { 'steps', 'jumps', 'squats', 'punches', 'hits', 'dodges', 'kcal' }
-local function allTimeText()
+-- rows for the summary table: { label, this session, all time }
+local function summaryRows()
     local t = {}
     for _, k in ipairs(KEYS) do t[k] = (totals:get(k) or 0) + (k == 'kcal' and saveTimer or 0) end
-    return string.format('THIS SESSION   %s steps   %d jumps   %d squats   %d punches   %s kcal\n'
-        .. 'ALL TIME   %s steps   %s jumps   %s squats   %s punches (%s landed)   %s dodges   %s kcal',
-        commas(session.steps), session.jumps, session.squats, session.punches, commas(session.kcal),
-        commas(t.steps), commas(t.jumps), commas(t.squats), commas(t.punches), commas(t.hits),
-        commas(t.dodges), commas(t.kcal))
+    return {
+        { 'CALORIES', commas(session.kcal), commas(t.kcal) },
+        { 'STEPS', commas(session.steps), commas(t.steps) },
+        { 'PUNCHES', commas(session.punches), commas(t.punches) },
+        { 'LANDED', commas(session.hits), commas(t.hits) },
+        { 'DODGES', commas(session.dodges), commas(t.dodges) },
+        { 'JUMPS', commas(session.jumps), commas(t.jumps) },
+        { 'SQUATS', commas(session.squats), commas(t.squats) },
+    }
 end
 
 -- coach.lua shows this summary whenever the game is paused / a menu is open
@@ -111,7 +116,7 @@ local function onFrame(dt)
     if showTimer > 0 then return end
     showTimer = 0.5
     -- shown only while a menu is open / the game is paused (coach.lua), not during play
-    summary:set('text', profile:get('showTracker') ~= false and allTimeText() or nil)
+    summary:set('rows', profile:get('showTracker') ~= false and summaryRows() or nil)
 end
 
 -- Backup copy of the totals inside every save game. Saves live in the Quest's Morrowind folder,
