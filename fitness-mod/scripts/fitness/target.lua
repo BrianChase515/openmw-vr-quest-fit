@@ -115,6 +115,7 @@ local LANE = { slash = 'squat', attack1 = 'squat', chop = 'slip', thrust = 'slip
 
 local combatCheck, cachedPlayer = 0, nil
 local statusTimer = 0
+local deadFor = 0
 local loggedSpeed = false
 local function onUpdate(dt)
     -- cheap: only ask the AI who we're fighting twice a second
@@ -124,6 +125,13 @@ local function onUpdate(dt)
         cachedPlayer = fightingPlayer()
     end
     local player = cachedPlayer
+    -- a corpse keeps its combat target: stop reporting a while after death
+    if types.Actor.isDead(self) then
+        deadFor = deadFor + dt
+        if deadFor > (CFG.enemyHideAfterDeath or 10) + 2 then player = nil end
+    else
+        deadFor = 0
+    end
     if player and CFG.showEnemy then
         statusTimer = statusTimer - dt
         if statusTimer <= 0 then

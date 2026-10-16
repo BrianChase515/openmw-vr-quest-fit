@@ -100,6 +100,8 @@ end
 
 -- Enemy panel (top): name + health + fatigue of whoever is fighting you (nearest if several).
 local enemies = {}         -- id -> latest status
+local finished = {}        -- id -> true once a defeated enemy's bars have had their moment
+local HIDE_AFTER_DEATH = CFG.enemyHideAfterDeath or 10
 local enemyEl, enemyParts = nil, nil
 local ENEMY_W = 420
 
@@ -131,14 +133,21 @@ end
 
 local function updateEnemy()
     if not CFG.showEnemy then return end
-    -- pick the nearest enemy that reported in the last 1.5 s
-    local best, bestDist
+    -- pick the nearest living enemy that reported in the last 1.5 s; a defeated one stays up
+    -- (marked DEFEATED) for a few seconds when nobody else is fighting you, then goes away
+    local best, bestDist, bestAlive
     for id, e in pairs(enemies) do
+        if (e.health or 1) <= 0 and not e.deadAt then e.deadAt = now end
         if now - e.t > 1.5 then
             enemies[id] = nil
+        elseif e.deadAt and now - e.deadAt > HIDE_AFTER_DEATH then
+            enemies[id], finished[id] = nil, true
         else
+            local alive = not e.deadAt
             local dist = e.pos and (e.pos - self.position):length() or 0
-            if not best or dist < bestDist then best, bestDist = e, dist end
+            if not best or (alive and not bestAlive) or (alive == bestAlive and dist < bestDist) then
+                best, bestDist, bestAlive = e, dist, alive
+            end
         end
     end
     if not enemyEl then
@@ -151,7 +160,7 @@ local function updateEnemy()
         return
     end
     enemyEl.layout.props.visible = true
-    enemyParts.name.props.text = best.name
+    enemyParts.name.props.text = best.deadAt and (best.name .. '  -  DEFEATED') or best.name
     for key, row in pairs(enemyParts.rows) do
         local cur, max = math.max(best[key] or 0, 0), math.max(best[key .. 'Max'] or 1, 1)
         local p = math.min(cur / max, 1)
@@ -239,6 +248,11 @@ return {
     engineHandlers = { onFrame = safe('coach', onFrame) },
     eventHandlers = {
         FitCoach = safe('coach show', show),
-        FitEnemyStatus = safe('coach enemy', function(e) e.t = now; enemies[e.id] = e end),
+        FitEnemyStatus = safe('coach enemy', function(e)
+            if finished[e.id] then return end
+            local old = enemies[e.id]
+            e.t, e.deadAt = now, old and old.deadAt
+            enemies[e.id] = e
+        end),
     },
 }

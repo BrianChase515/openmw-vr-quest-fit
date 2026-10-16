@@ -11,6 +11,7 @@ return {
     showStats    = true,   -- health / magicka / fatigue bars on the bottom line
     showEnemy    = true,   -- enemy name + health / fatigue bars at the top while fighting
     coachEnemyY  = 0.06,
+    enemyHideAfterDeath = 10,   -- seconds a defeated enemy's bars stay up before disappearing
     -- Keep your body lined up with your character: if your head ends up this far (m) from the
     -- character (walking around the room), the view re-centres. false = never.
     recenterDist = 0.35,
