@@ -1,5 +1,6 @@
 PLAYER: scripts/fitness/coach.lua
 PLAYER: scripts/fitness/tracker.lua
+PLAYER: scripts/fitness/anthem.lua
 PLAYER: scripts/fitness/locomotion.lua
 PLAYER: scripts/fitness/punch.lua
 PLAYER: scripts/fitness/dodge.lua

@@ -98,6 +98,15 @@ if exist "%WORK%\fitness-mod\fitness.omwscripts" (
   echo !! fitness-mod folder not found in %WORK%
 )
 
+REM ---- Optional comeback anthem: any songs you own in Documents\openmw-fitness\music ----
+if not exist "%WORK%\music" mkdir "%WORK%\music"
+dir /b /a-d "%WORK%\music" 2>nul | findstr . >nul && (
+  "%ADB%" shell rm -rf "'%QDATA%/music/fitness'"
+  "%ADB%" shell mkdir -p "'%QDATA%/music/fitness'"
+  for %%F in ("%WORK%\music\*") do "%ADB%" push "%%F" "%QDATA%/music/fitness/" >nul
+  echo Anthem music copied.
+)
+
 REM Saves now live in /sdcard/Morrowind/userdata (survives reinstalls). Put the PC backup
 REM there if the Quest has none yet.
 "%ADB%" shell "ls /sdcard/Morrowind/userdata/saves/*/*.omwsave" >nul 2>&1

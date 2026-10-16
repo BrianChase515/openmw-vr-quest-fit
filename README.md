@@ -5,9 +5,10 @@ Walk and jog in place to travel, throw real punches with both fists, squat and s
 attacks, swim with a breaststroke, lie down to rest — with a workout tracker counting your steps,
 punches and calories. Level up Athletics by actually running.
 
-Built on [OpenMW](https://openmw.org) (the open-source Morrowind engine) via the
-[OpenMW-VR](https://gitlab.com/madsbuvi/openmw) project and
-[tomups' native Quest port](https://github.com/tomups/openmw-vr-quest). Free and open source (GPLv3).
+**Based on [tomups' native Quest port](https://github.com/tomups/openmw-vr-quest)** of
+[OpenMW-VR](https://gitlab.com/madsbuvi/openmw) by Mads Buvik Sandvei, on the
+[OpenMW](https://openmw.org) engine — their work makes this possible, and their full commit
+history is kept in this repo. Free and open source (GPLv3).
 **You need your own copy of Morrowind** — nothing from the game is included here.
 
 > Hobby project, tested on one Quest 3. Expect rough edges; feedback and issues welcome.
@@ -27,6 +28,7 @@ Built on [OpenMW](https://openmw.org) (the open-source Morrowind engine) via the
 | **Enemy winds up** → screen calls **SQUAT!** / **SLIP LEFT** / **SLIP RIGHT** | Do it in time to dodge (green flash) or soften the hit. Enemy wind-ups are slowed so you can react |
 | **Breaststroke** in water (hands from chest, push forward together) | Swim forward |
 | **Lie down** on the floor for 2 seconds | Open the Rest window |
+| **Drop to half health in a fight** | Your own fight song kicks in (bring your own music — see below) |
 | **Thumbstick** | Always works and overrides the body controls (turning, strafing, backing up) |
 
 **Fitness HUD**, locked to your view:
@@ -37,6 +39,11 @@ Built on [OpenMW](https://openmw.org) (the open-source Morrowind engine) via the
 
 Calories use the standard MET method (activity intensity × your resting burn from height,
 weight, age and sex). Set your profile in **Options → Scripts → Fitness**.
+
+**Comeback anthem:** put any song you own (.mp3 or .ogg) in `Documents\openmw-fitness\music`
+and rerun the installer. When you're at half health or less in a fight it takes over from the
+battle music, once per fight (several files = a random pick). No music is included with the mod.
+Turn it off or change the health % in **Options → Scripts → Fitness**.
 
 ## What you need
 
@@ -104,6 +111,7 @@ fitness-mod/                 Lua gameplay mod (fitness.omwscripts), no rebuild n
     dodge.lua                attack calls, squat/slip dodge judging
     target.lua               (on every NPC/creature) wind-up telegraph + slowdown, hit rules, enemy status
     coach.lua                the view-locked fitness HUD
+    anthem.lua               plays your song when you're hurt in a fight
     tracker.lua              steps / jumps / squats / punches / calories, profile settings
     align.lua  hud.lua       keep you lined up with your character; manage the game's wrist HUD
 apps/openmw/mwvr/            engine changes: off-hand fist, punch-position gate, menu cooldown
