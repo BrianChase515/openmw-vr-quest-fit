@@ -35,7 +35,7 @@ history is kept in this repo. Free and open source (GPLv3).
 
 **Fitness HUD**, locked to your view:
 - your **health / magicka / fatigue** bars, colour-coded green → yellow → red — shown while you're fighting
-  (and 10 s after), when you lose health or magicka, and whenever health is low; otherwise check your wrist
+  (and 10 s after), when you lose health or magicka, and whenever health or fatigue is low; otherwise check your wrist
 - a **compass** in the upper right
 - the **enemy you're fighting** (name, health, fatigue) across the top
 - **punch names and combos**, **dodge calls and results** in the middle

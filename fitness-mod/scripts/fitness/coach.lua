@@ -90,7 +90,10 @@ local function statsWanted()
     if now - lastDrop < 5 then return true end
     local h = types.Actor.stats.dynamic.health(self)
     local hmax = math.max((h.base or 0) + (h.modifier or 0), 1)
-    return h.current / hmax < (CFG.statsAlwaysBelow or 0.35)
+    if h.current / hmax < (CFG.statsAlwaysBelow or 0.35) then return true end
+    local f = types.Actor.stats.dynamic.fatigue(self)
+    local fmax = math.max((f.base or 0) + (f.modifier or 0), 1)
+    return f.current / fmax < (CFG.statsAlwaysBelow or 0.35)   -- running low on fatigue: time to ease off
 end
 
 local function updateStats(dt)
