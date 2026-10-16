@@ -14,6 +14,17 @@ local ui = require('openmw.ui')
 local util = require('openmw.util')
 local I = require('openmw.interfaces')
 local types = require('openmw.types')
+local input = require('openmw.input')
+local async = require('openmw.async')
+
+-- You jump for real, so the controller's jump button (left trigger) opens the map instead.
+local JUMP_OPENS_MAP = require('scripts.fitness.config').jumpButtonOpensMap ~= false
+if JUMP_OPENS_MAP then
+    input.registerTriggerHandler('Jump', async:callback(function()
+        if core.isWorldPaused() or I.UI.getMode() then return end
+        I.UI.addMode(I.UI.MODE.Interface, { windows = { I.UI.WINDOW.Map } })
+    end))
+end
 
 local U = I.vrspaces.unitsPerMeter -- game units per real metre (~70)
 
@@ -243,7 +254,11 @@ local function onFrame(dt)
     elseif standZ and standZ - z < CFG.lieDrop * 0.5 then
         lyingSince, restOpened = nil, false
     end
-    if wantJump and not lyingSince then self.controls.jump = true end
+    if wantJump and not lyingSince then
+        self.controls.jump = true
+    elseif JUMP_OPENS_MAP and not swimming then
+        self.controls.jump = false   -- the button opens the map; only a real jump jumps (it still swims you up)
+    end
 
     -- what you're doing, for the calorie estimate
     activityTimer = activityTimer - dt

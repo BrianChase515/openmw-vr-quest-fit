@@ -9,6 +9,9 @@ return {
     coachStatsY  = 0.74,
     coachTallyY  = 0.82,   -- workout tracker line (steps, jumps, squats, punches, kcal)
     showStats    = true,   -- health / magicka / fatigue bars on the bottom line
+    showCompass  = true,   -- compass strip in the upper right
+    compassX = 0.80, compassY = 0.07,
+    jumpButtonOpensMap = true,   -- you jump for real, so the jump button (left trigger) opens the map instead
     showEnemy    = true,   -- enemy name + health / fatigue bars at the top while fighting
     coachEnemyY  = 0.06,
     enemyHideAfterDeath = 10,   -- seconds a defeated enemy's bars stay up before disappearing

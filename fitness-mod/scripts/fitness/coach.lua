@@ -226,6 +226,46 @@ local function show(data)
 end
 
 local greeted = false
+-- Compass (upper right): which way you're looking, as a strip of directions with your heading under it.
+local I = require('openmw.interfaces')
+local compassEl, headYaw, compassTimer = nil, nil, 0
+local POINTS = { [0] = 'N', [45] = 'NE', [90] = 'E', [135] = 'SE', [180] = 'S', [225] = 'SW', [270] = 'W', [315] = 'NW' }
+local NAMES16 = { 'N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW' }
+local function onVRFrame()
+    if not CFG.showCompass then return end
+    local head = I.vrspaces.locateSpaceInWorld(I.vrspaces.referenceSpaces.View)
+    if head and head.orientation then
+        local f = head.orientation * util.vector3(0, 1, 0)
+        if f.x * f.x + f.y * f.y > 1e-4 then headYaw = math.deg((math.atan2 or math.atan)(f.x, f.y)) % 360 end
+    end
+end
+local function updateCompass(dt)
+    if not CFG.showCompass or not headYaw then return end
+    compassTimer = compassTimer - math.max(dt, 0.001)
+    if compassTimer > 0 then return end
+    compassTimer = 0.05
+    -- strip from -90 to +90 degrees around where you look, one slot per 15 degrees
+    local parts = {}
+    for i = -6, 6 do
+        local a = math.floor((headYaw + i * 15) / 15 + 0.5) * 15 % 360
+        parts[#parts + 1] = POINTS[a] or ((i == 0) and '|' or '.')
+    end
+    local text = table.concat(parts, '  ') .. '\n' .. string.format('%s  %03d', NAMES16[math.floor(headYaw / 22.5 + 0.5) % 16 + 1], math.floor(headYaw + 0.5) % 360)
+    if not compassEl then
+        local ok, el = pcall(ui.create, { layer = LAYER, type = ui.TYPE.Text, props = {
+            text = text, textSize = 22, multiline = true, textAlignH = ui.ALIGNMENT.Center,
+            textColor = util.color.rgb(1, 0.92, 0.7), textShadow = true, textShadowColor = util.color.rgb(0, 0, 0),
+            relativePosition = util.vector2(CFG.compassX or 0.8, CFG.compassY or 0.07), anchor = util.vector2(0.5, 0) } })
+        if not ok then CFG.showCompass = false; print('[fitness] compass failed: ' .. tostring(el)); return end
+        compassEl = el
+        return
+    end
+    if compassEl.layout.props.text ~= text then
+        compassEl.layout.props.text = text
+        compassEl:update()
+    end
+end
+
 local pausedShown = false
 local function onFrame(dt)
     now = now + math.max(dt, 0)
@@ -246,6 +286,7 @@ local function onFrame(dt)
     end
     updateStats(dt)
     updateFlash()
+    updateCompass(dt)
     enemyTimer = (enemyTimer or 0) - dt
     if enemyTimer <= 0 then enemyTimer = 0.25; updateEnemy() end
     for _, slot in pairs(slots) do
@@ -259,7 +300,7 @@ local function onFrame(dt)
 end
 
 return {
-    engineHandlers = { onFrame = safe('coach', onFrame) },
+    engineHandlers = { onFrame = safe('coach', onFrame), onVRFrame = safe('coach vr', onVRFrame) },
     eventHandlers = {
         FitCoach = safe('coach show', show),
         FitEnemyStatus = safe('coach enemy', function(e)
