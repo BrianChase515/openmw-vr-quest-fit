@@ -1,71 +1,138 @@
-> NOT UNDER ACTIVE DEVELOPMENT
->
-> The legendary Team Beef is working on a Quest native port that is going to be so much better than anything I could do :)
->
-> My version is just an "aperitif" until theirs launches, so stay tuned!
+# Morrowind VR Fitness — work out in Vvardenfell on Meta Quest
 
-# OpenMW-VR for Meta Quest (native APK)
+**Play The Elder Scrolls III: Morrowind standalone on a Meta Quest 3, and move your body to play it.**
+Walk and jog in place to travel, throw real punches with both fists, squat and slip under enemy
+attacks, swim with a breaststroke, lie down to rest — with a workout tracker counting your steps,
+punches and calories. Level up Athletics by actually running.
 
-https://github.com/user-attachments/assets/b8b5b967-709e-4d4c-b8da-65542aeea3a7
+Built on [OpenMW](https://openmw.org) (the open-source Morrowind engine) via the
+[OpenMW-VR](https://gitlab.com/madsbuvi/openmw) project and
+[tomups' native Quest port](https://github.com/tomups/openmw-vr-quest). Free and open source (GPLv3).
+**You need your own copy of Morrowind** — nothing from the game is included here.
 
-Self-contained build of OpenMW-VR as a standalone Quest APK (OpenXR + GLES via gl4es).
-Everything needed lives in this repo:
+> Hobby project, tested on one Quest 3. Expect rough edges; feedback and issues welcome.
+> Not affiliated with Bethesda, Team Beef or the OpenMW team.
+
+---
+
+## What it does
+
+| You do this | In the game |
+|---|---|
+| **Walk in place** | Walk forward; your pace sets the speed |
+| **Jog in place** (about 2+ steps a second) | Run |
+| **Jump** | Jump |
+| **Throw a punch**, either hand | Fists come up on their own; a real punch out in front lands, arm swings don't |
+| **Mix punches and hands** (L JAB › R JAB › L HOOK › R UPPERCUT) | Combo multiplier up to ×1.8 damage; the same punch 3× in a row goes stale |
+| **Enemy winds up** → screen calls **SQUAT!** / **SLIP LEFT** / **SLIP RIGHT** | Do it in time to dodge (green flash) or soften the hit. Enemy wind-ups are slowed so you can react |
+| **Breaststroke** in water (hands from chest, push forward together) | Swim forward |
+| **Lie down** on the floor for 2 seconds | Open the Rest window |
+| **Thumbstick** | Always works and overrides the body controls (turning, strafing, backing up) |
+
+**Fitness HUD**, locked to your view:
+- your **health / magicka / fatigue** bars, colour-coded green → yellow → red
+- the **enemy you're fighting** (name, health, fatigue) across the top
+- **punch names and combos**, **dodge calls and results** in the middle
+- a **workout tracker**: steps, jumps, squats, punches and estimated calories
+
+Calories use the standard MET method (activity intensity × your resting burn from height,
+weight, age and sex). Set your profile in **Options → Scripts → Fitness**.
+
+## What you need
+
+- **Meta Quest 3** (Quest 2 / Pro may work, untested) in **developer mode**
+- A **Windows PC** with [SideQuest](https://sidequestvr.com) installed and a **USB cable**
+- **Morrowind** installed on that PC (Steam or GOG; Game of the Year edition with Tribunal and Bloodmoon recommended)
+- A **clear play area** — you will be jogging, jumping, punching and lying on the floor
+
+## Install (about 10 minutes, then one click to update)
+
+1. Put the Quest in developer mode (Meta Horizon phone app → Devices → Developer mode) and
+   install SideQuest on the PC. Plug the Quest in and allow USB debugging when it asks.
+2. Download **[install-to-quest.bat](https://github.com/BrianChase515/openmw-vr-quest-fit/raw/apk/install-to-quest.bat)**
+   (right-click → *Save link as*).
+3. Double-click it with the headset plugged in. It will:
+   - find Morrowind (common Steam/GOG folders; otherwise it asks once for your `Data Files` folder)
+   - download the newest game build and fitness scripts from this repo
+   - install the app, copy your Morrowind data to the Quest (first time only, ~600 MB)
+   - launch the game
+4. Once the game is up, **unplug and play**. When done, plug back in and press a key in the window:
+   it saves logs, any headset screenshots and a **backup of your saves** to `Documents\openmw-fitness`.
+
+**Updating:** run the same file again. Your saves live in the Quest's `Morrowind/userdata` folder,
+so updates and reinstalls never touch them.
+
+## Tips
+
+- **Recenter** (VR menu) if you're ever offset from your character; the mod also re-centres
+  automatically if you wander more than 35 cm from your body in the game.
+- **Physical sneak:** turn on *Physical Sneak* in the VR settings to crouch-sneak.
+- **Hand-to-hand is your friend early on:** a committed punch always lands; damage grows with your skill.
+- **Jogging in place creeps forward.** Check your Guardian now and then (or turn on the drift
+  warning in `config.lua` for small rooms).
+- **Screenshots:** hold the Meta button and pull a trigger; the installer copies them to your PC.
+
+## Tuning
+
+Everything adjustable is in [`fitness-mod/scripts/fitness/config.lua`](fitness-mod/scripts/fitness/config.lua):
+punch strictness, combo values, dodge chances, HUD layout and visibility, the game's own wrist
+HUD (hidden by default), re-centre distance. Movement feel (step sensitivity, run pace, jump,
+swim, rest) is at the top of [`locomotion.lua`](fitness-mod/scripts/fitness/locomotion.lua).
+To use your own edits, put them in `Documents\openmw-fitness\fitness-mod` and comment out the
+"Downloading the latest fitness scripts" lines in the installer.
+
+## Troubleshooting
+
+| Problem | Fix |
+|---|---|
+| *"Quest not detected"* | Headset on, cable in, accept the USB debugging prompt inside the headset |
+| *"Could not find adb"* | Open SideQuest once (it installs adb), then rerun |
+| Game opens and closes instantly | Rerun the installer; check `Documents\openmw-fitness\openmw-log.txt` for "No content file" (Morrowind data missing) |
+| *INSTALL_FAILED_UPDATE_INCOMPATIBLE* | You have an older/different build installed; answer **Y** — saves are backed up first |
+| Ghosting / judder | The game runs below the headset's refresh rate in busy areas; lower view distance in Options → Video |
+| Walking won't start | Step a little more firmly; light steps need a steady rhythm to register |
+
+---
+
+## How it works (for developers)
 
 ```
-android/
-  buildscripts/   cross-compiles the engine + all native deps for arm64-v8a
-  app/            minimal VR APK that loads libopenmw.so straight into VR
+fitness-mod/                 Lua gameplay mod (fitness.omwscripts), no rebuild needed to change
+  scripts/fitness/
+    locomotion.lua           walk/jog/jump from head bob, breaststroke swimming, lie-down rest
+    punch.lua                fist tracking, punch classification, L/R combos
+    dodge.lua                attack calls, squat/slip dodge judging
+    target.lua               (on every NPC/creature) wind-up telegraph + slowdown, hit rules, enemy status
+    coach.lua                the view-locked fitness HUD
+    tracker.lua              steps / jumps / squats / punches / calories, profile settings
+    align.lua  hud.lua       keep you lined up with your character; manage the game's wrist HUD
+apps/openmw/mwvr/            engine changes: off-hand fist, punch-position gate, menu cooldown
+android/                     Quest build (cross-compiles engine + deps, packages the APK)
+tools/install-to-quest.bat   the installer
 ```
 
-Based on https://gitlab.com/madsbuvi/openmw/-/tree/openmw-51 and https://github.com/xyzz/openmw-android
+Every push to `main` builds the APK on GitHub Actions and publishes it — with the scripts,
+installer and this guide — to the [`apk`](https://github.com/BrianChase515/openmw-vr-quest-fit/tree/apk)
+branch. Script-only changes publish in about a minute without rebuilding the engine.
 
-## Game data
-
-The APK ships no Morrowind data. Put your Morrowind install in **either** location:
-
-```sh
-# Option A — full Morrowind folder on shared storage (contains "Data Files/"):
-adb push Morrowind/ /sdcard/Morrowind/
-# Option B — app-scoped folder, just the Data Files contents (no permission needed):
-adb push "Morrowind/Data Files/." /sdcard/Android/data/org.openmw.vr/files/data/
-```
-
-`OpenMWActivity` regenerates `…/files/config/openmw.cfg` on each launch, scanning
-`/sdcard/Morrowind/Data Files`, `/sdcard/Morrowind`, and the app-scoped `data/` folder — it adds a
-`data=` line for each that exists and a `content=` entry per game file found (Morrowind/Tribunal/
-Bloodmoon ordered first). For Option A, grant the storage permission when prompted, or pre-grant:
-
-```sh
-adb shell pm grant org.openmw.vr android.permission.READ_EXTERNAL_STORAGE
-```
-
-## Install & run on the headset (one command)
-
-Once the Quest is reachable over adb (USB, or `adb connect <ip>:5555`):
-
-```sh
-android/run-on-device.sh ~/Morrowind   # pushes data, installs, grants perms, launches, tails log
-android/run-on-device.sh               # if data is already on the device
-```
-
-It captures the startup log to `android/omw-device.log` (filtered to OpenMW/SDL/OpenXR/crash tags).
-
-## Build
+### Building it yourself
 
 ```sh
 cd android/buildscripts
 ./build.sh            # downloads the NDK, builds deps + libopenmw.so, deploys into app/
 cd ..
 ANDROID_HOME=$HOME/Android/Sdk ./gradlew :app:assembleDebug
-adb install -r app/build/outputs/apk/debug/app-debug.apk
 ```
 
+`build.sh` keeps unstripped libs in `buildscripts/symbols/arm64-v8a/` for symbolizing tombstones.
+Watch startup with `adb logcat -s OpenMW SDL openxr VrApi DEBUG`.
 
-## Debugging
+## Credits
 
-`build.sh` keeps unstripped libs in `buildscripts/symbols/arm64-v8a/` for symbolizing
-tombstones. Watch startup with:
+- [OpenMW](https://openmw.org) — the open-source Morrowind engine (GPLv3)
+- [Mads Buvik Sandvei](https://gitlab.com/madsbuvi/openmw) — OpenMW-VR
+- [tomups](https://github.com/tomups/openmw-vr-quest) — the native Meta Quest port this builds on
+- [xyzz/openmw-android](https://github.com/xyzz/openmw-android) — Android build scripts
+- Fitness mod by Brian Chase, built with Claude
 
-```sh
-adb logcat -s OpenMW SDL openxr VrApi DEBUG
-```
+The Elder Scrolls III: Morrowind is © Bethesda Softworks. You must own the game to play.

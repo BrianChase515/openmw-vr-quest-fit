@@ -8,7 +8,7 @@ on:
     paths:
       - 'fitness-mod/**'
       - 'tools/**'
-      - 'QUEST-FITNESS.md'
+      - 'README.md'
   workflow_dispatch:
 
 permissions:
@@ -29,9 +29,9 @@ jobs:
           set -e
           git clone --depth 1 --branch apk "https://x-access-token:${{ github.token }}@github.com/${GITHUB_REPOSITORY}.git" "$RUNNER_TEMP/apk"
           cd "$RUNNER_TEMP/apk"
-          rm -f fitness-mod.zip
+          rm -f fitness-mod.zip QUEST-FITNESS.md
           (cd "$GITHUB_WORKSPACE/fitness-mod" && zip -qr "$RUNNER_TEMP/apk/fitness-mod.zip" .)
-          cp "$GITHUB_WORKSPACE/tools/install-to-quest.bat" "$GITHUB_WORKSPACE/QUEST-FITNESS.md" .
+          cp "$GITHUB_WORKSPACE/tools/install-to-quest.bat" "$GITHUB_WORKSPACE/README.md" .
           echo "Scripts from ${GITHUB_SHA} on $(date -u)" > SCRIPTS.txt
           git add -A
           git -c user.name=ci -c user.email=ci@localhost commit -q -m "Scripts from ${GITHUB_SHA}" || exit 0
