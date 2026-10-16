@@ -7,6 +7,8 @@ if not vr.isVr() then return {} end
 local ui = require('openmw.ui')
 local util = require('openmw.util')
 local core = require('openmw.core')
+local storage = require('openmw.storage')
+local summary = storage.playerSection('FitnessSummary')
 local CFG = require('scripts.fitness.config')
 local safe = require('scripts.fitness.safe')
 
@@ -26,7 +28,8 @@ local function element(slot)
     if slot.el then return slot.el end
     local ok, el = pcall(ui.create, {
         layer = LAYER, type = ui.TYPE.Text,
-        props = { text = '', textSize = slot.size, textColor = util.color.rgb(1, 1, 1),
+        props = { text = '', textSize = slot.size, textColor = util.color.rgb(1, 1, 1), multiline = true,
+                  textAlignH = ui.ALIGNMENT.Center,
                   textShadow = true, textShadowColor = util.color.rgb(0, 0, 0),
                   relativePosition = util.vector2(0.5, slot.y), anchor = util.vector2(0.5, 0.5) },
     })
@@ -223,8 +226,19 @@ local function show(data)
 end
 
 local greeted = false
+local pausedShown = false
 local function onFrame(dt)
     now = now + math.max(dt, 0)
+    -- game paused / menu open: workout summary (this session + all time) at the bottom of your view
+    if core.isWorldPaused() then
+        if not pausedShown and summary:get('text') then
+            pausedShown = true
+            show({ slot = 'tally', text = summary:get('text'), secs = 0.1, size = 24,
+                   color = util.color.rgb(0.75, 0.9, 1) })
+        end
+    else
+        pausedShown = false
+    end
     if not greeted and now > 2 then
         greeted = true
         show({ slot = 'centre', text = 'FITNESS MOD READY', secs = 3, color = util.color.rgb(0.6, 1, 0.6) })

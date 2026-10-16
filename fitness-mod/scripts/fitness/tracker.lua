@@ -19,7 +19,8 @@ local L10N = 'FitnessMod'
 local GROUP = 'SettingsFitnessProfile'
 
 I.Settings.registerPage({ key = 'FitnessMod', l10n = L10N, name = 'Fitness',
-    description = 'Your body stats for the calorie estimate, and tracker display.' })
+    description = 'Your body stats for the calorie estimate, and tracker display.\n'
+        .. 'Your all-time workout totals show at the bottom of your view whenever the game is paused or a menu is open.' })
 I.Settings.registerGroup({
     key = GROUP, page = 'FitnessMod', l10n = L10N, name = 'Fitness profile', permanentStorage = true,
     settings = {
@@ -78,6 +79,21 @@ local function commas(n)
     return s:reverse():gsub('(%d%d%d)', '%1,'):reverse():gsub('^,', '')
 end
 
+local KEYS = { 'steps', 'jumps', 'squats', 'punches', 'hits', 'dodges', 'kcal' }
+local function allTimeText()
+    local t = {}
+    for _, k in ipairs(KEYS) do t[k] = (totals:get(k) or 0) + (k == 'kcal' and saveTimer or 0) end
+    return string.format('THIS SESSION   %s steps   %d jumps   %d squats   %d punches   %s kcal\n'
+        .. 'ALL TIME   %s steps   %s jumps   %s squats   %s punches (%s landed)   %s dodges   %s kcal',
+        commas(session.steps), session.jumps, session.squats, session.punches, commas(session.kcal),
+        commas(t.steps), commas(t.jumps), commas(t.squats), commas(t.punches), commas(t.hits),
+        commas(t.dodges), commas(t.kcal))
+end
+
+-- coach.lua shows this summary whenever the game is paused / a menu is open
+local summary = storage.playerSection('FitnessSummary')
+summary:setLifeTime(storage.LIFE_TIME.Temporary)
+
 local function onFrame(dt)
     if dt <= 0 then return end
     now = now + dt
@@ -93,15 +109,36 @@ local function onFrame(dt)
     showTimer = showTimer - dt
     if showTimer > 0 then return end
     showTimer = 0.5
+    summary:set('text', allTimeText())
     if profile:get('showTracker') == false then return end
     self.object:sendEvent('FitCoach', { slot = 'tally', secs = 1.0, color = util.color.rgb(0.75, 0.9, 1),
         text = string.format('STEPS %s   JUMPS %d   SQUATS %d   PUNCHES %d   %s kcal',
             commas(session.steps), session.jumps, session.squats, session.punches, commas(session.kcal)) })
 end
 
+-- Backup copy of the totals inside every save game. Saves live in the Quest's Morrowind folder,
+-- which survives reinstalls; the totals file itself is in the app's folder, which doesn't.
+-- Loading a save never lowers your totals, only restores them if they were lost.
+local function onSave()
+    local t = {}
+    for _, k in ipairs(KEYS) do t[k] = totals:get(k) or 0 end
+    return { fitnessTotals = t }
+end
+local function onLoad(data)
+    local saved = data and data.fitnessTotals
+    if not saved then return end
+    local restored = false
+    for _, k in ipairs(KEYS) do
+        if (saved[k] or 0) > (totals:get(k) or 0) then totals:set(k, saved[k]); restored = true end
+    end
+    if restored then print('[fitness] all-time totals restored from your save') end
+end
+
 local logTimer = 0
 return {
     engineHandlers = {
+        onSave = onSave,
+        onLoad = onLoad,
         onFrame = safe('tracker', function(dt)
             onFrame(dt)
             logTimer = logTimer + math.max(dt, 0)
