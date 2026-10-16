@@ -100,6 +100,13 @@ local function isPunchShape(h)
     -- Speed tells punches from arm pumps: jogging arms swing at 2.5-3.6 m/s, real punches 5+.
     -- A fast swing counts wherever it finishes (hooks end beside your head, uppercuts close in,
     -- body shots low); only slower swings have to look like a punch.
+    -- pulling the fist back to your guard (fast, after every punch) is not another punch
+    if h.start then
+        local m = finish - h.start
+        local right = util.vector3(headFwd.y, -headFwd.x, 0)
+        local back, inward, up = -m:dot(headFwd), m:dot(right) * h.inward, m.z
+        if back > 0.10 and back > inward and back > up then return false end
+    end
     local fast = CFG.punchFastSpeed or 5.0
     if moving and h.peak < fast then return false end   -- bouncing on your feet is fine, pumping arms isn't
     if h.peak >= fast then return d.z >= -(CFG.punchMaxDropFast or 0.65) end
