@@ -87,6 +87,10 @@ namespace MWVR
     void VRInputManager::updateRealisticCombat(float dt)
     {
         bool guiMode = MWBase::Environment::get().getWindowManager()->isGuiMode();
+        if (guiMode)
+            mGuiCooldown = 0.6f;
+        else if (mGuiCooldown > 0.f)
+            mGuiCooldown -= dt;
 
         if (!guiMode)
         {
@@ -105,7 +109,8 @@ namespace MWVR
                 mOffHandPath = offPath;
                 mRealisticCombatOffHand.reset(new RealisticCombat::StateMachine(playerPtr, offPath, true));
             }
-            bool enabled = !guiMode && player.getDrawState() == MWMechanics::DrawState::Weapon && !player.isDisabled();
+            bool enabled = !guiMode && mGuiCooldown <= 0.f && player.getDrawState() == MWMechanics::DrawState::Weapon
+                && !player.isDisabled();
             mRealisticCombat->update(dt, enabled);
             mRealisticCombatOffHand->update(dt, enabled);
         }

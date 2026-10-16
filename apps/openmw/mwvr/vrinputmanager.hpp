@@ -92,6 +92,7 @@ namespace MWVR
         std::unique_ptr<RealisticCombat::StateMachine> mRealisticCombat;
         std::unique_ptr<RealisticCombat::StateMachine> mRealisticCombatOffHand; // second fist (hand-to-hand)
         std::string mOffHandPath;
+        float mGuiCooldown = 0.f; // no punches for a moment after closing a menu (hands are out from clicking)
         //bool mPointerActivation = false;
         bool mPointerLeft = true;
         bool mPointerRight = true;

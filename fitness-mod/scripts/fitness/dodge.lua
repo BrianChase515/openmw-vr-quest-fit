@@ -118,6 +118,7 @@ I.Combat.addOnHitHandler(function(attack)
         attack.successful = false
         pcall(ambient.playSound, 'miss')
         coach('centre', 'DODGED!', GREEN, 1.6, 80, GREEN)
+        self.object:sendEvent('FitTally', { dodges = 1 })
         buzz(1.0, 0.08)
         return
     end

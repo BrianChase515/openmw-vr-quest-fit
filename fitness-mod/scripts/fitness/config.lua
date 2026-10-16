@@ -6,6 +6,7 @@ return {
     coachCentreY = 0.22,
     coachStatusY = 0.62,
     coachStatsY  = 0.74,
+    coachTallyY  = 0.82,   -- workout tracker line (steps, jumps, squats, punches, kcal)
     showStats    = true,   -- health / magicka / fatigue bars on the bottom line
     showEnemy    = true,   -- enemy name + health / fatigue bars at the top while fighting
     coachEnemyY  = 0.06,

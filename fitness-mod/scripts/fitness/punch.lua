@@ -90,6 +90,7 @@ local function emptyHanded()
 end
 
 raiseFists = function()
+    if Actor.isSwimming(self) then return end   -- breaststroke, not a fight
     lastPunchSwing = now
     if Actor.getStance(self) == Actor.STANCE.Nothing and emptyHanded()
         and types.Player.getControlSwitch(self, types.Player.CONTROL_SWITCH.Fighting) then
@@ -99,6 +100,11 @@ raiseFists = function()
 end
 
 local function maybeLowerFists()
+    if raisedByUs and Actor.isSwimming(self) and Actor.getStance(self) == Actor.STANCE.Weapon then
+        Actor.setStance(self, Actor.STANCE.Nothing)
+        raisedByUs = false
+        return
+    end
     local idle = now - lastPunchSwing
     if raisedByUs and (idle > FISTS_DOWN_AFTER or (moving and idle > 1.5)) then
         if Actor.getStance(self) == Actor.STANCE.Weapon and emptyHanded() then
@@ -110,6 +116,7 @@ end
 
 onSwingEnd = function(name, h)
     if h.peak < AUTO_FISTS_SPEED or not isPunchShape(h) then return end
+    self.object:sendEvent('FitTally', { punches = 1 })
     raiseFists()
     local kind = classify(h, name)
     print(string.format('[fitness] swing %s %s peak %.1f m/s', name, kind, h.peak))
@@ -186,6 +193,7 @@ local function buzz(name, strength, secs)
 end
 
 local function onPunchLanded(data)
+    self.object:sendEvent('FitTally', { hits = 1 })
     local h, name = pickHand()
     local kind = h and classify(h, name) or 'punch'
     -- Left and right count as different moves (a 1-2 is L JAB > R JAB).

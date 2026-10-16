@@ -19,6 +19,7 @@ local enemyTimer = 0
 local slots = {
     centre = { y = CFG.coachCentreY, size = 44 },
     status = { y = CFG.coachStatusY, size = 28 },
+    tally  = { y = CFG.coachTallyY or 0.82, size = 22 },
 }
 local function element(slot)
     if slot.el then return slot.el end
