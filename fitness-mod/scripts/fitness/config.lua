@@ -9,6 +9,9 @@ return {
     coachStatsY  = 0.74,
     coachTallyY  = 0.82,   -- workout tracker line (steps, jumps, squats, punches, kcal)
     showStats    = true,   -- health / magicka / fatigue bars on the bottom line
+    statsMode    = 'combat',   -- 'combat': show them while fighting (+10 s), after losing health/magicka, or when health is low; 'always'
+    statsHideAfterCombat = 10,
+    statsAlwaysBelow = 0.35,   -- health fraction below which your bars always show
     showCompass  = true,   -- compass strip in the upper right
     compassX = 0.80, compassY = 0.07,
     jumpButtonOpensMap = true,   -- you jump for real, so the jump button (left trigger) opens the map instead

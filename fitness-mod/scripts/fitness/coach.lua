@@ -79,6 +79,20 @@ local function buildStats()
     if ok then statsEl = el else print('[fitness] coach: stats bars failed: ' .. tostring(el)) end
 end
 
+-- Your bars show when they matter: while something is fighting you (and 10 s after), for a few
+-- seconds after you lose health or magicka outside a fight, and always when health is low.
+-- The rest of the time check your wrist. config.lua: statsMode = 'combat' (default) or 'always'.
+local lastFight, lastDrop = -100, -100
+local prevHealth, prevMagicka
+local function statsWanted()
+    if CFG.statsMode == 'always' then return true end
+    if now - lastFight < (CFG.statsHideAfterCombat or 10) then return true end
+    if now - lastDrop < 5 then return true end
+    local h = types.Actor.stats.dynamic.health(self)
+    local hmax = math.max((h.base or 0) + (h.modifier or 0), 1)
+    return h.current / hmax < (CFG.statsAlwaysBelow or 0.35)
+end
+
 local function updateStats(dt)
     if not CFG.showStats then return end
     statsTimer = statsTimer - dt
@@ -87,6 +101,15 @@ local function updateStats(dt)
     if not statsEl then buildStats() end
     if not statsEl then return end
     local d = types.Actor.stats.dynamic
+    local hc, mc = d.health(self).current, d.magicka(self).current
+    if (prevHealth and hc < prevHealth - 0.5) or (prevMagicka and mc < prevMagicka - 0.5) then lastDrop = now end
+    prevHealth, prevMagicka = hc, mc
+    local want = statsWanted()
+    if statsEl.layout.props.visible ~= want then
+        statsEl.layout.props.visible = want
+        statsEl:update()
+    end
+    if not want then return end
     for _, st in ipairs(STATS) do
         local stat = d[st.key](self)
         local max = math.max((stat.base or 0) + (stat.modifier or 0), 1)
@@ -304,6 +327,7 @@ return {
     eventHandlers = {
         FitCoach = safe('coach show', show),
         FitEnemyStatus = safe('coach enemy', function(e)
+            if (e.health or 1) > 0 then lastFight = now end
             if finished[e.id] then return end
             local old = enemies[e.id]
             e.t, e.deadAt = now, old and old.deadAt
