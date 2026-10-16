@@ -261,6 +261,17 @@ bool OMW::Engine::frame(unsigned frameNumber, float frametime)
             // Should be called after input manager update and before any change to the game world.
             // It applies to the game world queued changes from the previous frame.
             mLuaManager->synchronizedUpdate();
+
+            // VR fitness: the Quest app is usually closed from the headset menu, which kills it
+            // without a normal shutdown - so write the Lua permanent storage (workout totals,
+            // settings) every minute instead of only on exit.
+            static float storageSaveTimer = 0.f;
+            storageSaveTimer += frametime;
+            if (storageSaveTimer > 60.f)
+            {
+                storageSaveTimer = 0.f;
+                mLuaManager->savePermanentStorage(mCfgMgr.getUserConfigPath());
+            }
         }
 
         // update game state

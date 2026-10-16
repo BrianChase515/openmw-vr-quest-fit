@@ -12,8 +12,8 @@ return {
     statsMode    = 'combat',   -- 'combat': show them while fighting (+10 s), after losing health/magicka, or when health is low; 'always'
     statsHideAfterCombat = 10,
     statsAlwaysBelow = 0.35,   -- health or fatigue fraction below which your bars always show
-    showCompass  = true,   -- compass strip in the upper right
-    compassX = 0.80, compassY = 0.07,
+    showCompass  = true,   -- direction you're facing (N, NE, E...) in the upper right
+    compassX = 0.85, compassY = 0.08, compassSize = 26,
     jumpButtonOpensMap = true,   -- you jump for real, so the jump button (left trigger) opens the map instead
     showEnemy    = true,   -- enemy name + health / fatigue bars at the top while fighting
     coachEnemyY  = 0.06,
@@ -45,6 +45,7 @@ return {
         uppercut = { green = 9.0, yellow = 6.5 },
         punch    = { green = 7.5, yellow = 5.5 },
     },
+    punchMinSpeedMoving = 3.8, -- while your feet are moving, slower swings are taken as jogging arms
     punchFastSpeed = 5.0,      -- swings this fast are punches wherever they finish (arm pumps are ~3 m/s)
     punchMaxDropFast = 0.65,   -- ...down to body-shot height (m below your eyes)
     hookMinReach = -0.25,      -- slower hooks: finish beside the head is fine
@@ -56,10 +57,9 @@ return {
     punchMinReachMoving = 0.42,   -- stricter while you're jogging
 
     -- The game's own wrist HUD panel (health bars, minimap, equipped icons).
-    -- 'watch' (default): hidden until you check your left wrist like a watch (forearm across in front
-    --   of you, inside of the wrist toward your face) - then it shows, minimap included, while you walk.
-    -- 'hidden': never shown. Or always shown at 'LeftWristTop' (game default), 'HUDBottomLeft', ...
-    hudPosition = 'watch',
+    -- 'hidden' (default): never shown - the fitness HUD shows your stats.
+    -- 'watch' (experimental): shows when you check your left wrist like a watch. Or always shown at 'LeftWristTop' (game default), 'HUDBottomLeft', ...
+    hudPosition = 'hidden',
     watchSpace = 'LeftWristInner',   -- where it appears when you check: inner wrist (or 'LeftWristTop')
     watchPixelsPerMeter = 1024,      -- smaller = bigger panel
 

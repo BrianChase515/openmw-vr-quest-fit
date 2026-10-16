@@ -48,6 +48,10 @@ namespace MWLua
         api["_setHudVisibility"] = [luaManager = context.mLuaManager](bool state) {
             luaManager->addAction([state] { MWBase::Environment::get().getWindowManager()->setHudVisibility(state); });
         };
+        api["_restUntilHealed"] = [luaManager = context.mLuaManager]() {
+            luaManager->addAction(
+                [] { MWBase::Environment::get().getWindowManager()->restUntilHealed(); }, "Rest until healed");
+        };
         api["_isHudVisible"] = []() -> bool { return MWBase::Environment::get().getWindowManager()->isHudVisible(); };
         api["_getDefaultFontSize"] = []() -> int { return Settings::gui().mFontSize; };
         api["showMessage"]

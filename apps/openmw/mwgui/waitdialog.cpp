@@ -174,6 +174,19 @@ namespace MWGui
         mDateTimeText->setCaptionWithReplacing(dateTimeText);
     }
 
+    void WaitDialog::restUntilHealed()
+    {
+        int hours = MWBase::Environment::get().getMechanicsManager()->getHoursToRest();
+        if (hours <= 0)
+        {
+            // already healed: nothing to wait for
+            MWBase::Environment::get().getWindowManager()->removeGuiMode(GM_Rest);
+            MWBase::Environment::get().getWindowManager()->messageBox("You are fully rested.");
+            return;
+        }
+        startWaiting(hours);
+    }
+
     void WaitDialog::onUntilHealedButtonClicked(MyGUI::Widget* /*sender*/)
     {
         int autoHours = MWBase::Environment::get().getMechanicsManager()->getHoursToRest();

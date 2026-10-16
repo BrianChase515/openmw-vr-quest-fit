@@ -303,6 +303,8 @@ namespace MWBase
 
         virtual bool getPlayerSleeping() = 0;
         virtual void wakeUpPlayer() = 0;
+        /// Open the rest window and immediately rest until healed (VR fitness: lie down to rest).
+        virtual void restUntilHealed() = 0;
 
         virtual void showSoulgemDialog(MWWorld::Ptr item) = 0;
 

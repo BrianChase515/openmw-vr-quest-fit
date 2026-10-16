@@ -100,7 +100,12 @@ local function isPunchShape(h)
     -- Speed tells punches from arm pumps: jogging arms swing at 2.5-3.6 m/s, real punches 5+.
     -- A fast swing counts wherever it finishes (hooks end beside your head, uppercuts close in,
     -- body shots low); only slower swings have to look like a punch.
-    -- pulling the fist back to your guard (fast, after every punch) is not another punch
+    -- pulling the fist back to your guard (fast, after every punch) is not another punch:
+    -- it starts where the last punch ended, right after it, and goes the opposite way
+    if h.start and h.punchEnd and now - h.punchTime < 0.8 and (h.start - h.punchEnd):length() < 0.15 then
+        local m = finish - h.start
+        if m:length() > 0.05 and m:normalize():dot(h.punchDir) < -0.5 then return false end
+    end
     if h.start then
         local m = finish - h.start
         local right = util.vector3(headFwd.y, -headFwd.x, 0)
@@ -108,7 +113,7 @@ local function isPunchShape(h)
         if back > 0.10 and back > inward and back > up then return false end
     end
     local fast = CFG.punchFastSpeed or 5.0
-    if moving and h.peak < fast then return false end   -- bouncing on your feet is fine, pumping arms isn't
+    if moving and h.peak < (CFG.punchMinSpeedMoving or 3.8) then return false end   -- jogging arms swing at 2.5-3.6 m/s
     if h.peak >= fast then return d.z >= -(CFG.punchMaxDropFast or 0.65) end
     if d.z < -CFG.punchMaxDrop then return false end
     if kind == 'hook' then return reach >= (CFG.hookMinReach or -0.25) end
@@ -165,6 +170,7 @@ onSwingEnd = function(name, h)
         settleLanded(data, kind, name)
     end
     if h.peak < AUTO_FISTS_SPEED then return end
+    if Actor.isSwimming(self) then return end   -- breaststroke, not punches
     if not isPunchShape(h) then
         print(string.format('[fitness] swing %s %s %.1f m/s REJECTED (height %.2f m, moving %s) %s',
             name, kind, h.peak, h.shapeDrop or -1, tostring(moving), h.dbg or ''))
@@ -172,9 +178,12 @@ onSwingEnd = function(name, h)
     end
     self.object:sendEvent('FitTally', { punches = 1 })
     raiseFists()
+    if h.start and h.endPos and (h.endPos - h.start):length() > 0.05 then
+        h.punchEnd, h.punchTime, h.punchDir = h.endPos, now, (h.endPos - h.start):normalize()
+    end
     local color, verdict = grade(kind, h.peak)
     print(string.format('[fitness] swing %s %s %.1f m/s %s %s', name, kind, h.peak, verdict, h.dbg or ''))
-    if CFG.showSwings and not moving then
+    if CFG.showSwings then
         showSwing(string.format('%s %s   %.1f m/s', name == 'left' and 'L' or 'R', kind:upper(), h.peak), color)
     end
 end
@@ -193,19 +202,27 @@ local function updateHand(name, h, dt)
         end
         h.fast = speed > LAUNCH_SPEED and (h.fast or 0) + 1 or 0
         if not h.active and h.fast >= 2 then       -- needs 2+ frames of real speed
-            h.active, h.start, h.peak, h.peakTime = true, h.prev, speed, now
+            -- start from where the hand was before it sped up
+            h.active, h.start, h.peak, h.peakTime = true, h.prev2 or h.prev, speed, now
+            h.far, h.farDist = h.prev, (h.prev - h.start):length()
         end
         if h.active then
             if speed > h.peak then h.peak, h.peakTime = speed, now end
-            h.last = p
-            if speed < END_SPEED or now - h.peakTime > 0.5 then
+            -- The punch "lands" at the point furthest from where it started. A snapped punch comes
+            -- straight back without ever slowing down, so also end the swing once the fist has
+            -- come back 10 cm from that point - the pull-back is not part of the punch.
+            local dist = (p - h.start):length()
+            if dist > h.farDist then h.far, h.farDist = p, dist end
+            h.last = h.far
+            local pulledBack = h.farDist > 0.15 and dist < h.farDist - 0.10
+            if speed < END_SPEED or pulledBack or now - h.peakTime > 0.5 then
                 h.active = false
-                h.endPos, h.endTime = p, now
+                h.endPos, h.endTime = h.far, now
                 onSwingEnd(name, h)
             end
         end
     end
-    h.prev = p
+    h.prev2, h.prev = h.prev, p
 end
 
 -- What kind of punch: decided by where the fist ends up, then which way it travelled.

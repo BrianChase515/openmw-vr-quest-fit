@@ -1953,6 +1953,16 @@ namespace MWGui
         mWaitDialog->wakeUp();
     }
 
+    void WindowManager::restUntilHealed()
+    {
+        if (isGuiMode())
+            return;
+        pushGuiMode(GM_Rest);
+        // the dialog closes itself (with the game's message) if resting isn't allowed here
+        if (isGuiMode() && getMode() == GM_Rest)
+            mWaitDialog->restUntilHealed();
+    }
+
     void WindowManager::addVisitedLocation(const std::string& name, int x, int y)
     {
         mMap->addVisitedLocation(name, x, y);

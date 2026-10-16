@@ -40,6 +40,7 @@ namespace MWGui
 
         bool getSleeping() { return mTimeAdvancer.isRunning() && mSleeping; }
         void wakeUp();
+        void restUntilHealed();
         void autosave();
 
         WindowBase* getProgressBar() { return &mProgressBar; }

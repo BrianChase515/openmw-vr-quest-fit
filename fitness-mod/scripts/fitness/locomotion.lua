@@ -43,11 +43,13 @@ local CFG = {
     jumpSpeed      = 1.2,   -- upward head speed (m/s) that counts as a real jump
     jumpRise       = 0.06,  -- and the head must be at least this far above average
     jumpCooldown   = 1.0,
-    strokeReach    = 0.42,  -- swimming: both hands pushed out at least this far in front of your face...
+    strokeReach    = 0.38,  -- swimming: both hands pushed out at least this far in front of your face...
     strokeStart    = 0.25,  -- ...starting from closer than this (hands at your chest)
-    strokeTime     = 0.9,   -- ...within this many seconds, hands together (< strokeHands apart)
-    strokeHands    = 0.40,
-    strokeGlide    = 1.3,   -- each stroke swims you forward this long
+    strokeTime     = 1.2,   -- ...within this many seconds, hands together (< strokeHands apart)
+    strokeHands    = 0.45,
+    strokeGlide    = 1.8,   -- each stroke swims you forward (at swimming 'run' speed) this long
+    swimEnter      = 0.4,   -- seconds the game must say "swimming" before strokes take over (shallow water flickers)
+    swimLeave      = 0.6,   -- ...and "not swimming" before walking takes over again
     lieDrop        = 1.0,   -- head this far (m) below standing height = lying down (squats are ~0.5-0.8)
     lieHold        = 2.0,   -- for this long -> Rest window
     debug          = true,  -- on-screen readout for tuning
@@ -68,6 +70,7 @@ local hud, hudTimer = nil, 0
 local lastDz, lastVz = 0, 0
 
 local hands = {}            -- cached hand poses (swimming)
+local swimState, swimFlip = false, 0
 local strokeArmed, strokeArmedAt, glideUntil, lastStroke = false, -10, -10, -10
 local lyingSince, restOpened = nil, false
 
@@ -199,7 +202,15 @@ local function onFrame(dt)
         if inSquat and drop < 0.10 then inSquat = false; tally({ squats = 1 }) end
     end
 
-    local swimming = types.Actor.isSwimming(self)
+    -- the game flips in and out of "swimming" at the water's edge: only switch after it settles
+    local rawSwim = types.Actor.isSwimming(self)
+    if rawSwim ~= swimState then
+        swimFlip = swimFlip + dt
+        if swimFlip > (rawSwim and CFG.swimEnter or CFG.swimLeave) then swimState, swimFlip = rawSwim, 0 end
+    else
+        swimFlip = 0
+    end
+    local swimming = swimState
     -- the stick always wins
     local stickUsed = math.abs(self.controls.movement) > 0.1 or math.abs(self.controls.sideMovement) > 0.1
 
@@ -228,7 +239,7 @@ local function onFrame(dt)
         end
         if not stickUsed and now < glideUntil then
             self.controls.movement = 1
-            self.controls.run = false
+            self.controls.run = true   -- swimming 'run' is the game's faster swim
         end
     elseif not stickUsed and moving then
         -- Forward only. Pace sets speed smoothly: an easy march = steady walk, picking it up =
@@ -249,7 +260,8 @@ local function onFrame(dt)
         if not restOpened and now - lyingSince > CFG.lieHold then
             restOpened = true
             print('[fitness] lying down -> rest')
-            I.UI.addMode('Rest')
+            -- rest until healed straight away (needs the matching game build); otherwise open the Rest window
+            if ui._restUntilHealed then ui._restUntilHealed() else I.UI.addMode('Rest') end
         end
     elseif standZ and standZ - z < CFG.lieDrop * 0.5 then
         lyingSince, restOpened = nil, false

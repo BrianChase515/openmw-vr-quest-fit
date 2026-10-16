@@ -33,7 +33,8 @@ I.Settings.registerGroup({
         { key = 'age', renderer = 'number', name = 'Age', default = 35, argument = { integer = true, min = 10, max = 100 } },
         { key = 'sex', renderer = 'select', name = 'Sex', default = 'Male',
           description = 'Used for the resting calorie rate.', argument = { l10n = L10N, items = { 'Male', 'Female' } } },
-        { key = 'showTracker', renderer = 'checkbox', name = 'Show tracker on HUD', default = true },
+        { key = 'showTracker', renderer = 'checkbox', name = 'Show workout summary in menus', default = true,
+          description = 'This session and all-time totals at the bottom of your view whenever a menu is open.' },
     },
 })
 local profile = storage.playerSection(GROUP)
@@ -109,11 +110,8 @@ local function onFrame(dt)
     showTimer = showTimer - dt
     if showTimer > 0 then return end
     showTimer = 0.5
-    summary:set('text', allTimeText())
-    if profile:get('showTracker') == false then return end
-    self.object:sendEvent('FitCoach', { slot = 'tally', secs = 1.0, color = util.color.rgb(0.75, 0.9, 1),
-        text = string.format('STEPS %s   JUMPS %d   SQUATS %d   PUNCHES %d   %s kcal',
-            commas(session.steps), session.jumps, session.squats, session.punches, commas(session.kcal)) })
+    -- shown only while a menu is open / the game is paused (coach.lua), not during play
+    summary:set('text', profile:get('showTracker') ~= false and allTimeText() or nil)
 end
 
 -- Backup copy of the totals inside every save game. Saves live in the Quest's Morrowind folder,

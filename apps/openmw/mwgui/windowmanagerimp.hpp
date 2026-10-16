@@ -322,6 +322,7 @@ namespace MWGui
 
         bool getPlayerSleeping() override;
         void wakeUpPlayer() override;
+        void restUntilHealed() override;
 
         void updatePlayer() override;
 
