@@ -97,14 +97,15 @@ local function isPunchShape(h)
     local reach = util.vector3(d.x, d.y, 0):dot(headFwd)
     local kind = classify(h)
     h.shapeReach, h.shapeDrop = reach, d.z
-    if moving then
-        -- while jogging, arm pumps can rise high: only a clearly extended jab/hook counts
-        return kind ~= 'uppercut' and kind ~= 'punch' and reach >= CFG.punchMinReachMoving and d.z >= -0.3
-    end
+    -- Speed tells punches from arm pumps: jogging arms swing at 2.5-3.6 m/s, real punches 5+.
+    -- A fast swing counts wherever it finishes (hooks end beside your head, uppercuts close in,
+    -- body shots low); only slower swings have to look like a punch.
+    local fast = CFG.punchFastSpeed or 5.0
+    if moving and h.peak < fast then return false end   -- bouncing on your feet is fine, pumping arms isn't
+    if h.peak >= fast then return d.z >= -(CFG.punchMaxDropFast or 0.65) end
     if d.z < -CFG.punchMaxDrop then return false end
-    -- each punch finishes in its own place: jabs far out, hooks beside the head, uppercuts close in
-    if kind == 'hook' then return reach >= (CFG.hookMinReach or 0.15) end
-    if kind == 'uppercut' then return reach >= (CFG.uppercutMinReach or 0.05) end
+    if kind == 'hook' then return reach >= (CFG.hookMinReach or -0.25) end
+    if kind == 'uppercut' then return reach >= (CFG.uppercutMinReach or -0.15) end
     return reach >= CFG.punchMinReach
 end
 
@@ -201,6 +202,11 @@ classify = function(h, name)
     if up > 0.12 and up >= 0.8 * math.abs(fwd) and up > math.abs(side) then return 'uppercut' end
     if inward > 0.12 and inward >= 0.9 * math.abs(fwd) and inward > up then return 'hook' end
     if fwd > 0.12 then return 'jab' end
+    -- short or curved punch: name it by its main direction
+    local best = math.max(fwd, inward, up)
+    if best > 0.06 then
+        if best == up then return 'uppercut' elseif best == inward then return 'hook' else return 'jab' end
+    end
     return 'punch'
 end
 

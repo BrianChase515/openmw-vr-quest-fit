@@ -24,6 +24,8 @@ local function onFrame(dt)
         pixelResolution = util.vector2(1024, 768),
         autosize = true,
     }
+    -- The VR menu script re-applies its own wrist layout every time a menu opens; tell it hands off.
+    if I.vrui and I.vrui.overrideLayerConfig then I.vrui.overrideLayerConfig('HUD_3D', true) end
     if CFG.hudPosition == 'hidden' then
         -- park the panel far below you and shrink it to nothing: never seen, costs nothing
         I.vrspaces.createDerivedSpace('FitnessHiddenHud', I.vrspaces.referenceSpaces.View,

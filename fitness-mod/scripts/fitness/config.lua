@@ -32,14 +32,17 @@ return {
     -- Set for a strong puncher; the rear-hand straight (cross) and hooks travel further, so they're graded higher.
     -- Your stance (which hand leads) is in Options > Scripts > Fitness.
     speedGrades = {
-        jab      = { green = 6.5, yellow = 4.5 },
-        cross    = { green = 8.0, yellow = 6.0 },
-        hook     = { green = 8.5, yellow = 6.5 },
-        uppercut = { green = 7.5, yellow = 5.5 },
-        punch    = { green = 7.0, yellow = 5.0 },
+        -- set from a real session: your hardest ~40% of punches are green
+        jab      = { green = 6.6, yellow = 5.0 },
+        cross    = { green = 7.4, yellow = 5.5 },
+        hook     = { green = 9.0, yellow = 6.5 },
+        uppercut = { green = 9.0, yellow = 6.5 },
+        punch    = { green = 7.5, yellow = 5.5 },
     },
-    hookMinReach = 0.15,       -- hooks finish beside the head, not far out in front
-    uppercutMinReach = 0.05,   -- uppercuts finish close in, rising
+    punchFastSpeed = 5.0,      -- swings this fast are punches wherever they finish (arm pumps are ~3 m/s)
+    punchMaxDropFast = 0.65,   -- ...down to body-shot height (m below your eyes)
+    hookMinReach = -0.25,      -- slower hooks: finish beside the head is fine
+    uppercutMinReach = -0.15,  -- slower uppercuts: finish close in is fine
     -- What counts as a punch (vs. arms pumping while you jog): the fist must finish at least
     -- this far in front of your face, and no more than this far below it.
     punchMinReach = 0.30,
