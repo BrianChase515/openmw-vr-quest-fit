@@ -154,18 +154,26 @@ local function maybeLowerFists()
     end
 end
 
+local settleLanded
 onSwingEnd = function(name, h)
+    h.finishReach = nil
+    local kind = punchName(classify(h, name), name)
+    h.lastKind, h.lastKindTime = kind, now
+    if h.pendingLanded then
+        local data = h.pendingLanded
+        h.pendingLanded = nil
+        settleLanded(data, kind, name)
+    end
     if h.peak < AUTO_FISTS_SPEED then return end
     if not isPunchShape(h) then
-        print(string.format('[fitness] swing %s %s %.1f m/s REJECTED (reach %.2f m, height %.2f m, moving %s)',
-            name, classify(h, name), h.peak, h.shapeReach or -1, h.shapeDrop or -1, tostring(moving)))
+        print(string.format('[fitness] swing %s %s %.1f m/s REJECTED (height %.2f m, moving %s) %s',
+            name, kind, h.peak, h.shapeDrop or -1, tostring(moving), h.dbg or ''))
         return
     end
     self.object:sendEvent('FitTally', { punches = 1 })
     raiseFists()
-    local kind = punchName(classify(h, name), name)
     local color, verdict = grade(kind, h.peak)
-    print(string.format('[fitness] swing %s %s %.1f m/s %s (reach %.2f m)', name, kind, h.peak, verdict, h.shapeReach or -1))
+    print(string.format('[fitness] swing %s %s %.1f m/s %s %s', name, kind, h.peak, verdict, h.dbg or ''))
     if CFG.showSwings and not moving then
         showSwing(string.format('%s %s   %.1f m/s', name == 'left' and 'L' or 'R', kind:upper(), h.peak), color)
     end
@@ -179,6 +187,7 @@ local function updateHand(name, h, dt)
         local speed = (p - h.prev):length() / dt
         if speed > MAX_REAL_SPEED then
             -- tracking glitch (controller lost / jumped): throw the swing away
+            if h.pendingLanded then settleLanded(h.pendingLanded, 'punch', name); h.pendingLanded = nil end
             h.active, h.fast, h.prev = false, 0, p
             return
         end
@@ -199,21 +208,33 @@ local function updateHand(name, h, dt)
     h.prev = p
 end
 
+-- What kind of punch: decided by where the fist ends up, then which way it travelled.
+--   straight (jab/cross): arm finishes extended out in front of your face
+--   uppercut: finishes close in, having travelled mostly upward
+--   hook: finishes close in (beside or in front of the head), having travelled sideways/around
 classify = function(h, name)
     local finish = h.active and h.last or h.endPos
     if not h.start or not finish then return 'punch' end
     local d = finish - h.start
     local right = util.vector3(headFwd.y, -headFwd.x, 0)
     local fwd, side, up = d:dot(headFwd), d:dot(right), d.z
-    local inward = side * h.inward          -- positive = hand crossing toward the body's centre
-    if up > 0.12 and up >= 0.8 * math.abs(fwd) and up > math.abs(side) then return 'uppercut' end
-    if inward > 0.12 and inward >= 0.9 * math.abs(fwd) and inward > up then return 'hook' end
-    if fwd > 0.12 then return 'jab' end
-    -- short or curved punch: name it by its main direction
-    local best = math.max(fwd, inward, up)
-    if best > 0.06 then
-        if best == up then return 'uppercut' elseif best == inward then return 'hook' else return 'jab' end
+    local horiz = math.sqrt(fwd * fwd + side * side)
+    local reach = h.finishReach
+    if reach == nil then
+        local head = poseCache[SP.View]
+        if head then
+            local r = finish - toMeters(head.position)
+            reach = util.vector3(r.x, r.y, 0):dot(headFwd)
+        end
     end
+    h.dbg = string.format('fwd %.2f side %.2f up %.2f reach %.2f', fwd, side * h.inward, up, reach or -9)
+    if reach and reach >= (CFG.straightMinReach or 0.36) and fwd > 0.10 and up < 0.8 * horiz then return 'jab' end
+    if up > 0.10 and up >= 0.8 * horiz then return 'uppercut' end
+    if horiz > 0.10 then
+        if reach and reach < (CFG.straightMinReach or 0.36) then return 'hook' end
+        return 'jab'
+    end
+    if up > 0.06 then return 'uppercut' end
     return 'punch'
 end
 
@@ -243,10 +264,17 @@ local function buzz(name, strength, secs)
     HANDS[name].buzz = strength
 end
 
+-- A hit usually connects mid-swing, before we know what kind of punch it is: hold it until
+-- the swing finishes (a fraction of a second) so combos use the real punch type.
 local function onPunchLanded(data)
     self.object:sendEvent('FitTally', { hits = 1 })
     local h, name = pickHand()
-    local kind = h and punchName(classify(h, name), name) or 'punch'
+    if h and h.active then h.pendingLanded = data; return end
+    local kind = (h and now - (h.lastKindTime or -10) < 1) and h.lastKind or 'punch'
+    settleLanded(data, kind, name)
+end
+
+settleLanded = function(data, kind, name)
     -- Left and right count as different moves (a 1-2 is L JAB > R JAB).
     local move = ((name == 'left') and 'L ' or (name == 'right') and 'R ' or '') .. kind:upper()
 
