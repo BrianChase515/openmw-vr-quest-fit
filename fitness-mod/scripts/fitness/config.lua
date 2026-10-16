@@ -52,10 +52,13 @@ return {
     punchMaxDrop  = 0.45,
     punchMinReachMoving = 0.42,   -- stricter while you're jogging
 
-    -- The game's own wrist HUD panel (health bars, minimap, equipped icons). 'hidden' (default)
-    -- turns it off - the fitness HUD already shows your stats; item tooltips are not affected.
-    -- To bring it back: 'LeftWristTop' (game default), 'HUDBottomLeft', 'HUDBottomRight', 'HUDTopLeft'...
-    hudPosition = 'hidden',
+    -- The game's own wrist HUD panel (health bars, minimap, equipped icons).
+    -- 'watch' (default): hidden until you check your left wrist like a watch (forearm across in front
+    --   of you, inside of the wrist toward your face) - then it shows, minimap included, while you walk.
+    -- 'hidden': never shown. Or always shown at 'LeftWristTop' (game default), 'HUDBottomLeft', ...
+    hudPosition = 'watch',
+    watchSpace = 'LeftWristInner',   -- where it appears when you check: inner wrist (or 'LeftWristTop')
+    watchPixelsPerMeter = 1024,      -- smaller = bigger panel
 
     -- Combos: alternate punch types to build a multiplier, repeat one type and it goes stale.
     comboWindow   = 1.5,      -- max gap between landed punches to keep a combo alive

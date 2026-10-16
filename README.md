@@ -29,10 +29,13 @@ history is kept in this repo. Free and open source (GPLv3).
 | **Breaststroke** in water (hands from chest, push forward together) | Swim forward |
 | **Lie down** on the floor for 2 seconds | Open the Rest window |
 | **Drop to half health in a fight** | Your own fight song kicks in (bring your own music — see below) |
+| **Check your left wrist like a watch** (forearm across in front of you, hold a moment) | The game's wrist panel with the **minimap** appears; keep walking while you read it |
+| **Left trigger** (the old jump button) | Opens the full map — you jump for real |
 | **Thumbstick** | Always works and overrides the body controls (turning, strafing, backing up) |
 
 **Fitness HUD**, locked to your view:
 - your **health / magicka / fatigue** bars, colour-coded green → yellow → red
+- a **compass** in the upper right
 - the **enemy you're fighting** (name, health, fatigue) across the top
 - **punch names and combos**, **dodge calls and results** in the middle
 - a **workout tracker**: steps, jumps, squats, punches and estimated calories
@@ -90,7 +93,7 @@ so updates and reinstalls never touch them.
 
 Everything adjustable is in [`fitness-mod/scripts/fitness/config.lua`](fitness-mod/scripts/fitness/config.lua):
 punch strictness, combo values, dodge chances, HUD layout and visibility, the game's own wrist
-HUD (hidden by default), re-centre distance. Movement feel (step sensitivity, run pace, jump,
+HUD (shown when you check your wrist), re-centre distance. Movement feel (step sensitivity, run pace, jump,
 swim, rest) is at the top of [`locomotion.lua`](fitness-mod/scripts/fitness/locomotion.lua).
 To use your own edits, put them in `Documents\openmw-fitness\fitness-mod` and comment out the
 "Downloading the latest fitness scripts" lines in the installer.
