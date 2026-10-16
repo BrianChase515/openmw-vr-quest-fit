@@ -4,6 +4,7 @@ return {
 
     -- Fitness HUD layout (fractions of the view panel, 0 = top, 1 = bottom)
     coachCentreY = 0.22,
+    coachSpeedY  = 0.555,  -- punch speed readout (just above the combo line)
     coachStatusY = 0.62,
     coachStatsY  = 0.74,
     coachTallyY  = 0.82,   -- workout tracker line (steps, jumps, squats, punches, kcal)
@@ -26,6 +27,18 @@ return {
     committedPunchesAlwaysHit = true,
     -- Show every swing on screen (even in the air), handy for shadowboxing and tuning.
     showSwings = true,
+    -- Punch speed grades (m/s at the controller). Green = good, yellow = OK, red = push harder.
+    -- Set for a strong puncher; the rear-hand straight (cross) and hooks travel further, so they're graded higher.
+    -- Your stance (which hand leads) is in Options > Scripts > Fitness.
+    speedGrades = {
+        jab      = { green = 6.5, yellow = 4.5 },
+        cross    = { green = 8.0, yellow = 6.0 },
+        hook     = { green = 8.5, yellow = 6.5 },
+        uppercut = { green = 7.5, yellow = 5.5 },
+        punch    = { green = 7.0, yellow = 5.0 },
+    },
+    hookMinReach = 0.15,       -- hooks finish beside the head, not far out in front
+    uppercutMinReach = 0.05,   -- uppercuts finish close in, rising
     -- What counts as a punch (vs. arms pumping while you jog): the fist must finish at least
     -- this far in front of your face, and no more than this far below it.
     punchMinReach = 0.30,

@@ -1,5 +1,8 @@
 #include "worldimp.hpp"
 
+#include <algorithm>
+#include <cmath>
+
 #include <charconv>
 #include <vector>
 
@@ -3921,6 +3924,42 @@ namespace MWWorld
         mRendering->enableVRPointer(left, right);
     }
 
+    // Fists swing at chest height, but rats, mudcrabs and kwama are knee-high: a punch thrown
+    // out in front still lands on a small creature below it if one is within reach.
+    static std::optional<std::pair<MWWorld::Ptr, osg::Vec3f>> findLowPunchTarget(
+        const MWWorld::Ptr& ptr, const osg::Vec3f& origin, const osg::Quat& orient, float reach)
+    {
+        osg::Vec3f dir = orient * osg::Vec3f(0.f, 1.f, 0.f);
+        dir.z() = 0.f;
+        if (dir.normalize() < 0.2f)
+            return std::nullopt; // fist pointing straight up/down: no forward direction
+        std::vector<MWWorld::Ptr> actors;
+        MWBase::Environment::get().getMechanicsManager()->getActorsInRange(origin, reach + 200.f, actors);
+        const float cosCone = std::cos(osg::DegreesToRadians(40.f));
+        std::optional<std::pair<MWWorld::Ptr, osg::Vec3f>> best;
+        float bestDist = reach;
+        for (const MWWorld::Ptr& a : actors)
+        {
+            if (a == ptr || !a.getClass().isActor() || a.getClass().getCreatureStats(a).isDead())
+                continue;
+            const osg::Vec3f pos = a.getRefData().getPosition().asVec3();
+            const osg::Vec3f he = MWBase::Environment::get().getWorld()->getHalfExtents(a);
+            if (pos.z() + 2.f * he.z() > origin.z() + 10.f)
+                continue; // as tall as the fist: the normal aim test handles it
+            osg::Vec3f v = pos - origin;
+            v.z() = 0.f;
+            const float radius = std::max(he.x(), he.y());
+            const float dist = std::max(0.f, v.length() - radius);
+            if (dist > bestDist)
+                continue;
+            if (v.length() > radius && (v / v.length()) * dir < cosCone)
+                continue; // not in front of the punch
+            bestDist = dist;
+            best = std::make_pair(a, osg::Vec3f(pos.x(), pos.y(), pos.z() + he.z()));
+        }
+        return best;
+    }
+
     std::optional<std::pair<MWWorld::Ptr, osg::Vec3f>> MWWorld::World::getVRMeleeHitContact(MWWorld::Ptr ptr)
     {
         if (ptr.getClass().getCreatureStats(ptr).getDrawState() != MWMechanics::DrawState::Weapon)
@@ -3946,6 +3985,9 @@ namespace MWWorld
             return std::nullopt;
         auto worldMatrix = osg::computeLocalToWorld(node->getParentalNodePaths()[0]);
         auto result = mPhysics->getHitContact(ptr, worldMatrix.getTrans(), worldMatrix.getRotate(), distance);
+        if (weapon.isEmpty() && (result.first.isEmpty() || !result.first.getClass().isActor()))
+            if (auto low = findLowPunchTarget(ptr, worldMatrix.getTrans(), worldMatrix.getRotate(), distance))
+                return low;
         if (result.first.isEmpty())
             return std::nullopt;
         Log(Debug::Verbose) << "Hit: " << result.first.getTypeDescription();
@@ -3961,6 +4003,9 @@ namespace MWWorld
         const float distance
             = store.find("fCombatDistance")->mValue.getFloat() * store.find("fHandToHandReach")->mValue.getFloat();
         auto result = mPhysics->getHitContact(ptr, origin, orient, distance);
+        if (result.first.isEmpty() || !result.first.getClass().isActor())
+            if (auto low = findLowPunchTarget(ptr, origin, orient, distance))
+                return low;
         if (result.first.isEmpty())
             return std::nullopt;
         return result;

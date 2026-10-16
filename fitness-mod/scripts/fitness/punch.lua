@@ -12,6 +12,25 @@ local I = require('openmw.interfaces')
 local types = require('openmw.types')
 local CFG = require('scripts.fitness.config')
 local Actor = types.Actor
+local storage = require('openmw.storage')
+
+I.Settings.registerGroup({
+    key = 'SettingsFitnessBoxing', page = 'FitnessMod', l10n = 'FitnessMod', name = 'Boxing', permanentStorage = true,
+    settings = {
+        { key = 'stance', renderer = 'select', name = 'Stance', default = 'Orthodox (left foot forward)',
+          description = 'Your lead hand throws jabs; the rear hand throws crosses (graded harder).',
+          argument = { l10n = 'FitnessMod', items = { 'Orthodox (left foot forward)', 'Southpaw (right foot forward)' } } },
+    },
+})
+local boxing = storage.playerSection('SettingsFitnessBoxing')
+local function rearHand()
+    return (boxing:get('stance') or ''):find('^Southpaw') and 'left' or 'right'
+end
+-- A straight punch from the rear hand is a cross.
+local function punchName(kind, hand)
+    if kind == 'jab' and hand == rearHand() then return 'cross' end
+    return kind
+end
 
 local U = I.vrspaces.unitsPerMeter
 local SP = I.vrspaces.referenceSpaces
@@ -22,7 +41,7 @@ local HANDS = {
               haptic = '/user/hand/left/output/haptic', inward = 1 },
 }
 local LAUNCH_SPEED, END_SPEED = 1.5, 0.8
-local MAX_REAL_SPEED = 12   -- m/s; faster than any human punch = tracking glitch   -- m/s: swing tracking only, not the effort gate
+local MAX_REAL_SPEED = 16   -- m/s; faster than any human punch = tracking glitch
 
 local WEAK = {   -- used only when CFG.weaknessesEnabled
     heavy = { weak = 'uppercut', resist = 'jab' },
@@ -76,12 +95,25 @@ local function isPunchShape(h)
     local hp = toMeters(head.position)
     local d = finish - hp
     local reach = util.vector3(d.x, d.y, 0):dot(headFwd)
+    local kind = classify(h)
+    h.shapeReach, h.shapeDrop = reach, d.z
     if moving then
         -- while jogging, arm pumps can rise high: only a clearly extended jab/hook counts
-        local kind = classify(h)
         return kind ~= 'uppercut' and kind ~= 'punch' and reach >= CFG.punchMinReachMoving and d.z >= -0.3
     end
-    return reach >= CFG.punchMinReach and d.z >= -CFG.punchMaxDrop
+    if d.z < -CFG.punchMaxDrop then return false end
+    -- each punch finishes in its own place: jabs far out, hooks beside the head, uppercuts close in
+    if kind == 'hook' then return reach >= (CFG.hookMinReach or 0.15) end
+    if kind == 'uppercut' then return reach >= (CFG.uppercutMinReach or 0.05) end
+    return reach >= CFG.punchMinReach
+end
+
+local GREEN, YELLOW, RED = util.color.rgb(0.3, 1, 0.35), util.color.rgb(1, 0.9, 0.2), util.color.rgb(1, 0.3, 0.25)
+local function grade(kind, speed)
+    local g = (CFG.speedGrades or {})[kind] or { green = 7, yellow = 5 }
+    if speed >= g.green then return GREEN, 'good' end
+    if speed >= g.yellow then return YELLOW, 'ok' end
+    return RED, 'weak'
 end
 
 local function emptyHanded()
@@ -115,13 +147,19 @@ local function maybeLowerFists()
 end
 
 onSwingEnd = function(name, h)
-    if h.peak < AUTO_FISTS_SPEED or not isPunchShape(h) then return end
+    if h.peak < AUTO_FISTS_SPEED then return end
+    if not isPunchShape(h) then
+        print(string.format('[fitness] swing %s %s %.1f m/s REJECTED (reach %.2f m, height %.2f m, moving %s)',
+            name, classify(h, name), h.peak, h.shapeReach or -1, h.shapeDrop or -1, tostring(moving)))
+        return
+    end
     self.object:sendEvent('FitTally', { punches = 1 })
     raiseFists()
-    local kind = classify(h, name)
-    print(string.format('[fitness] swing %s %s peak %.1f m/s', name, kind, h.peak))
-    if CFG.showSwings and now > hudUntil and not moving then
-        showSwing(string.format('%s %.1f m/s', kind, h.peak))
+    local kind = punchName(classify(h, name), name)
+    local color, verdict = grade(kind, h.peak)
+    print(string.format('[fitness] swing %s %s %.1f m/s %s (reach %.2f m)', name, kind, h.peak, verdict, h.shapeReach or -1))
+    if CFG.showSwings and not moving then
+        showSwing(string.format('%s %s   %.1f m/s', name == 'left' and 'L' or 'R', kind:upper(), h.peak), color)
     end
 end
 
@@ -183,8 +221,8 @@ local function showHud(text, secs, color)
     self.object:sendEvent('FitCoach', { slot = 'status', text = text, secs = secs or 1.2, color = color or ORANGE })
 end
 
-showSwing = function(text)
-    self.object:sendEvent('FitCoach', { slot = 'status', text = text, secs = 0.8, color = GREY })
+showSwing = function(text, color)
+    self.object:sendEvent('FitCoach', { slot = 'speed', text = text, secs = 1.5, color = color or GREY })
 end
 
 local function buzz(name, strength, secs)
@@ -195,7 +233,7 @@ end
 local function onPunchLanded(data)
     self.object:sendEvent('FitTally', { hits = 1 })
     local h, name = pickHand()
-    local kind = h and classify(h, name) or 'punch'
+    local kind = h and punchName(classify(h, name), name) or 'punch'
     -- Left and right count as different moves (a 1-2 is L JAB > R JAB).
     local move = ((name == 'left') and 'L ' or (name == 'right') and 'R ' or '') .. kind:upper()
 

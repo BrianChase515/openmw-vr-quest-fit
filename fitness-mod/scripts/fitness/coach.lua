@@ -18,6 +18,7 @@ local now = 0
 local enemyTimer = 0
 local slots = {
     centre = { y = CFG.coachCentreY, size = 44 },
+    speed  = { y = CFG.coachSpeedY or 0.555, size = 30 },   -- punch type + hand speed, colour-graded
     status = { y = CFG.coachStatusY, size = 28 },
     tally  = { y = CFG.coachTallyY or 0.82, size = 22 },
 }
