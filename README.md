@@ -37,6 +37,9 @@ history is kept in this repo. Free and open source (GPLv3).
 - **punch names and combos**, **dodge calls and results** in the middle
 - a **workout tracker**: steps, jumps, squats, punches and estimated calories
 
+Open any menu (or pause) to see this session's totals and your **all-time** totals at the bottom of your view.
+All-time totals are kept on the Quest and also tucked into every save game, so a reinstall can't lose them.
+
 Calories use the standard MET method (activity intensity × your resting burn from height,
 weight, age and sex). Set your profile in **Options → Scripts → Fitness**.
 
