@@ -32,11 +32,10 @@ return {
     punchMaxDrop  = 0.45,
     punchMinReachMoving = 0.42,   -- stricter while you're jogging
 
-    -- Where the game's own health/magic/fatigue panel sits. 'LeftWristTop' is the engine default
-    -- (on your left wrist). 'HUDBottomLeft' would lock it in the lower-left of
-    -- your view. Other options: 'HUDBottomRight', 'HUDTopLeft', 'HUDTopRight', 'LeftWristTop'
-    -- (engine default). Set to false to leave whatever you picked in the VR settings menu.
-    hudPosition = 'LeftWristTop',
+    -- The game's own wrist HUD panel (health bars, minimap, equipped icons). 'hidden' (default)
+    -- turns it off - the fitness HUD already shows your stats; item tooltips are not affected.
+    -- To bring it back: 'LeftWristTop' (game default), 'HUDBottomLeft', 'HUDBottomRight', 'HUDTopLeft'...
+    hudPosition = 'hidden',
 
     -- Combos: alternate punch types to build a multiplier, repeat one type and it goes stale.
     comboWindow   = 1.5,      -- max gap between landed punches to keep a combo alive
