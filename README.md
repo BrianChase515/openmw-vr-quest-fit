@@ -56,8 +56,12 @@ Turn it off or change the health % in **Options → Scripts → Fitness**.
 
 1. Put the Quest in developer mode (Meta Horizon phone app → Devices → Developer mode) and
    install SideQuest on the PC. Plug the Quest in and allow USB debugging when it asks.
-2. Download **[install-to-quest.bat](https://github.com/BrianChase515/openmw-vr-quest-fit/raw/apk/install-to-quest.bat)**
-   (right-click → *Save link as*).
+2. Download **[install-to-quest.bat](https://raw.githubusercontent.com/BrianChase515/openmw-vr-quest-fit/apk/install-to-quest.bat)**
+   (right-click → *Save link as*). Or skip the browser: press **Win + R**, paste this and press Enter
+   (it downloads the installer to your Downloads folder and runs it):
+   ```
+   cmd /k "curl -L -o %USERPROFILE%\Downloads\install-to-quest.bat https://raw.githubusercontent.com/BrianChase515/openmw-vr-quest-fit/apk/install-to-quest.bat && %USERPROFILE%\Downloads\install-to-quest.bat"
+   ```
 3. Double-click it with the headset plugged in. It will:
    - find Morrowind (common Steam/GOG folders; otherwise it asks once for your `Data Files` folder)
    - download the newest game build and fitness scripts from this repo
