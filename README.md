@@ -23,8 +23,8 @@ history is kept in this repo. Free and open source (GPLv3).
 | **Walk in place** | Walk forward; your pace sets the speed |
 | **Jog in place** (about 2+ steps a second) | Run |
 | **Jump** | Jump |
-| **Throw a punch**, either hand | Fists come up on their own; a real punch out in front lands, arm swings don't |
-| **Mix punches and hands** (L JAB › R JAB › L HOOK › R UPPERCUT) | Combo multiplier up to ×1.8 damage; the same punch 3× in a row goes stale |
+| **Throw a punch**, either hand — jab, cross, hook or uppercut, to the head or body | Fists come up on their own; real punches land (even on rats and mudcrabs at your feet), jogging arm swings don't |
+| **Mix punches and hands** (L JAB › R CROSS › L HOOK › R UPPERCUT) | Combo multiplier up to ×1.8 damage; the same punch 3× in a row goes stale |
 | **Enemy winds up** → screen calls **SQUAT!** / **SLIP LEFT** / **SLIP RIGHT** | Do it in time to dodge (green flash) or soften the hit. Enemy wind-ups are slowed so you can react |
 | **Breaststroke** in water (hands from chest, push forward together) | Swim forward |
 | **Lie down** on the floor for 2 seconds | Rest until healed |
@@ -37,7 +37,9 @@ history is kept in this repo. Free and open source (GPLv3).
   (and 10 s after), when you lose health or magicka, and whenever health or fatigue is low
 - the **direction you're facing** (N, NE, E…) in the upper right
 - the **enemy you're fighting** (name, health, fatigue) across the top
-- **punch names and combos**, **dodge calls and results** in the middle
+- **every punch's type and speed**, graded green / yellow / red for that punch type (set your stance —
+  orthodox or southpaw — in Options → Scripts → Fitness)
+- **combos**, **dodge calls and results** in the middle
 
 **Workout tracker:** open any menu (or pause) to see this session's and your **all-time** steps, jumps, squats,
 punches, dodges and estimated calories at the bottom of your view.
@@ -50,6 +52,10 @@ weight, age and sex). Set your profile in **Options → Scripts → Fitness**.
 and rerun the installer. When you're at half health or less in a fight it takes over from the
 battle music, once per fight (several files = a random pick). No music is included with the mod.
 Turn it off or change the health % in **Options → Scripts → Fitness**.
+
+## See it in action
+
+<!-- VIDEO: replace with your link, e.g. [![Watch the video](https://img.youtube.com/vi/VIDEO_ID/maxresdefault.jpg)](https://www.youtube.com/watch?v=VIDEO_ID) -->
 
 ## What you need
 
